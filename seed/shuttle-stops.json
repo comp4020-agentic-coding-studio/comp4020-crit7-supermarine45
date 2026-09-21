@@ -1,0 +1,86 @@
+[
+  {
+    "name": "ANU Rimmer Street",
+    "sequence": 1,
+    "latitude": -35.2767528,
+    "longitude": 149.1259725,
+    "note": "Last loop of the day departs 7:18pm."
+  },
+  {
+    "name": "City West Alinga Street",
+    "sequence": 2,
+    "latitude": -35.2785824,
+    "longitude": 149.1309139,
+    "note": null
+  },
+  {
+    "name": "Marcus Clarke Street after Farrell Place",
+    "sequence": 3,
+    "latitude": -35.2815066,
+    "longitude": 149.1237276,
+    "note": null
+  },
+  {
+    "name": "Liversidge Street after Ellery Crescent",
+    "sequence": 4,
+    "latitude": -35.282645,
+    "longitude": 149.1206686,
+    "note": null
+  },
+  {
+    "name": "Garran Road after Liversidge Street",
+    "sequence": 5,
+    "latitude": -35.2818686,
+    "longitude": 149.1152891,
+    "note": null
+  },
+  {
+    "name": "Garran Road at Graduate House",
+    "sequence": 6,
+    "latitude": -35.2818686,
+    "longitude": 149.1152891,
+    "note": null
+  },
+  {
+    "name": "Ward Street (via Yukeembruk)",
+    "sequence": 7,
+    "latitude": -35.2805965,
+    "longitude": 149.1117908,
+    "note": null
+  },
+  {
+    "name": "Dickson Road (via Wamburun)",
+    "sequence": 8,
+    "latitude": -35.27736,
+    "longitude": 149.1139415,
+    "note": null
+  },
+  {
+    "name": "Daley Road at Burton & Garran Hall",
+    "sequence": 9,
+    "latitude": -35.2732453,
+    "longitude": 149.1194002,
+    "note": null
+  },
+  {
+    "name": "Daley Road at Bruce Hall",
+    "sequence": 10,
+    "latitude": -35.2737803,
+    "longitude": 149.1172727,
+    "note": null
+  },
+  {
+    "name": "Daley Road at Fulton Muir",
+    "sequence": 11,
+    "latitude": -35.2790163,
+    "longitude": 149.1151064,
+    "note": null
+  },
+  {
+    "name": "Canberra Centre (Ainslie Avenue)",
+    "sequence": 12,
+    "latitude": -35.2796117,
+    "longitude": 149.1353144,
+    "note": "Evening-only: served at 6:48pm on weeknights, not on the regular daytime loop."
+  }
+]

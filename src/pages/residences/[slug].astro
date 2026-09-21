@@ -1,0 +1,212 @@
+---
+import Map from "../../components/Map.astro";
+import Nav from "../../components/Nav.astro";
+import {
+  getResidenceBySlug,
+  getShortlistIds,
+  listFeatures,
+  listGalleryImages,
+  listNearbyPlaces,
+  listRoomTypes,
+  listShuttleStops,
+} from "../../lib/db";
+import "../../styles.css";
+
+const residence = getResidenceBySlug(Astro.params.slug ?? "");
+if (!residence) {
+  return new Response("Residence not found", { status: 404 });
+}
+
+const features = listFeatures(residence.id);
+const gallery = listGalleryImages(residence.id);
+const rooms = listRoomTypes(residence.id);
+const nearby = listNearbyPlaces(residence.id);
+const shuttleStops = listShuttleStops();
+const shortlisted = getShortlistIds().has(residence.id);
+const redirectTo = `/residences/${residence.slug}/`;
+
+function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371000;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+const nearestShuttle =
+  residence.latitude != null && residence.longitude != null && shuttleStops.length > 0
+    ? shuttleStops
+        .map((s) => ({ stop: s, distance: haversineMeters(residence.latitude as number, residence.longitude as number, s.latitude, s.longitude) }))
+        .sort((a, b) => a.distance - b.distance)[0]
+    : null;
+
+const cateringLabel = { self_catered: "Self-catered", catered: "Catered", flexi_catered: "Flexi-catered" }[
+  residence.cateringType
+];
+const residentLabel =
+  residence.residentUndergrad && residence.residentPostgrad
+    ? "Undergraduate & postgraduate"
+    : residence.residentUndergrad
+      ? "Undergraduate"
+      : residence.residentPostgrad
+        ? "Postgraduate"
+        : "Not specified";
+
+const mapResidences =
+  residence.latitude != null && residence.longitude != null
+    ? [{ lat: residence.latitude, lon: residence.longitude, name: residence.name, slug: residence.slug }]
+    : [];
+const mapPlaces = nearby.map((p) => ({ lat: p.latitude, lon: p.longitude, name: p.name, category: p.category }));
+const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude, name: s.name, note: s.note }));
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{residence.name} — ANU Residence Explorer</title>
+  </head>
+  <body>
+    <Nav />
+    <main class="wide">
+      <p><a href="/search/">&larr; Back to search</a></p>
+      {
+        residence.imageUrl && (
+          <img class="hero-image" src={residence.imageUrl} alt={`${residence.name} building exterior`} width="920" height="518" />
+        )
+      }
+      <h1>{residence.name}</h1>
+      <ul class="tags">
+        <li>{residentLabel}</li>
+        <li>{cateringLabel}</li>
+        {residence.weeklyRateFrom != null && <li>From ${residence.weeklyRateFrom}/wk</li>}
+        {residence.address && <li>{residence.address}</li>}
+      </ul>
+      <p>{residence.blurb}</p>
+
+      {
+        mapResidences.length > 0 && (
+          <Map
+            id={`map-${residence.slug}`}
+            center={[residence.latitude as number, residence.longitude as number]}
+            zoom={17}
+            residences={mapResidences}
+            places={mapPlaces}
+            shuttle={mapShuttle}
+            small
+          />
+        )
+      }
+
+      {
+        nearestShuttle && (
+          <p>
+            Nearest ANU Civic Loop stop: <strong>{nearestShuttle.stop.name}</strong>, about{" "}
+            {Math.round(nearestShuttle.distance)}m away.
+          </p>
+        )
+      }
+
+      <div class="card-actions">
+        {
+          residence.applyUrl && (
+            <a class="btn-primary" href={residence.applyUrl} target="_blank" rel="noopener noreferrer">
+              Apply now
+            </a>
+          )
+        }
+        <form method="post" action={`/api/shortlist/${shortlisted ? "remove" : "add"}`}>
+          <input type="hidden" name="residenceId" value={residence.id} />
+          <input type="hidden" name="redirect" value={redirectTo} />
+          <button type="submit" class="link-button">{shortlisted ? "Remove from shortlist" : "Save to shortlist"}</button>
+        </form>
+      </div>
+
+      {
+        gallery.length > 0 && (
+          <>
+            <h2>Gallery</h2>
+            <ul class="gallery-grid">
+              {gallery.map((image) => (
+                <li>
+                  <img src={image.url} alt={image.alt} loading="lazy" width="920" height="518" />
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      <h2>Room types &amp; rates</h2>
+      {residence.capacityNote ? <p>{residence.capacityNote}</p> : residence.capacity != null && <p>{residence.capacity} places.</p>}
+      {
+        rooms.length > 0 ? (
+          <fieldset class="room-tabs">
+            <legend class="visually-hidden">Choose a room type to see its weekly rate and fees</legend>
+            {rooms.map((_room, i) => <input type="radio" name="room-tab" id={`room-tab-${i}`} class="room-tab-radio" checked={i === 0} />)}
+            <div class="room-tab-list">
+              {rooms.map((room, i) => (
+                <label class="room-tab-label" for={`room-tab-${i}`}>
+                  {room.name}
+                </label>
+              ))}
+            </div>
+            <div class="room-tab-panels">
+              {rooms.map((room) => (
+                <div class="room-tab-panel">
+                  <table class="room-rate-table">
+                    <caption class="visually-hidden">{room.name} weekly rate and fees</caption>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Weekly tariff</th>
+                        <td>{room.weeklyTariff != null ? `$${room.weeklyTariff.toFixed(2)}/wk` : "Not yet published (tbc)"}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Contract length</th>
+                        <td>{room.contractTerm ?? "Not stated"}</td>
+                      </tr>
+                      {room.inclusions.length > 0 && (
+                        <tr>
+                          <th scope="row">Inclusions</th>
+                          <td>
+                            <ul>
+                              {room.inclusions.map((item) => <li>{item}</li>)}
+                            </ul>
+                          </td>
+                        </tr>
+                      )}
+                      {room.otherFees.length > 0 && (
+                        <tr>
+                          <th scope="row">Other fees</th>
+                          <td>
+                            <ul>
+                              {room.otherFees.map((item) => <li>{item}</li>)}
+                            </ul>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
+            </div>
+          </fieldset>
+        ) : (
+          residence.feeNote && <p>{residence.feeNote}</p>
+        )
+      }
+
+      <h2>Accessibility</h2>
+      <p>{residence.accessibilityNote ?? "Not stated on the ANU residences page."}</p>
+
+      <h2>Features</h2>
+      <ul>
+        {features.map((f) => <li>{f}</li>)}
+      </ul>
+
+      <p><a href={residence.anuUrl}>View this residence on the official ANU page</a></p>
+    </main>
+  </body>
+</html>

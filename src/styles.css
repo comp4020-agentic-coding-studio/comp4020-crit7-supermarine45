@@ -1,18 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  --anu-black: #131313;
+  --anu-gray-900: #252525;
+  --anu-gray-700: #3a3a3a;
+  --anu-gray-500: #6b6b6b;
+  --anu-gray-200: #d9d9d9;
+  --anu-gray-100: #f6f6f6;
+  --anu-gold: #be830e;
+  --anu-gold-btn: #d19010;
+  --anu-gold-btn-hover: #e2a22d;
+  --anu-burnt-orange: #be4f0e;
+  --anu-cyan: #00a0cc;
+  --anu-cream: #f2e9db;
+  --card-radius: 20px;
+  --btn-radius: 8px;
+  --card-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+  --card-shadow-hover: 0 8px 20px rgb(0 0 0 / 16%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 2rem;
-  font-family: system-ui, sans-serif;
+  font-family: "Public Sans", system-ui, sans-serif;
   line-height: 1.6;
-  color: #1a1a1a;
+  color: var(--anu-black);
+  background: var(--anu-gray-100);
 }
 
 main {
-  max-width: 40rem;
+  max-width: 60rem;
   margin: 0 auto;
 }
 
+main.wide {
+  max-width: 80rem;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--anu-black);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+h1 {
+  border-bottom: 3px solid var(--anu-gold-btn);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
 a {
-  color: #0b5fff;
+  color: var(--anu-burnt-orange);
+}
+
+a:hover {
+  color: var(--anu-gold);
+}
+
+:focus-visible {
+  outline: 3px solid var(--anu-cyan);
+  outline-offset: 2px;
+}
+
+nav[aria-label="site"] {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 80rem;
+  margin: 0 auto 2rem;
+  background: var(--anu-black);
+  border-radius: var(--card-radius);
+  padding: 0.75rem 1rem;
+}
+
+nav[aria-label="site"] a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--btn-radius);
+}
+
+nav[aria-label="site"] a:hover {
+  background: var(--anu-gray-900);
+  color: var(--anu-gold-btn-hover);
+}
+
+nav[aria-label="site"] a[aria-current="page"] {
+  background: var(--anu-gold-btn);
+  color: var(--anu-black);
+}
+
+form.filters {
+  display: block;
+  margin-block: 1.5rem;
+  padding: 1.5rem;
+  background: var(--anu-cream);
+  border-radius: var(--card-radius);
+}
+
+form.filters .filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+form.filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--anu-gray-700);
+}
+
+form.filters input,
+form.filters select {
+  border: none;
+  border-bottom: 1px solid var(--anu-gray-500);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.35rem 0;
+}
+
+form.filters input:focus-visible,
+form.filters select:focus-visible {
+  outline-offset: 4px;
+}
+
+form.filters .filters-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgb(0 0 0 / 10%);
+}
+
+form.filters .filter-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--anu-gold);
+  flex-shrink: 0;
+}
+
+form.filters .filters-actions .link-button {
+  border-radius: 999px;
+}
+
+form.filters button[type="submit"] {
+  border-radius: 999px;
 }
 
 form {
@@ -23,18 +167,435 @@ form {
   margin-block: 1.5rem;
 }
 
-input {
+input,
+select {
   flex: 1;
-  min-width: 12rem;
-  padding: 0.4rem 0.6rem;
+  min-width: 8rem;
+  padding: 0.45rem 0.6rem;
   font: inherit;
+  border: 1px solid var(--anu-gray-200);
+  border-radius: 6px;
+  color: var(--anu-black);
 }
 
 button {
-  padding: 0.4rem 1rem;
+  padding: 0.5rem 1.25rem;
   font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--anu-gold-btn);
+  color: var(--anu-black);
+  border: none;
+  border-radius: var(--btn-radius);
+  transition: background-color 0.15s ease;
 }
 
-#messages {
-  padding-inline-start: 1.2rem;
+button:hover {
+  background: var(--anu-gold-btn-hover);
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--anu-gold-btn);
+  color: var(--anu-black);
+  border-radius: var(--btn-radius);
+  transition: background-color 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--anu-gold-btn-hover);
+  color: var(--anu-black);
+}
+
+.link-button {
+  display: inline-block;
+  background: none;
+  border: 1px solid var(--anu-gold-btn);
+  color: var(--anu-black);
+  padding: 0.45rem 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  background: rgb(209 144 16 / 10%);
+  color: var(--anu-black);
+}
+
+.residence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+  margin: 1.5rem 0;
+}
+
+.residence-card {
+  background: #fff;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.residence-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.card-image-link {
+  display: block;
+  line-height: 0;
+}
+
+.card-image-link img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  margin-block: 1rem;
+}
+
+.rate-bar {
+  margin: 0;
+  background: var(--anu-black);
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+.rate-bar strong {
+  font-weight: 700;
+}
+
+.card-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.card-body h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.card-body h2 a {
+  color: var(--anu-black);
+  text-decoration: none;
+}
+
+.card-body h2 a:hover {
+  color: var(--anu-gold);
+}
+
+.card-subtitle {
+  margin: 0;
+  color: var(--anu-gray-500);
+  font-size: 0.85rem;
+}
+
+.card-blurb {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--anu-gray-700);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tags li {
+  background: var(--anu-gray-100);
+  color: var(--anu-gray-700);
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.card-actions form {
+  margin: 0;
+}
+
+.map-container {
+  height: 26rem;
+  min-height: 20rem;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  margin-block: 1.5rem;
+  background: #fff;
+  box-shadow: var(--card-shadow);
+}
+
+.map-container.small {
+  height: 18rem;
+}
+
+.no-results {
+  color: var(--anu-gray-500);
+  font-style: italic;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hero banner (home page) — mirrors ANU's own full-width image banner with
+   a dark overlay, page title and gold divider. */
+.hero-banner {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+.hero-banner img {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 2.5rem;
+  background: linear-gradient(90deg, rgb(19 19 19 / 65%) 0%, rgb(19 19 19 / 25%) 65%, rgb(19 19 19 / 0%) 100%);
+}
+
+.hero-banner-overlay h1 {
+  color: #fff;
+  border-bottom-color: var(--anu-gold-btn);
+  margin: 0;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.hero-banner-overlay p {
+  color: #fff;
+  max-width: 32rem;
+  margin: 0.75rem 0 0;
+}
+
+/* CTA bar — mirrors ANU's black "applications open" banner style. */
+.cta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--anu-black);
+  color: #fff;
+  border-radius: var(--card-radius);
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.cta-bar h2 {
+  color: #fff;
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+}
+
+.cta-bar p {
+  margin: 0;
+  color: var(--anu-gray-200);
+}
+
+.cta-bar .btn-primary {
+  flex-shrink: 0;
+}
+
+/* Gallery grid on a residence page. */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+  margin: 1rem 0 1.5rem;
+}
+
+.gallery-grid li {
+  border-radius: var(--btn-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+/* Room-type tabs — CSS-only (radio + label), no client-side JS. Each
+   .room-tab-radio is a direct child of .room-tabs so it shares a parent
+   with .room-tab-list and .room-tab-panels, which is what lets the
+   :nth-of-type sibling rules below reach across into both of them. */
+.room-tabs {
+  border: none;
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+}
+
+.room-tab-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.room-tab-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  border-bottom: 2px solid var(--anu-gray-200);
+  margin-bottom: 1rem;
+}
+
+.room-tab-label {
+  padding: 0.6rem 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--anu-gray-500);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+}
+
+.room-tab-panel {
+  display: none;
+}
+
+.room-tab-radio:nth-of-type(1):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(1),
+.room-tab-radio:nth-of-type(2):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(2),
+.room-tab-radio:nth-of-type(3):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(3),
+.room-tab-radio:nth-of-type(4):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(4),
+.room-tab-radio:nth-of-type(5):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(5),
+.room-tab-radio:nth-of-type(6):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(6),
+.room-tab-radio:nth-of-type(7):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(7),
+.room-tab-radio:nth-of-type(8):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(8),
+.room-tab-radio:nth-of-type(9):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(9),
+.room-tab-radio:nth-of-type(10):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(10),
+.room-tab-radio:nth-of-type(11):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(11),
+.room-tab-radio:nth-of-type(12):checked ~ .room-tab-panels .room-tab-panel:nth-of-type(12) {
+  display: block;
+}
+
+.room-tab-radio:nth-of-type(1):checked ~ .room-tab-list .room-tab-label:nth-of-type(1),
+.room-tab-radio:nth-of-type(2):checked ~ .room-tab-list .room-tab-label:nth-of-type(2),
+.room-tab-radio:nth-of-type(3):checked ~ .room-tab-list .room-tab-label:nth-of-type(3),
+.room-tab-radio:nth-of-type(4):checked ~ .room-tab-list .room-tab-label:nth-of-type(4),
+.room-tab-radio:nth-of-type(5):checked ~ .room-tab-list .room-tab-label:nth-of-type(5),
+.room-tab-radio:nth-of-type(6):checked ~ .room-tab-list .room-tab-label:nth-of-type(6),
+.room-tab-radio:nth-of-type(7):checked ~ .room-tab-list .room-tab-label:nth-of-type(7),
+.room-tab-radio:nth-of-type(8):checked ~ .room-tab-list .room-tab-label:nth-of-type(8),
+.room-tab-radio:nth-of-type(9):checked ~ .room-tab-list .room-tab-label:nth-of-type(9),
+.room-tab-radio:nth-of-type(10):checked ~ .room-tab-list .room-tab-label:nth-of-type(10),
+.room-tab-radio:nth-of-type(11):checked ~ .room-tab-list .room-tab-label:nth-of-type(11),
+.room-tab-radio:nth-of-type(12):checked ~ .room-tab-list .room-tab-label:nth-of-type(12) {
+  color: var(--anu-black);
+  border-bottom-color: var(--anu-gold-btn);
+}
+
+.room-tab-radio:nth-of-type(1):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(1),
+.room-tab-radio:nth-of-type(2):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(2),
+.room-tab-radio:nth-of-type(3):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(3),
+.room-tab-radio:nth-of-type(4):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(4),
+.room-tab-radio:nth-of-type(5):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(5),
+.room-tab-radio:nth-of-type(6):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(6),
+.room-tab-radio:nth-of-type(7):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(7),
+.room-tab-radio:nth-of-type(8):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(8),
+.room-tab-radio:nth-of-type(9):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(9),
+.room-tab-radio:nth-of-type(10):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(10),
+.room-tab-radio:nth-of-type(11):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(11),
+.room-tab-radio:nth-of-type(12):focus-visible ~ .room-tab-list .room-tab-label:nth-of-type(12) {
+  outline: 3px solid var(--anu-cyan);
+  outline-offset: 2px;
+}
+
+.room-rate-table {
+  width: 100%;
+  max-width: 34rem;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: var(--btn-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.room-rate-table th,
+.room-rate-table td {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--anu-gray-200);
+  vertical-align: top;
+}
+
+.room-rate-table th {
+  width: 40%;
+  color: var(--anu-gray-700);
+  font-weight: 600;
+}
+
+.room-rate-table tr:last-child th,
+.room-rate-table tr:last-child td {
+  border-bottom: none;
+}
+
+.room-rate-table ul {
+  margin: 0;
+  padding-left: 1.1rem;
 }

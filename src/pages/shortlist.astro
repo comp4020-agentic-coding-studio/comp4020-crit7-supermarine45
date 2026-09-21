@@ -1,0 +1,41 @@
+---
+import Nav from "../components/Nav.astro";
+import ResidenceCard from "../components/ResidenceCard.astro";
+import { getShortlistIds, listShortlistedResidences } from "../lib/db";
+import "../styles.css";
+
+const results = listShortlistedResidences();
+const shortlistIds = getShortlistIds();
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your shortlist — ANU Residence Explorer</title>
+  </head>
+  <body>
+    <Nav />
+    <main class="wide">
+      <h1>Your shortlist</h1>
+      <p>
+        Residences you've saved while browsing. This list is stored on the server, so it's still here next time you
+        open this page — even from a different tab.
+      </p>
+      {
+        results.length === 0 ? (
+          <p class="no-results">
+            Nothing saved yet. Head to <a href="/search/">search</a> and use "Save to shortlist" on any residence.
+          </p>
+        ) : (
+          <ul class="residence-grid">
+            {results.map((r) => (
+              <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo="/shortlist/" />
+            ))}
+          </ul>
+        )
+      }
+    </main>
+  </body>
+</html>

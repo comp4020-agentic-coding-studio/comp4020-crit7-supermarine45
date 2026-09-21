@@ -1,0 +1,58 @@
+---
+import type { Residence } from "../lib/db";
+
+interface Props {
+  residence: Residence;
+  shortlisted: boolean;
+  redirectTo: string;
+}
+
+const { residence: r, shortlisted, redirectTo } = Astro.props;
+
+const residentLabel =
+  r.residentUndergrad && r.residentPostgrad
+    ? "Undergrad & postgrad"
+    : r.residentUndergrad
+      ? "Undergrad"
+      : r.residentPostgrad
+        ? "Postgrad"
+        : "Resident type unknown";
+
+const cateringLabel = { self_catered: "Self-catered", catered: "Catered", flexi_catered: "Flexi-catered" }[
+  r.cateringType
+];
+---
+
+<li class="residence-card">
+  {r.imageUrl && (
+    <a href={`/residences/${r.slug}/`} class="card-image-link">
+      <img src={r.imageUrl} alt={`${r.name} building exterior`} loading="lazy" width="920" height="518" />
+    </a>
+  )}
+  {r.weeklyRateFrom != null && (
+    <p class="rate-bar">
+      Rates from <strong>${r.weeklyRateFrom}</strong>/wk
+    </p>
+  )}
+  <div class="card-body">
+    <h2><a href={`/residences/${r.slug}/`}>{r.name}</a></h2>
+    <p class="card-subtitle">
+      {cateringLabel} &middot; {residentLabel}
+    </p>
+    <p class="card-blurb">{r.blurb}</p>
+    <div class="card-actions">
+      {
+        r.applyUrl && (
+          <a class="btn-primary" href={r.applyUrl} target="_blank" rel="noopener noreferrer">
+            Apply now
+          </a>
+        )
+      }
+      <form method="post" action={`/api/shortlist/${shortlisted ? "remove" : "add"}`}>
+        <input type="hidden" name="residenceId" value={r.id} />
+        <input type="hidden" name="redirect" value={redirectTo} />
+        <button type="submit" class="link-button">{shortlisted ? "Remove from shortlist" : "Save to shortlist"}</button>
+      </form>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,947 @@
+[
+  {
+    "residenceSlug": "davey-lodge",
+    "category": "bus_stop",
+    "name": "ANU Rimmer St",
+    "latitude": -35.276451,
+    "longitude": 149.125778,
+    "distanceMeters": 77,
+    "sourceId": "node/5190396375"
+  },
+  {
+    "residenceSlug": "davey-lodge",
+    "category": "bus_stop",
+    "name": "Marcus Clarke St before Rimmer St",
+    "latitude": -35.277218,
+    "longitude": 149.126389,
+    "distanceMeters": 161,
+    "sourceId": "node/2123193131"
+  },
+  {
+    "residenceSlug": "davey-lodge",
+    "category": "cafe",
+    "name": "Chatime",
+    "latitude": -35.2763533,
+    "longitude": 149.1258723,
+    "distanceMeters": 64,
+    "sourceId": "node/3918008623"
+  },
+  {
+    "residenceSlug": "davey-lodge",
+    "category": "cafe",
+    "name": "Cafe 54",
+    "latitude": -35.2766985,
+    "longitude": 149.1269709,
+    "distanceMeters": 131,
+    "sourceId": "node/4064801795"
+  },
+  {
+    "residenceSlug": "davey-lodge",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 123,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "davey-lodge",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 564,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "ursula-hall-laurus-wing",
+    "category": "bus_stop",
+    "name": "Dickson Road (via Wamburun)",
+    "latitude": -35.2777568,
+    "longitude": 149.1134736,
+    "distanceMeters": 134,
+    "sourceId": "node/14102329743"
+  },
+  {
+    "residenceSlug": "ursula-hall-laurus-wing",
+    "category": "bus_stop",
+    "name": null,
+    "latitude": -35.2763334,
+    "longitude": 149.1155077,
+    "distanceMeters": 266,
+    "sourceId": "node/14102329744"
+  },
+  {
+    "residenceSlug": "ursula-hall-laurus-wing",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 239,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "ursula-hall-laurus-wing",
+    "category": "cafe",
+    "name": "Three Sides Cafe",
+    "latitude": -35.2810052,
+    "longitude": 149.1191235,
+    "distanceMeters": 495,
+    "sourceId": "node/14072461701"
+  },
+  {
+    "residenceSlug": "ursula-hall-laurus-wing",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 527,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "wamburun-hall",
+    "category": "bus_stop",
+    "name": "Dickson Road (via Wamburun)",
+    "latitude": -35.2777568,
+    "longitude": 149.1134736,
+    "distanceMeters": 61,
+    "sourceId": "node/14102329743"
+  },
+  {
+    "residenceSlug": "wamburun-hall",
+    "category": "bus_stop",
+    "name": null,
+    "latitude": -35.2763334,
+    "longitude": 149.1155077,
+    "distanceMeters": 182,
+    "sourceId": "node/14102329744"
+  },
+  {
+    "residenceSlug": "wamburun-hall",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 283,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "wamburun-hall",
+    "category": "cafe",
+    "name": "Ambi's Chai",
+    "latitude": -35.2777915,
+    "longitude": 149.1203267,
+    "distanceMeters": 582,
+    "sourceId": "node/13694455478"
+  },
+  {
+    "residenceSlug": "wamburun-hall",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 569,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "bruce-hall-packard-wing",
+    "category": "bus_stop",
+    "name": "Daley Road at Bruce Hall",
+    "latitude": -35.2742188,
+    "longitude": 149.1173067,
+    "distanceMeters": 49,
+    "sourceId": "node/700787426"
+  },
+  {
+    "residenceSlug": "bruce-hall-packard-wing",
+    "category": "bus_stop",
+    "name": "Daley Road opposite Bruce Hall",
+    "latitude": -35.274471,
+    "longitude": 149.117371,
+    "distanceMeters": 77,
+    "sourceId": "node/5190396132"
+  },
+  {
+    "residenceSlug": "bruce-hall-packard-wing",
+    "category": "cafe",
+    "name": "Tasa Coffee House",
+    "latitude": -35.2761892,
+    "longitude": 149.1209513,
+    "distanceMeters": 428,
+    "sourceId": "node/978060176"
+  },
+  {
+    "residenceSlug": "bruce-hall-packard-wing",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 451,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "bruce-hall-packard-wing",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 496,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "bruce-hall-packard-wing",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 814,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "toad-hall",
+    "category": "bus_stop",
+    "name": "ANU Rimmer St",
+    "latitude": -35.276451,
+    "longitude": 149.125778,
+    "distanceMeters": 259,
+    "sourceId": "node/5190396375"
+  },
+  {
+    "residenceSlug": "toad-hall",
+    "category": "bus_stop",
+    "name": "Marcus Clarke St before Rimmer St",
+    "latitude": -35.277218,
+    "longitude": 149.126389,
+    "distanceMeters": 304,
+    "sourceId": "node/2123193131"
+  },
+  {
+    "residenceSlug": "toad-hall",
+    "category": "cafe",
+    "name": "As You Like It",
+    "latitude": -35.2785521,
+    "longitude": 149.1238486,
+    "distanceMeters": 175,
+    "sourceId": "node/978010476"
+  },
+  {
+    "residenceSlug": "toad-hall",
+    "category": "cafe",
+    "name": "Coffee Lab",
+    "latitude": -35.2774461,
+    "longitude": 149.1210466,
+    "distanceMeters": 185,
+    "sourceId": "node/6317612744"
+  },
+  {
+    "residenceSlug": "toad-hall",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 221,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "toad-hall",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 262,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "kinloch-lodge",
+    "category": "bus_stop",
+    "name": "ANU Rimmer St",
+    "latitude": -35.276451,
+    "longitude": 149.125778,
+    "distanceMeters": 77,
+    "sourceId": "node/5190396375"
+  },
+  {
+    "residenceSlug": "kinloch-lodge",
+    "category": "bus_stop",
+    "name": "Marcus Clarke St before Rimmer St",
+    "latitude": -35.277218,
+    "longitude": 149.126389,
+    "distanceMeters": 161,
+    "sourceId": "node/2123193131"
+  },
+  {
+    "residenceSlug": "kinloch-lodge",
+    "category": "cafe",
+    "name": "Chatime",
+    "latitude": -35.2763533,
+    "longitude": 149.1258723,
+    "distanceMeters": 64,
+    "sourceId": "node/3918008623"
+  },
+  {
+    "residenceSlug": "kinloch-lodge",
+    "category": "cafe",
+    "name": "Cafe 54",
+    "latitude": -35.2766985,
+    "longitude": 149.1269709,
+    "distanceMeters": 131,
+    "sourceId": "node/4064801795"
+  },
+  {
+    "residenceSlug": "kinloch-lodge",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 123,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "kinloch-lodge",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 564,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "warrumbul-lodge",
+    "category": "bus_stop",
+    "name": "ANU Rimmer St",
+    "latitude": -35.276451,
+    "longitude": 149.125778,
+    "distanceMeters": 131,
+    "sourceId": "node/5190396375"
+  },
+  {
+    "residenceSlug": "warrumbul-lodge",
+    "category": "bus_stop",
+    "name": "Marcus Clarke St before Rimmer St",
+    "latitude": -35.277218,
+    "longitude": 149.126389,
+    "distanceMeters": 191,
+    "sourceId": "node/2123193131"
+  },
+  {
+    "residenceSlug": "warrumbul-lodge",
+    "category": "cafe",
+    "name": "Chatime",
+    "latitude": -35.2763533,
+    "longitude": 149.1258723,
+    "distanceMeters": 142,
+    "sourceId": "node/3918008623"
+  },
+  {
+    "residenceSlug": "warrumbul-lodge",
+    "category": "cafe",
+    "name": "Coffee Guru",
+    "latitude": -35.2780661,
+    "longitude": 149.1258935,
+    "distanceMeters": 203,
+    "sourceId": "node/1518611963"
+  },
+  {
+    "residenceSlug": "warrumbul-lodge",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 98,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "warrumbul-lodge",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 389,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "fenner-hall",
+    "category": "bus_stop",
+    "name": "Daley Road at Fulton Muir",
+    "latitude": -35.2737111,
+    "longitude": 149.1205233,
+    "distanceMeters": 345,
+    "sourceId": "node/5190396149"
+  },
+  {
+    "residenceSlug": "fenner-hall",
+    "category": "bus_stop",
+    "name": "Daley Road Anutech House",
+    "latitude": -35.2736778,
+    "longitude": 149.1203052,
+    "distanceMeters": 353,
+    "sourceId": "node/5190396432"
+  },
+  {
+    "residenceSlug": "fenner-hall",
+    "category": "cafe",
+    "name": "Tasa Coffee House",
+    "latitude": -35.2761892,
+    "longitude": 149.1209513,
+    "distanceMeters": 69,
+    "sourceId": "node/978060176"
+  },
+  {
+    "residenceSlug": "fenner-hall",
+    "category": "cafe",
+    "name": "Coffee Lab",
+    "latitude": -35.2774461,
+    "longitude": 149.1210466,
+    "distanceMeters": 80,
+    "sourceId": "node/6317612744"
+  },
+  {
+    "residenceSlug": "fenner-hall",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 131,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "fenner-hall",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 380,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "ursula-hall-main-wing",
+    "category": "bus_stop",
+    "name": "Dickson Road (via Wamburun)",
+    "latitude": -35.2777568,
+    "longitude": 149.1134736,
+    "distanceMeters": 134,
+    "sourceId": "node/14102329743"
+  },
+  {
+    "residenceSlug": "ursula-hall-main-wing",
+    "category": "bus_stop",
+    "name": null,
+    "latitude": -35.2763334,
+    "longitude": 149.1155077,
+    "distanceMeters": 266,
+    "sourceId": "node/14102329744"
+  },
+  {
+    "residenceSlug": "ursula-hall-main-wing",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 239,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "ursula-hall-main-wing",
+    "category": "cafe",
+    "name": "Three Sides Cafe",
+    "latitude": -35.2810052,
+    "longitude": 149.1191235,
+    "distanceMeters": 495,
+    "sourceId": "node/14072461701"
+  },
+  {
+    "residenceSlug": "ursula-hall-main-wing",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 527,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "bruce-hall-main-wing",
+    "category": "bus_stop",
+    "name": "Daley Road at Bruce Hall",
+    "latitude": -35.2742188,
+    "longitude": 149.1173067,
+    "distanceMeters": 49,
+    "sourceId": "node/700787426"
+  },
+  {
+    "residenceSlug": "bruce-hall-main-wing",
+    "category": "bus_stop",
+    "name": "Daley Road opposite Bruce Hall",
+    "latitude": -35.274471,
+    "longitude": 149.117371,
+    "distanceMeters": 77,
+    "sourceId": "node/5190396132"
+  },
+  {
+    "residenceSlug": "bruce-hall-main-wing",
+    "category": "cafe",
+    "name": "Tasa Coffee House",
+    "latitude": -35.2761892,
+    "longitude": 149.1209513,
+    "distanceMeters": 428,
+    "sourceId": "node/978060176"
+  },
+  {
+    "residenceSlug": "bruce-hall-main-wing",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 451,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "bruce-hall-main-wing",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 496,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "bruce-hall-main-wing",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 814,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "wright-hall",
+    "category": "bus_stop",
+    "name": null,
+    "latitude": -35.2763334,
+    "longitude": 149.1155077,
+    "distanceMeters": 144,
+    "sourceId": "node/14102329744"
+  },
+  {
+    "residenceSlug": "wright-hall",
+    "category": "bus_stop",
+    "name": "Daley Road opposite Bruce Hall",
+    "latitude": -35.274471,
+    "longitude": 149.117371,
+    "distanceMeters": 183,
+    "sourceId": "node/5190396132"
+  },
+  {
+    "residenceSlug": "wright-hall",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 340,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "wright-hall",
+    "category": "cafe",
+    "name": "Tasa Coffee House",
+    "latitude": -35.2761892,
+    "longitude": 149.1209513,
+    "distanceMeters": 513,
+    "sourceId": "node/978060176"
+  },
+  {
+    "residenceSlug": "wright-hall",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 512,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "wright-hall",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 926,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "graduate-house",
+    "category": "bus_stop",
+    "name": "Garran Road at Graduate House",
+    "latitude": -35.2823852,
+    "longitude": 149.1163621,
+    "distanceMeters": 113,
+    "sourceId": "node/14102329741"
+  },
+  {
+    "residenceSlug": "graduate-house",
+    "category": "bus_stop",
+    "name": "Ward Street (via Yukeembruk)",
+    "latitude": -35.2809271,
+    "longitude": 149.11307,
+    "distanceMeters": 227,
+    "sourceId": "node/14102329742"
+  },
+  {
+    "residenceSlug": "graduate-house",
+    "category": "cafe",
+    "name": "The Licensed Grocer on Balmain",
+    "latitude": -35.2845169,
+    "longitude": 149.1166971,
+    "distanceMeters": 321,
+    "sourceId": "node/6991430547"
+  },
+  {
+    "residenceSlug": "graduate-house",
+    "category": "cafe",
+    "name": "Three Sides Cafe",
+    "latitude": -35.2810052,
+    "longitude": 149.1191235,
+    "distanceMeters": 361,
+    "sourceId": "node/14072461701"
+  },
+  {
+    "residenceSlug": "graduate-house",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 656,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "burgmann-college",
+    "category": "bus_stop",
+    "name": "Ward Street (via Yukeembruk)",
+    "latitude": -35.2809271,
+    "longitude": 149.11307,
+    "distanceMeters": 100,
+    "sourceId": "node/14102329742"
+  },
+  {
+    "residenceSlug": "burgmann-college",
+    "category": "bus_stop",
+    "name": "Dickson Road (via Wamburun)",
+    "latitude": -35.2777568,
+    "longitude": 149.1134736,
+    "distanceMeters": 260,
+    "sourceId": "node/14102329743"
+  },
+  {
+    "residenceSlug": "burgmann-college",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 407,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "burgmann-college",
+    "category": "cafe",
+    "name": "Three Sides Cafe",
+    "latitude": -35.2810052,
+    "longitude": 149.1191235,
+    "distanceMeters": 522,
+    "sourceId": "node/14072461701"
+  },
+  {
+    "residenceSlug": "burgmann-college",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 673,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "lena-karmel-lodge",
+    "category": "bus_stop",
+    "name": "ANU Rimmer St",
+    "latitude": -35.276451,
+    "longitude": 149.125778,
+    "distanceMeters": 52,
+    "sourceId": "node/5190396375"
+  },
+  {
+    "residenceSlug": "lena-karmel-lodge",
+    "category": "bus_stop",
+    "name": "Marcus Clarke St before Rimmer St",
+    "latitude": -35.277218,
+    "longitude": 149.126389,
+    "distanceMeters": 152,
+    "sourceId": "node/2123193131"
+  },
+  {
+    "residenceSlug": "lena-karmel-lodge",
+    "category": "cafe",
+    "name": "Chatime",
+    "latitude": -35.2763533,
+    "longitude": 149.1258723,
+    "distanceMeters": 45,
+    "sourceId": "node/3918008623"
+  },
+  {
+    "residenceSlug": "lena-karmel-lodge",
+    "category": "cafe",
+    "name": "Cafe 54",
+    "latitude": -35.2766985,
+    "longitude": 149.1269709,
+    "distanceMeters": 144,
+    "sourceId": "node/4064801795"
+  },
+  {
+    "residenceSlug": "lena-karmel-lodge",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 89,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "lena-karmel-lodge",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 521,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "john-xxiii-college",
+    "category": "bus_stop",
+    "name": "Dickson Road (via Wamburun)",
+    "latitude": -35.2777568,
+    "longitude": 149.1134736,
+    "distanceMeters": 204,
+    "sourceId": "node/14102329743"
+  },
+  {
+    "residenceSlug": "john-xxiii-college",
+    "category": "bus_stop",
+    "name": "Ward Street (via Yukeembruk)",
+    "latitude": -35.2809271,
+    "longitude": 149.11307,
+    "distanceMeters": 282,
+    "sourceId": "node/14102329742"
+  },
+  {
+    "residenceSlug": "john-xxiii-college",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 217,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "john-xxiii-college",
+    "category": "cafe",
+    "name": "Three Sides Cafe",
+    "latitude": -35.2810052,
+    "longitude": 149.1191235,
+    "distanceMeters": 426,
+    "sourceId": "node/14072461701"
+  },
+  {
+    "residenceSlug": "john-xxiii-college",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 491,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "john-xxiii-college",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 971,
+    "sourceId": "node/1667351768"
+  },
+  {
+    "residenceSlug": "burgmann-undergraduate-and-postgraduate-village",
+    "category": "bus_stop",
+    "name": "Ward Street (via Yukeembruk)",
+    "latitude": -35.2809271,
+    "longitude": 149.11307,
+    "distanceMeters": 100,
+    "sourceId": "node/14102329742"
+  },
+  {
+    "residenceSlug": "burgmann-undergraduate-and-postgraduate-village",
+    "category": "bus_stop",
+    "name": "Dickson Road (via Wamburun)",
+    "latitude": -35.2777568,
+    "longitude": 149.1134736,
+    "distanceMeters": 260,
+    "sourceId": "node/14102329743"
+  },
+  {
+    "residenceSlug": "burgmann-undergraduate-and-postgraduate-village",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 407,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "burgmann-undergraduate-and-postgraduate-village",
+    "category": "cafe",
+    "name": "Three Sides Cafe",
+    "latitude": -35.2810052,
+    "longitude": 149.1191235,
+    "distanceMeters": 522,
+    "sourceId": "node/14072461701"
+  },
+  {
+    "residenceSlug": "burgmann-undergraduate-and-postgraduate-village",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 673,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "university-house",
+    "category": "bus_stop",
+    "name": "Lennox Crossing before roundabout",
+    "latitude": -35.287781,
+    "longitude": 149.117065,
+    "distanceMeters": 163,
+    "sourceId": "node/5190396335"
+  },
+  {
+    "residenceSlug": "university-house",
+    "category": "bus_stop",
+    "name": "Lennox Crossing after roundabout",
+    "latitude": -35.288136,
+    "longitude": 149.116913,
+    "distanceMeters": 191,
+    "sourceId": "node/5190396410"
+  },
+  {
+    "residenceSlug": "university-house",
+    "category": "cafe",
+    "name": "The Licensed Grocer on Balmain",
+    "latitude": -35.2845169,
+    "longitude": 149.1166971,
+    "distanceMeters": 236,
+    "sourceId": "node/6991430547"
+  },
+  {
+    "residenceSlug": "university-house",
+    "category": "cafe",
+    "name": "The Gods Cafe, Hedley Bull",
+    "latitude": -35.2828776,
+    "longitude": 149.1196803,
+    "distanceMeters": 527,
+    "sourceId": "node/5921587174"
+  },
+  {
+    "residenceSlug": "yukeembruk",
+    "category": "bus_stop",
+    "name": "Ward Street (via Yukeembruk)",
+    "latitude": -35.2809271,
+    "longitude": 149.11307,
+    "distanceMeters": 122,
+    "sourceId": "node/14102329742"
+  },
+  {
+    "residenceSlug": "yukeembruk",
+    "category": "bus_stop",
+    "name": "Clunies Ross Street Botanic Gardens",
+    "latitude": -35.2787241,
+    "longitude": 149.1092989,
+    "distanceMeters": 307,
+    "sourceId": "node/3015889319"
+  },
+  {
+    "residenceSlug": "yukeembruk",
+    "category": "cafe",
+    "name": "Little Pickle",
+    "latitude": -35.2778298,
+    "longitude": 149.1170095,
+    "distanceMeters": 565,
+    "sourceId": "node/6392155033"
+  },
+  {
+    "residenceSlug": "yukeembruk",
+    "category": "cafe",
+    "name": "The Licensed Grocer on Balmain",
+    "latitude": -35.2845169,
+    "longitude": 149.1166971,
+    "distanceMeters": 623,
+    "sourceId": "node/6991430547"
+  },
+  {
+    "residenceSlug": "yukeembruk",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 836,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "burton-garran-hall",
+    "category": "bus_stop",
+    "name": "Barry Drive before Clunies Ross Street",
+    "latitude": -35.2729124,
+    "longitude": 149.1187869,
+    "distanceMeters": 67,
+    "sourceId": "node/405130345"
+  },
+  {
+    "residenceSlug": "burton-garran-hall",
+    "category": "bus_stop",
+    "name": "Daley Road Anutech House",
+    "latitude": -35.2736778,
+    "longitude": 149.1203052,
+    "distanceMeters": 95,
+    "sourceId": "node/5190396432"
+  },
+  {
+    "residenceSlug": "burton-garran-hall",
+    "category": "cafe",
+    "name": "Tasa Coffee House",
+    "latitude": -35.2761892,
+    "longitude": 149.1209513,
+    "distanceMeters": 356,
+    "sourceId": "node/978060176"
+  },
+  {
+    "residenceSlug": "burton-garran-hall",
+    "category": "cafe",
+    "name": "Rex Espresso",
+    "latitude": -35.2774411,
+    "longitude": 149.1204779,
+    "distanceMeters": 477,
+    "sourceId": "node/6302682192"
+  },
+  {
+    "residenceSlug": "burton-garran-hall",
+    "category": "supermarket",
+    "name": "Daily Market Groceries",
+    "latitude": -35.2775468,
+    "longitude": 149.1202097,
+    "distanceMeters": 484,
+    "sourceId": "node/6994112768"
+  },
+  {
+    "residenceSlug": "burton-garran-hall",
+    "category": "supermarket",
+    "name": "Daily Market",
+    "latitude": -35.2767939,
+    "longitude": 149.1254502,
+    "distanceMeters": 676,
+    "sourceId": "node/1667351768"
+  }
+]

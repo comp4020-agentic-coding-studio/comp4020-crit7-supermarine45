@@ -1,0 +1,88 @@
+---
+import Nav from "../components/Nav.astro";
+import ResidenceCard from "../components/ResidenceCard.astro";
+import { getShortlistIds, searchResidences } from "../lib/db";
+import type { CateringType, ResidentType } from "../lib/db";
+import "../styles.css";
+
+const params = Astro.url.searchParams;
+const q = params.get("q")?.trim() || undefined;
+const typeParam = params.get("type") || undefined;
+const cateringParam = params.get("catering") || undefined;
+const minParam = params.get("min");
+const maxParam = params.get("max");
+
+const type: ResidentType | undefined =
+  typeParam === "undergrad" || typeParam === "postgrad" || typeParam === "both" ? typeParam : undefined;
+const catering: CateringType | undefined =
+  cateringParam === "self_catered" || cateringParam === "catered" || cateringParam === "flexi_catered"
+    ? cateringParam
+    : undefined;
+const min = minParam ? Number(minParam) : undefined;
+const max = maxParam ? Number(maxParam) : undefined;
+
+const results = searchResidences({ q, type, catering, min, max });
+const shortlistIds = getShortlistIds();
+const redirectTo = `${Astro.url.pathname}${Astro.url.search}`;
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Search residences — ANU Residence Explorer</title>
+  </head>
+  <body>
+    <Nav />
+    <main class="wide">
+      <h1>Search residences</h1>
+      <form class="filters" method="get" action="/search/">
+        <div class="filters-row">
+          <label for="q">Keyword<input id="q" name="q" type="search" value={q ?? ""} placeholder="e.g. balcony, creek" /></label>
+          <label for="type"
+            >Resident type
+            <select id="type" name="type">
+              <option value="" selected={!type}>Any</option>
+              <option value="undergrad" selected={type === "undergrad"}>Undergrad</option>
+              <option value="postgrad" selected={type === "postgrad"}>Postgrad</option>
+              <option value="both" selected={type === "both"}>Undergrad & postgrad</option>
+            </select>
+          </label>
+          <label for="catering"
+            >Catering
+            <select id="catering" name="catering">
+              <option value="" selected={!catering}>Any</option>
+              <option value="self_catered" selected={catering === "self_catered"}>Self-catered</option>
+              <option value="flexi_catered" selected={catering === "flexi_catered"}>Flexi-catered</option>
+              <option value="catered" selected={catering === "catered"}>Catered</option>
+            </select>
+          </label>
+          <label for="min">Min $/wk<input id="min" name="min" type="number" min="0" step="1" value={min ?? ""} /></label>
+          <label for="max">Max $/wk<input id="max" name="max" type="number" min="0" step="1" value={max ?? ""} /></label>
+        </div>
+        <div class="filters-actions">
+          <svg class="filter-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M3 4h18v2.2l-7 7.6V19l-4 2v-7.2L3 6.2Z" />
+          </svg>
+          <button type="submit">Filter</button>
+          <a class="link-button" href="/search/">Clear filters</a>
+        </div>
+      </form>
+      <p aria-live="polite">
+        {results.length} {results.length === 1 ? "residence" : "residences"} match.
+      </p>
+      {
+        results.length === 0 ? (
+          <p class="no-results">No residences match those filters. Try widening the price range or clearing a filter.</p>
+        ) : (
+          <ul class="residence-grid">
+            {results.map((r) => (
+              <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo={redirectTo} />
+            ))}
+          </ul>
+        )
+      }
+    </main>
+  </body>
+</html>

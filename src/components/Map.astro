@@ -1,0 +1,125 @@
+---
+interface ResidenceMarker {
+  lat: number;
+  lon: number;
+  name: string;
+  slug: string;
+}
+interface PlaceMarker {
+  lat: number;
+  lon: number;
+  name: string | null;
+  category: string;
+}
+interface ShuttleMarker {
+  lat: number;
+  lon: number;
+  name: string;
+  note: string | null;
+}
+interface Props {
+  id: string;
+  center: [number, number];
+  zoom: number;
+  residences?: ResidenceMarker[];
+  places?: PlaceMarker[];
+  shuttle?: ShuttleMarker[];
+  small?: boolean;
+}
+
+const { id, center, zoom, residences = [], places = [], shuttle = [], small = false } = Astro.props;
+---
+
+<div
+  id={id}
+  class={`map-container${small ? " small" : ""}`}
+  data-initialized="0"
+  data-center={JSON.stringify(center)}
+  data-zoom={zoom}
+  data-residences={JSON.stringify(residences)}
+  data-places={JSON.stringify(places)}
+  data-shuttle={JSON.stringify(shuttle)}
+>
+</div>
+
+<script>
+  import L from "leaflet";
+  import "leaflet/dist/leaflet.css";
+
+  const CATEGORY_LABEL: Record<string, string> = {
+    bus_stop: "Bus stop",
+    tram_stop: "Light rail stop",
+    supermarket: "Supermarket",
+    cafe: "Cafe",
+  };
+  const CATEGORY_COLOR: Record<string, string> = {
+    bus_stop: "#2563eb",
+    tram_stop: "#7c3aed",
+    supermarket: "#059669",
+    cafe: "#b45309",
+  };
+
+  interface ResidenceMarker {
+    lat: number;
+    lon: number;
+    name: string;
+    slug: string;
+  }
+  interface PlaceMarker {
+    lat: number;
+    lon: number;
+    name: string | null;
+    category: string;
+  }
+  interface ShuttleMarker {
+    lat: number;
+    lon: number;
+    name: string;
+    note: string | null;
+  }
+
+  function init(el: HTMLElement) {
+    el.dataset.initialized = "1";
+    const center = JSON.parse(el.dataset.center || "[-35.28,149.12]") as [number, number];
+    const zoom = Number(el.dataset.zoom || "15");
+    const map = L.map(el, { scrollWheelZoom: false }).setView(center, zoom);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+    }).addTo(map);
+
+    const residences = JSON.parse(el.dataset.residences || "[]") as ResidenceMarker[];
+    for (const r of residences) {
+      L.marker([r.lat, r.lon])
+        .addTo(map)
+        .bindPopup(`<a href="/residences/${r.slug}/">${r.name}</a>`);
+    }
+
+    const places = JSON.parse(el.dataset.places || "[]") as PlaceMarker[];
+    for (const p of places) {
+      const label = CATEGORY_LABEL[p.category] || p.category;
+      L.circleMarker([p.lat, p.lon], {
+        radius: 6,
+        color: CATEGORY_COLOR[p.category] || "#555",
+        fillOpacity: 0.8,
+      })
+        .addTo(map)
+        .bindPopup(`${p.name || label} (${label})`);
+    }
+
+    const shuttle = JSON.parse(el.dataset.shuttle || "[]") as ShuttleMarker[];
+    if (shuttle.length > 0) {
+      L.polyline(
+        shuttle.map((s): [number, number] => [s.lat, s.lon]),
+        { color: "#dc2626", weight: 3, dashArray: "6 4" },
+      ).addTo(map);
+      for (const s of shuttle) {
+        L.circleMarker([s.lat, s.lon], { radius: 5, color: "#dc2626", fillColor: "#dc2626", fillOpacity: 1 })
+          .addTo(map)
+          .bindPopup(`${s.name}${s.note ? ` — ${s.note}` : ""} (ANU Civic Loop)`);
+      }
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('.map-container[data-initialized="0"]').forEach(init);
+</script>

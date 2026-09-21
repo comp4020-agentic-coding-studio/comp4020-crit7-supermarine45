@@ -1,8 +1,19 @@
 ---
-import { listMessages } from "../lib/db";
+import Map from "../components/Map.astro";
+import Nav from "../components/Nav.astro";
+import ResidenceCard from "../components/ResidenceCard.astro";
+import { getShortlistIds, listAllResidences, listShuttleStops } from "../lib/db";
 import "../styles.css";
 
-const messages = listMessages();
+const residences = listAllResidences();
+const shuttleStops = listShuttleStops();
+const shortlistIds = getShortlistIds();
+const redirectTo = "/";
+
+const mapResidences = residences
+  .filter((r) => r.latitude != null && r.longitude != null)
+  .map((r) => ({ lat: r.latitude as number, lon: r.longitude as number, name: r.name, slug: r.slug }));
+const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude, name: s.name, note: s.note }));
 ---
 
 <!doctype html>
@@ -10,44 +21,49 @@ const messages = listMessages();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>COMP4020 prototype</title>
+    <title>ANU Residence Explorer</title>
   </head>
   <body>
-    <nav aria-label="site">
-      <a href="/">Guestbook</a>
-      <a href="/readme/">About</a>
-    </nav>
-    <main>
-      <h1>Guestbook</h1>
+    <Nav />
+    <main class="wide">
+      <div class="hero-banner">
+        <img
+          src="https://imagedepot.anu.edu.au/isfs/banner/our-residence-banner.jpg"
+          alt="Students walking on ANU campus outside student accommodation"
+          width="1600"
+          height="700"
+        />
+        <div class="hero-banner-overlay">
+          <h1>ANU Residence Explorer</h1>
+          <p>
+            All {residences.length} of ANU's undergraduate and postgraduate residences, mapped, searchable and
+            side by side — built on top of ANU's own public residences listing.
+          </p>
+        </div>
+      </div>
+
+      <div class="cta-bar">
+        <div>
+          <h2>Compare all {residences.length} residences in one place</h2>
+          <p>Filter by resident type, catering and price, then jump straight to the real ANU application page.</p>
+        </div>
+        <a class="btn-primary" href="/search/">Search &amp; filter</a>
+      </div>
+
       <p>
-        A minimal full-stack starter: messages live in SQLite on the machine's
-        volume (state survives a reload and a redeploy), and new messages
-        appear in every open tab over a server-sent-events stream — open this
-        page twice and sign it in one. Replace all of this with your own
-        prototype.
+        ANU's own <a href="https://study.anu.edu.au/accommodation/our-residences">residences listing</a> splits
+        {residences.length} halls, lodges and colleges across separate pages with no way to compare them side by side,
+        and no sense of where any of them actually sit in Canberra. This map plots every residence together with the
+        <a href="https://sustainability.anu.edu.au/news/anu-civic-loop-bus-route-update-17-august-2026"
+          >ANU Civic Loop shuttle route</a
+        > (dashed red) and nearby bus stops, supermarkets and cafes, pulled from OpenStreetMap.
       </p>
-      <form method="post" action="/api/messages">
-        <label for="body">Leave a message</label>
-        <input id="body" name="body" required maxlength="500" />
-        <button>Sign</button>
-      </form>
-      <ul id="messages">
-        {messages.map((message) => <li>{message.body}</li>)}
+      <Map id="overview-map" center={[-35.2778, 149.1185]} zoom={15} residences={mapResidences} shuttle={mapShuttle} />
+
+      <h2>{residences.length} residences</h2>
+      <ul class="residence-grid">
+        {residences.map((r) => <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo={redirectTo} />)}
       </ul>
     </main>
-    <script>
-      // The live half of the demo: subscribe to the SSE stream and prepend
-      // messages as they arrive. The form itself needs none of this — its
-      // POST + redirect re-renders the submitting tab from SQLite; this
-      // stream is how every other tab finds out.
-      const list = document.querySelector("#messages");
-      const source = new EventSource("/api/events");
-      source.addEventListener("message", (event) => {
-        const message = JSON.parse(event.data);
-        const item = document.createElement("li");
-        item.textContent = message.body;
-        list?.prepend(item);
-      });
-    </script>
   </body>
 </html>

@@ -1,0 +1,2796 @@
+[
+  {
+    "slug": "davey-lodge",
+    "name": "Davey Lodge",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/davey-lodge",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 365,
+    "address": "X001 Childers Street ACT 2601",
+    "capacity": null,
+    "capacityNote": null,
+    "blurb": "Davey Lodge is a self-catered apartment-style residence on Childers Street, close to the city and the Kambri precinct, offering everything from single-occupancy studios to five-bedroom multi-share apartments, each with its own kitchen and bathroom.",
+    "accessibilityNote": "Common rooms and courtyards are designed to be accessible and disabled parking is available on site, though the lift is noted as hard to turn a wheelchair in.",
+    "feeNote": "10 room types from $365-$581/wk on 48-week contracts; $1,300 deposit, $400 registration fee (new students), $200 committee fee.",
+    "features": [
+      "Self-contained studio apartment",
+      "Shared apartment with kitchen & bathroom, lockable rooms",
+      "Games / Music Entertainment room",
+      "Self-catered",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Summer accommodation",
+      "Parking",
+      "Wheelchair access - hard to turn in the lift"
+    ],
+    "latitude": -35.2757963,
+    "longitude": 149.1260441,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Davey%20Lodge%20-%20Banner.jpg?h=07298254&itok=uAepIdnT",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Davey%20Lodge%20-%201.jpeg?h=f2fcf546&itok=SVzDD0x7",
+        "alt": "Davey Lodge - front"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Davey%20Lodge%20-%202.jpeg?h=f2fcf546&itok=46jcfiZC",
+        "alt": "Davey Lodge - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Davey%20Lodge%20-%203.jpeg?h=f2fcf546&itok=ClHTiL36",
+        "alt": "Davey Lodge - room"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Davey%20Lodge%20-%204.jpeg?h=f2fcf546&itok=YK2JbNqA",
+        "alt": "Davey Lodge - playroom"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Davey%20Lodge%20-%205.jpeg?h=f2fcf546&itok=GADsXbn2",
+        "alt": "Davey Lodge - laundry"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Studio Long",
+        "weeklyTariff": 463.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $926",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double/1 Bedroom (single occupancy)",
+        "weeklyTariff": 566.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,132",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double/1 Bedroom (double occupancy)",
+        "weeklyTariff": 581.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,162",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double/1 Bedroom Mezzanine (single occupancy)",
+        "weeklyTariff": 558.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,116",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double/1 Bedroom Mezzanine (double occupancy)",
+        "weeklyTariff": 573.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,146",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "2 Bedroom Multishare",
+        "weeklyTariff": 405.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $810",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "2 and 3 Bedroom Multishare Lightwell",
+        "weeklyTariff": 365.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $730",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "3 Bedroom Multishare",
+        "weeklyTariff": 401.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $802",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "3 Bedroom Multishare Mezzanine",
+        "weeklyTariff": 407.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $814",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "5 Bedroom Multishare",
+        "weeklyTariff": 374.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff",
+          "Monthly common area cleaning: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $748",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Committee Fee: $200"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "ursula-hall-laurus-wing",
+    "name": "Ursula Hall Laurus Wing",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/ursula-hall-laurus-wing",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": false,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 436,
+    "address": "50 Daley Road ACT 2600",
+    "capacity": 188,
+    "capacityNote": null,
+    "blurb": "Ursula Hall Laurus Wing is the self-catered postgraduate wing of one of ANU's oldest residences, offering self-contained studios and one-bedroom apartments near Sullivans Creek, with access to Main Wing's dining hall and shared facilities.",
+    "accessibilityNote": "Laurus Wing is mobility friendly, with a lift servicing all 6 floors, several accessible rooms with lower benchtops and accessible bathrooms, and automatic sliding doors at main access points.",
+    "feeNote": "6 room types $436-$608/wk on 48-week contracts; $1,300 deposit, $400 registration fee (new students), $240 committee fee.",
+    "features": [
+      "Self-contained studio apartment",
+      "Self-contained kitchen & bathroom",
+      "Self-catered + one catered meal per week",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Secured access",
+      "Personal Accident Insurance",
+      "Parking",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2785883,
+    "longitude": 149.1145431,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Laurus%20Wing%20-%20Banner.jpg?h=07298254&itok=_AL3R7fD",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Laurus%20Wing%20-%20%201.jpg?h=d8102449&itok=g0FCi10P",
+        "alt": "Laurus Wing - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Laurus%20Wing%20-%20%202.jpg?h=d8102449&itok=CfNx_Yfy",
+        "alt": "Laurus Wing - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Laurus%20Wing%20-%20%203.jpg?h=d8102449&itok=okbrhoMl",
+        "alt": "Laurus Wing - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Laurus%20Wing%20-%20%204.jpg?h=d8102449&itok=f-iK44Nj",
+        "alt": "Laurus Wing - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Laurus%20Wing%20-%20%205.jpg?h=d8102449&itok=6kUa2xZX",
+        "alt": "Laurus Wing - 5"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Laurus%20Wing%20-%20%206.jpg?h=d8102449&itok=lnFBpXF8",
+        "alt": "Laurus Wing - 6"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Studio Single",
+        "weeklyTariff": 436.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $872",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Studio Large",
+        "weeklyTariff": 448.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $896",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Studio Accessible",
+        "weeklyTariff": 448.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $896",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "1 Bedroom",
+        "weeklyTariff": 448.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $896",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Studio Double (Single Occupancy)",
+        "weeklyTariff": 577.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,154",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Studio Double (Double Occupancy)",
+        "weeklyTariff": 608.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,216",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "wamburun-hall",
+    "name": "Wamburun Hall",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/wamburun-hall",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 379,
+    "address": "150 Dickson Road ACT 2601",
+    "capacity": 500,
+    "capacityNote": null,
+    "blurb": "Wamburun Hall is one of ANU's newer residences, a self-catered building at the foot of Black Mountain housing 500 students in individual furnished bedrooms with large communal kitchens, common rooms, and a central quad with community garden beds.",
+    "accessibilityNote": "Rooms are available for accessibility requirements with easy access to elevators, and emergency systems include both visual and audible signals.",
+    "feeNote": "3 room types $379-$407/wk on 44-week contracts; $1,300 deposit, $400 registration fee (new students), $240 committee fee.",
+    "features": [
+      "Single-gender floors",
+      "Standard room, shared bathroom",
+      "Self-catered, shared kitchen",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Music room",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Movie room",
+      "Games room",
+      "Parking",
+      "Wheelchair access"
+    ],
+    "latitude": -35.27736,
+    "longitude": 149.1139415,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wamburun%20Hall%20-%20Banner.jpg?h=07298254&itok=IJ_0FsWr",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wamburun%20Hall%20-%201.jpg?h=1467a2aa&itok=-b3wHKk9",
+        "alt": "Wamburun Hall - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wamburun%20Hall%20-%202.jpg?h=d8102449&itok=dmbQw6KG",
+        "alt": "Wamburun Hall - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wamburun%20Hall%20-%203.jpg?h=d8102449&itok=RgPenUHb",
+        "alt": "Wamburun Hall - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wamburun%20Hall%20-%204.jpg?h=d8102449&itok=mPLtFYV-",
+        "alt": "Wamburun Hall - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wamburun%20Hall%20-%205.jpg?h=d8102449&itok=7bbtHLEj",
+        "alt": "Wamburun Hall - 5"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": 383.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $766",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Standard Corner",
+        "weeklyTariff": 379.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $758",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Standard Accessible",
+        "weeklyTariff": 407.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $814",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "bruce-hall-packard-wing",
+    "name": "Bruce Hall Packard Wing",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/bruce-hall-packard-wing",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/676E5A7F/8/10/HOME-Home?UrlToken=6DD4D0BC",
+    "residentUndergrad": true,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 417,
+    "address": "40A Daley Rd ACT 2601",
+    "capacity": null,
+    "capacityNote": "66 single rooms and 12 double rooms for couples",
+    "blurb": "Bruce Hall Packard Wing is a self-catered apartment residence completed in 2004, housing mainly later-year undergraduates and postgraduate students in studios with individual kitchens and bathrooms, a short walk from Kambri.",
+    "accessibilityNote": "Wide corridors, clear signage, colour-contrasting decor, and rooms available for accessibility needs; each floor is accessed via lift, with disabled parking available nearby.",
+    "feeNote": "4 room types $417-$481/wk on 44-week contracts; $1,300 deposit, $400 registration fee (new students), $240 committee fee.",
+    "features": [
+      "Self-contained studio apartment",
+      "Self-contained kitchen & bathroom",
+      "Self-catered + 1 catered meal per week",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "CCTV surveillance",
+      "Secured access",
+      "Parking",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2737803,
+    "longitude": 149.1172727,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Packard%20-%20Banner.jpg?h=07298254&itok=xoLpq2Hu",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Packard%20ext%204_0.jpeg?h=f2fcf546&itok=Z77tZ-de",
+        "alt": "Packard banner"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Packard%20double%20studio%203.jpeg?h=f2fcf546&itok=WaW24A5c",
+        "alt": "Packard double studio"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Packard%20standard%20studio%202.jpeg?h=f2fcf546&itok=l0hFvtg1",
+        "alt": "Packard standard studio"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Packard%20Senior%20Common%20Room%204.jpeg?h=f2fcf546&itok=bWRcft2j",
+        "alt": "Packard Senior Common Room"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Packard%20library%203.jpeg?h=f2fcf546&itok=QgMdhIZE",
+        "alt": "Packard library"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Studio Single",
+        "weeklyTariff": 417.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $834",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Standard Accessible",
+        "weeklyTariff": 427.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $854",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Studio Double (single occupancy)",
+        "weeklyTariff": 457.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $914",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Studio Double (double occupancy)",
+        "weeklyTariff": 481.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $962",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "toad-hall",
+    "name": "Toad Hall",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/toad-hall",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": false,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 335,
+    "address": "30 Kingsley Street ACT 2600",
+    "capacity": 227,
+    "capacityNote": null,
+    "blurb": "Toad Hall is a self-catered residence opened in 1974, mainly home to postgraduate students, known for its communal kitchens, strong multicultural community, and setting among willow trees on the banks of Sullivans Creek.",
+    "accessibilityNote": "The ground floor has wheelchair-accessible access to reception and a wheelchair-accessible toilet, but there is no lift, so wheelchair access to the upper accommodation floors is not possible; alarms are audible only, with no visual signal or braille signage.",
+    "feeNote": "4 room types $335-$504/wk on 44-week contracts; $1,300 deposit, $400 registration fee (new students), $200 committee fee.",
+    "features": [
+      "Single-gender floors",
+      "Standard room, shared bathroom",
+      "Self-catered",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Access to Sullivans Creek",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Personal Accident Insurance",
+      "Parking",
+      "Partial wheelchair access"
+    ],
+    "latitude": -35.2771205,
+    "longitude": 149.1230457,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Toad%20Hall%20-%20Banner_0.jpg?h=07298254&itok=If2UHfsl",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Toad%20Hall%20-%201.jpg?h=e5aec6c8&itok=YtdEGmuT",
+        "alt": "Toad Hall - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Toad%20Hall%20-%202.jpg?h=d8102449&itok=_3z9jHNx",
+        "alt": "Toad Hall - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Toad%20Hall%20-%203.jpg?h=d8102449&itok=SQPI3x3U",
+        "alt": "Toad Hall - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Toad%20Hall%20-%204.jpg?h=d8102449&itok=ffXJeX7K",
+        "alt": "Toad Hall - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Toad%20Hall%20-%205.jpg?h=d8102449&itok=n3orz7RI",
+        "alt": "Toad Hall - 5"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Toad%20Hall%20-%206.jpg?h=d8102449&itok=7_1woMxz",
+        "alt": "Toad Hall - 6"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": 335.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $670",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Large",
+        "weeklyTariff": 358.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $716",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "1 Bedroom (Student Leaders only, single occupancy)",
+        "weeklyTariff": 477.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $954",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "1 Bedroom (Student Leaders only, single occupancy)",
+        "weeklyTariff": 504.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,008",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "kinloch-lodge",
+    "name": "Kinloch Lodge",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/kinloch-lodge",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 371,
+    "address": "X002 Childers Street ACT 2601",
+    "capacity": null,
+    "capacityNote": null,
+    "blurb": "Kinloch Lodge is a self-catered apartment-style residence about a five-minute walk from ANU's campus core, offering studios up to six-bedroom multi-share apartments with kitchens, study desks, and many with balconies.",
+    "accessibilityNote": "Common rooms and courtyards are designed to be accessible, with accessible rooms available on request, though city sounds from the retail area below may be noticeable.",
+    "feeNote": "10 room types $371-$641/wk on 48-week contracts; $1,300 deposit, $400 registration fee (new students), $200 committee fee.",
+    "features": [
+      "Self-contained studio apartment",
+      "Shared apartment with kitchen & bathroom, lockable rooms",
+      "Games room, Music room, BBQ area",
+      "Self-catered",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Summer accommodation",
+      "Academic support",
+      "Wellbeing care",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Parking",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2757963,
+    "longitude": 149.1260441,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Kinlock%20Lodge%20-%20Banner%201.jpg?h=07298254&itok=sac-iPBC",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Kinlock%20Lodge%20-%201.jpg?h=d8102449&itok=uUz0ZBgk",
+        "alt": "Kinloch Lodge - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Kinlock%20Lodge%20-%202.jpg?h=d8102449&itok=4OMgAuNO",
+        "alt": "Kinloch Lodge - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Kinlock%20Lodge%20-%203.jpg?h=d8102449&itok=rb4Ko_xl",
+        "alt": "Kinloch Lodge - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Kinlock%20Lodge%20-%204.jpg?h=d8102449&itok=QCLS1yQk",
+        "alt": "Kinloch Lodge - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Kinlock%20Lodge%20-%205.jpg?h=e5aec6c8&itok=wDEczkwP",
+        "alt": "Kinloch Lodge - 5"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Studio Single",
+        "weeklyTariff": 465.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $930",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Long",
+        "weeklyTariff": 496.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $992",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double Accessible",
+        "weeklyTariff": 641.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,282",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double (single occupancy)",
+        "weeklyTariff": 626.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,252",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double (double occupancy)",
+        "weeklyTariff": 641.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,282",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "2 Bedroom Multishare",
+        "weeklyTariff": 434.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $868",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "3 Bedroom Multishare",
+        "weeklyTariff": 436.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $872",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "4 Bedroom Multishare",
+        "weeklyTariff": 396.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff",
+          "Monthly common area cleaning: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $792",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "5 Bedroom Multishare",
+        "weeklyTariff": 397.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff",
+          "Monthly common area cleaning: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $794",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "6 Bedroom Multishare",
+        "weeklyTariff": 371.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff",
+          "Monthly common area cleaning: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $742",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "warrumbul-lodge",
+    "name": "Warrumbul Lodge",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/warrumbul-lodge",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 380,
+    "address": "4 Hutton Street ACT 2601",
+    "capacity": null,
+    "capacityNote": null,
+    "blurb": "Warrumbul Lodge is a self-catered apartment-style residence opened in 2011, offering room types from single studios to six-bedroom apartments with a strong focus on multicultural community and support from a Senior Resident Team.",
+    "accessibilityNote": "Offers convenient access to public transport with solid, well-maintained pathways and accessible rooms to cater to various needs; disability parking is available on site.",
+    "feeNote": "10 room types $380-$641/wk on 48-week contracts; $1,000 deposit, $400 registration fee (new students), $200 committee fee.",
+    "features": [
+      "Self-contained studio apartment",
+      "Shared apartment with kitchen & bathroom, lockable rooms",
+      "BBQ area, outdoor recreation area",
+      "Self-catered",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Parking",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2767297,
+    "longitude": 149.1243736,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Warrumbul%20Lodge%20-%20Banner_1.jpg?h=07298254&itok=qbyZglIL",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Warrumbul%20Lodge%20-%201.jpg?h=d8102449&itok=FliocaBO",
+        "alt": "Warrumbul Lodge - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Warrumbul%20Lodge%20-%202.jpg?h=d8102449&itok=hrFW8Dy-",
+        "alt": "Warrumbul Lodge - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Warrumbul%20Lodge%20-%203.jpg?h=d8102449&itok=-dBK4IWG",
+        "alt": "Warrumbul Lodge - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Warrumbul%20Lodge%20-%204.jpg?h=d8102449&itok=8IQK2ZLs",
+        "alt": "Warrumbul Lodge - 4"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Studio Single",
+        "weeklyTariff": 446.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $932",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Long",
+        "weeklyTariff": 492.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $984",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Long (student leaders only)",
+        "weeklyTariff": 492.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $984",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double (single occupancy)",
+        "weeklyTariff": 626.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,252",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double (double occupancy)",
+        "weeklyTariff": 641.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,282",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double Accessible (single occupancy)",
+        "weeklyTariff": 626.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,252",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Accessible (double occupancy)",
+        "weeklyTariff": 641.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,282",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "2 and 3 Bedroom Multishare",
+        "weeklyTariff": 436.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $872",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "5 Bedroom Multishare",
+        "weeklyTariff": 402.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff",
+          "Monthly common area cleaning: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $804",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "6 Bedroom Multishare",
+        "weeklyTariff": 380.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff",
+          "Monthly common area cleaning: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $760",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "fenner-hall",
+    "name": "Fenner Hall",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/fenner-hall",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 395,
+    "address": "152 University Avenue ACT 2601",
+    "capacity": 453,
+    "capacityNote": null,
+    "blurb": "Fenner Hall is a self-catered residence of 453 rooms in the Kambri precinct, home to both undergraduate and postgraduate students, bordering Sullivans Creek and known for its inclusive community and restorative-practice culture.",
+    "accessibilityNote": "Has relatively easy access to public transport and solid surrounding pathways, one kitchen bay designed for wheelchair access, quiet study spaces, and bedrooms available for accessibility needs.",
+    "feeNote": "3 room types $395-$425/wk on 44-week contracts; $1,300 deposit, $400 registration fee (new students), $240 committee fee.",
+    "features": [
+      "Standard room, shared bathroom",
+      "Self-catered, shared kitchen",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Music facilities, open balcony patio",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Parking",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2767525,
+    "longitude": 149.1212699,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Fenner%20Hall%20-%20Banner.jpg?h=07298254&itok=26sKASk1",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Fenner%20Hall%20-%201.jpg?h=e5aec6c8&itok=ItSgzEeN",
+        "alt": "Fenner Hall - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Fenner%20Hall%20-%202.jpg?h=e5aec6c8&itok=UO7ys1GB",
+        "alt": "Fenner Hall - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Fenner%20Hall%20-%203.jpg?h=d8102449&itok=3fW3QCER",
+        "alt": "Fenner Hall - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Fenner%20Hall%20-%204.jpg?h=e5aec6c8&itok=Wo90N8K9",
+        "alt": "Fenner Hall - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Fenner%20Hall%20-%205.jpg?h=e5aec6c8&itok=ldIccp84",
+        "alt": "Fenner Hall - 5"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Fenner%20Hall%20-%206.jpg?h=e5aec6c8&itok=VAVfGt2s",
+        "alt": "Fenner Hall - 6"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": 395.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $790",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Standard Accessible",
+        "weeklyTariff": 411.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $822",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "1 Bedroom (Student Leaders only)",
+        "weeklyTariff": 425.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $850",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "ursula-hall-main-wing",
+    "name": "Ursula Hall Main Wing",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/ursula-hall-main-wing",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": false,
+    "cateringType": "catered",
+    "weeklyRateFrom": 512,
+    "address": "50 Daley Road ACT 2600",
+    "capacity": 208,
+    "capacityNote": null,
+    "blurb": "Ursula Hall Main Wing is a catered undergraduate residence dating to 1968, centred on a courtyard and the on-site Brian Francis Dining Hall where all meals are shared, fostering a tight-knit, resident-driven culture.",
+    "accessibilityNote": "The hall is described by residents as 'small' and 'homely'; common spaces are on the ground level while resident rooms are on levels 1 and 2 accessed via stairs, and the Dining Hall has a few steps at its entries.",
+    "feeNote": "2 room types $512-$530/wk on 44-week contracts; $1,300 deposit, $400 registration fee (new students), $240 committee fee.",
+    "features": [
+      "Standard room, shared bathroom",
+      "Catered, 21 meals per week",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Canteen, Games room",
+      "Computer lab",
+      "Secured access",
+      "Summer accommodation",
+      "Conference facilities and accommodation",
+      "Parking"
+    ],
+    "latitude": -35.2785883,
+    "longitude": 149.1145431,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Ursula%20Hall%20-%20Banner.jpg?h=07298254&itok=Tkl2S9Ry",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Ursula%20Hall%20-%201.jpg?h=e5aec6c8&itok=PQmv5QHa",
+        "alt": "Ursula Hall - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Ursula%20Hall%20-%202.jpg?h=d8102449&itok=mYfcmE34",
+        "alt": "Ursula Hall - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Ursula%20Hall%20-%203.jpg?h=d8102449&itok=QkUir_-h",
+        "alt": "Ursula Hall - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Ursula%20Hall%20-%204.jpg?h=d8102449&itok=H8Cb6aWt",
+        "alt": "Ursula Hall - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Ursula%20Hall%20-%205.jpg?h=d8102449&itok=NeE5urkA",
+        "alt": "Ursula Hall - 5"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": 512.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 week rent: $1,024",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Ensuite (Student Leaders only)",
+        "weeklyTariff": 530.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 week rent: $1,060",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "bruce-hall-main-wing",
+    "name": "Bruce Hall Main Wing",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/bruce-hall-main-wing",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": false,
+    "cateringType": "catered",
+    "weeklyRateFrom": 585,
+    "address": "40A Daley Road ACT 2601",
+    "capacity": null,
+    "capacityNote": null,
+    "blurb": "Bruce Hall Main Wing is ANU's original undergraduate hall, rebuilt in 2019 into a modern residence on Daley Road with student input into its design. It is fully catered and includes shared facilities such as a computer lab, music rooms and a rooftop garden.",
+    "accessibilityNote": "The hall has wide corridors, clear signage and colour-contrasting decor, with wheelchair-accessible rooms and accessible shared bathrooms available, and each floor reachable by lift. The dining hall includes dedicated quiet tables and staff can accommodate a wide variety of dietary needs.",
+    "feeNote": "2027 indicative weekly tariffs on a 44-week contract: Studio (student leaders/direct allocation only) $585, Standard $595, Standard Accessible $608. Phone/internet and utilities are included in the tariff, laundry is pay-as-you-go, plus a $1,300 deposit, $400 registration fee (new students) and $240 committee fee.",
+    "features": [
+      "Standard rooms with balcony",
+      "Shared bathrooms",
+      "Catered, 21 meals per week",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Music facilities",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Roof-top garden",
+      "Parking (limited paid resident permit parking)",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2737803,
+    "longitude": 149.1172727,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Bruce%20Hall%20-%20Banner.jpg?h=07298254&itok=KRuFkz7z",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Bruce%20Hall%20banner.jpg?h=f2fcf546&itok=WzazK43p",
+        "alt": "Bruce Hall banner"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Bruce%20Hall%20Accessible%20room%202.jpeg?h=f2fcf546&itok=m76B11Ud",
+        "alt": "Bruce Hall Accessible room"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Bruce%20Hall%20Standard%20Room%204.jpeg?h=f2fcf546&itok=Q0F90H8h",
+        "alt": "Bruce Hall Standard Room"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Bruce%20Hall%20Common%20Room%202.jpeg?h=f2fcf546&itok=26WnWaNj",
+        "alt": "Bruce Hall Common Room"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Bruce%20Hall%20Dining%20Hall%20centre.jpeg?h=f2fcf546&itok=nFLEzEvy",
+        "alt": "Bruce Hall Dining Hall centre"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Bruce%20Hall%20shared%20bathrooms%204.jpeg?h=f2fcf546&itok=4O8VRn4X",
+        "alt": "Bruce Hall shared bathrooms"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": 595.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,190",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Standard Accessible",
+        "weeklyTariff": 608.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,216",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Studio (Student Leaders/By direct allocation only)",
+        "weeklyTariff": 585.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,238",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "wright-hall",
+    "name": "Wright Hall",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/wright-hall",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": false,
+    "cateringType": "flexi_catered",
+    "weeklyRateFrom": 558,
+    "address": "163 Daley Road ACT 2601",
+    "capacity": null,
+    "capacityNote": null,
+    "blurb": "Wright Hall is one of ANU's newest undergraduate halls, opened in 2019 beside Bruce Hall at the end of University Avenue. It offers flexi-catered dining and a rooftop pavilion with panoramic views over Canberra.",
+    "accessibilityNote": "Wright Hall is wheelchair accessible throughout the building, with designated accessible rooms and bathrooms, clear signage, disabled parking spaces, handrails, colour-contrasting doorframes and furniture, low-arousal colour schemes and wide corridors.",
+    "feeNote": "2027 indicative weekly tariffs on a 44-week contract: Standard $558, Standard Accessible $572, 1 Bedroom (student leaders only) $583. Phone/internet and utilities are included in the tariff, laundry is pay-as-you-go, plus a $1,300 deposit, $400 registration fee (new students) and $240 committee fee.",
+    "features": [
+      "Standard rooms with balcony",
+      "Shared bathrooms",
+      "Flexi-catered, 16 meals per week",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Roof-top garden",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Parking (limited paid resident permit parking)",
+      "Wheelchair access"
+    ],
+    "latitude": -35.275035,
+    "longitude": 149.1154814,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wright%20Hall%20-%20Banner.jpg?h=07298254&itok=JvKHV4Wz",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wright%20Hall%20-%201.jpg?h=d8102449&itok=-rEiIPmm",
+        "alt": "Wright Hall - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wright%20Hall%20-%202.jpg?h=d8102449&itok=2tZuBvR2",
+        "alt": "Wright Hall - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wright%20Hall%20-%203.jpg?h=d8102449&itok=reCkjybs",
+        "alt": "Wright Hall - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wright%20Hall%20-%204.jpg?h=d8102449&itok=VVHc_fnl",
+        "alt": "Wright Hall - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wright%20Hall%20-%205.jpg?h=d8102449&itok=rkxvtGY1",
+        "alt": "Wright Hall - 5"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Wright%20Hall%20-%206.jpg?h=d8102449&itok=228rAT_e",
+        "alt": "Wright Hall - 6"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": 558.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,116",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Standard Accessible",
+        "weeklyTariff": 572.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,144",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "1 Bedroom (Student Leaders only)",
+        "weeklyTariff": 583.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,166",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $240"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "graduate-house",
+    "name": "Graduate House",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/graduate-house",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": false,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 400,
+    "address": "118 Garran Road ACT 2601",
+    "capacity": null,
+    "capacityNote": "over 150 graduate students from 30+ countries",
+    "blurb": "Graduate House is a self-catered postgraduate residence housing over 150 graduate students from more than 30 countries. It offers studio apartments plus a weekly communal House dinner, and was originally built in 1971 before relocating to its current campus site in 1998.",
+    "accessibilityNote": "The building has a ramp and lift to access different parts of the building, with two rooms available for residents with accessibility needs. Common rooms are located on the ground floor.",
+    "feeNote": "2027 indicative weekly tariffs on a 52-week contract: Studio Single $400, Studio Double (single occupancy) $554, Studio Double (double occupancy) $581. Phone/internet, laundry and utilities are included in the tariff, plus a $1,300 deposit, $400 registration fee (new students) and $200 committee fee.",
+    "features": [
+      "Self-contained studio apartment",
+      "Self-contained kitchen and bathroom",
+      "Self-catered + weekly House dinner",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Personal Accident Insurance",
+      "Parking (limited paid resident permit parking)"
+    ],
+    "latitude": -35.2818686,
+    "longitude": 149.1152891,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Graduate%20House%20-%20Banner.jpg?h=07298254&itok=SNOEEjqJ",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Graduate%20House%20-%201.jpg?h=e5aec6c8&itok=WrlopGSI",
+        "alt": "Graduate House - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Graduate%20House%20-%202.jpg?h=d8102449&itok=x6w-jWkR",
+        "alt": "Graduate House - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Graduate%20House%20-%203.jpg?h=d8102449&itok=nUNrCESO",
+        "alt": "Graduate House - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Graduate%20House%20-%204.jpg?h=d8102449&itok=LiwodpDQ",
+        "alt": "Graduate House - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Graduate%20House%20-%205.jpg?h=d8102449&itok=BvlQtqAW",
+        "alt": "Graduate House - 5"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Studio Single",
+        "weeklyTariff": 400.0,
+        "contractTerm": "52 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $800",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double (single occupancy)",
+        "weeklyTariff": 554.0,
+        "contractTerm": "52 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,108",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double (double occupancy)",
+        "weeklyTariff": 581.0,
+        "contractTerm": "52 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,162",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $200"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "burgmann-college",
+    "name": "Burgmann College",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/burgmann-college",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": false,
+    "cateringType": "catered",
+    "weeklyRateFrom": 629,
+    "address": "52 Daley Road ACT 2601",
+    "capacity": 378,
+    "capacityNote": null,
+    "blurb": "Burgmann College is a catered undergraduate college founded in 1971, home to 378 students, with pastoral care from an onsite Principal, Deputy and Dean and strong student leadership and alumni programs.",
+    "accessibilityNote": "Burgmann College has ramps, flat walkways and large rooms available for accessibility needs, a lift in the undergraduate wings, and audible signals on all emergency systems. Self-catered accessible rooms and studios are also available in Burgmann Village.",
+    "feeNote": "2027 indicative cost for the Standard room: $629 weekly inclusive tariff over a 43.57-week (new students) / 43-week (returning students) contract, including phone+internet ($11.36), laundry and utilities. Additional fees: $1,000 deposit, $470 registration fee (new students) and $250 committee fee.",
+    "features": [
+      "Single rooms",
+      "Study spaces and common areas",
+      "Music facilities",
+      "Pastoral care ratio 1:18",
+      "Catered, 21 meals per week",
+      "Computer lab and printing",
+      "Academic programs and support",
+      "Principal, Deputy & Dean live onsite",
+      "Over 50 Leadership opportunities",
+      "Free internet",
+      "Free laundry facilities",
+      "Wellbeing & Residential Life programmes",
+      "Free access to Residential Kitchen Facilities",
+      "Alumni engagement and mentoring",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2800917,
+    "longitude": 149.1134821,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Main%20page-min.jpeg?h=e5aec6c8&itok=elZHzs4-",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/Burgmann-2.jpeg?h=d03bd5df&itok=EOibzRyZ",
+        "alt": "Burgmann"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/Burgmann-7.jpeg?h=d03bd5df&itok=bHmxc37l",
+        "alt": "Burgmann"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/WEB-1-min.jpeg?h=e5aec6c8&itok=8uiD-yKZ",
+        "alt": "Burgmann-gallary"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/WEB-2-min.jpeg?h=e5aec6c8&itok=Ljo5KJdX",
+        "alt": "Burgmann-gallary"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/WEB-3-min.jpeg?h=06f6671c&itok=8V2SANGX",
+        "alt": "Burgmann-gallary"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/WEB-4-min.jpeg?h=06f6671c&itok=d4kyF5hh",
+        "alt": "Burgmann-gallary"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/WEB-5-min.jpeg?h=e5aec6c8&itok=nBGNl5h1",
+        "alt": "Burgmann-gallary"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/WEB-6-min.jpeg?h=06f6671c&itok=qeh0aZs7",
+        "alt": "Burgmann-gallary"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/WEB-7-min.jpeg?h=e5aec6c8&itok=eQhjIe1b",
+        "alt": "Burgmann-gallary"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/WEB-8-min.jpeg?h=e5aec6c8&itok=KUTm1Zxj",
+        "alt": "Burgmann-gallary"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/WEB-9-min.jpeg?h=e5aec6c8&itok=98ESU-uZ",
+        "alt": "Burgmann-gallary"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": 629.0,
+        "contractTerm": "43.57 weeks (new)",
+        "inclusions": [
+          "Phone + Internet Connection: $11.36",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 week rent: $1,258",
+          "Refundable Deposit: $1000",
+          "Registration Fee (New students only): $470",
+          "Committee Fee: $250"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "lena-karmel-lodge",
+    "name": "Lena Karmel Lodge",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/lena-karmel-lodge",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 385,
+    "address": "26 Barry Drive ACT 2601",
+    "capacity": null,
+    "capacityNote": null,
+    "blurb": "Lena Karmel Lodge is a modern self-catered residence for both undergraduate and postgraduate students, opened in 2012. It offers room types from single studios to 6-bedroom apartments, plus a gym, rooftop garden, atrium and ground-floor retail and food outlets, about a 5-minute walk to classes.",
+    "accessibilityNote": "The lodge offers accessible rooms to cater to various needs, has solid, well-maintained pathways and convenient access to public transport, and disabled parking is available on site. Some city noise from the retail area below may be apparent.",
+    "feeNote": "2027 indicative weekly tariffs across 11 room types on a 48-week contract range from $385 (6 Bedroom Multishare) to $641 (Studio Double/1 Bedroom, double occupancy). Phone/internet and utilities are included in the tariff, laundry is pay-as-you-go, and some multishare types add monthly common area cleaning, plus a $1,300 deposit, $400 registration fee (new students) and $200 committee fee.",
+    "features": [
+      "Self-contained studio apartment",
+      "Shared apartments with kitchen & bathroom, lockable rooms",
+      "Games Room, Music Room, Gym, Roof-top garden",
+      "Self-catered",
+      "Summer accommodation",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Parking (limited paid parking at UniLodge or resident permit parking at Kingsley Street parking station)",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2760033,
+    "longitude": 149.1256276,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Lena%20Karmel%20-%20Banner_0.jpg?h=07298254&itok=BbuJGPkB",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Lena%20Karmel%20-%201.jpg?h=d8102449&itok=wtpFw4Do",
+        "alt": "Lena Karmel - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Lena%20Karmel%20-%202.jpg?h=d8102449&itok=G82388E3",
+        "alt": "Lena Karmel - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Lena%20Karmel%20-%203.jpg?h=d8102449&itok=YMCABJcU",
+        "alt": "Lena Karmel - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Lena%20Karmel%20-%204.jpg?h=d8102449&itok=XKMPyfC8",
+        "alt": "Lena Karmel - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Lena%20Karmel%20-%205.jpg?h=d8102449&itok=K2iAxps4",
+        "alt": "Lena Karmel - 5"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Lena%20Karmel%20-%206.jpg?h=d8102449&itok=CBQ3iSW2",
+        "alt": "Lena Karmel - 6"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Studio Single",
+        "weeklyTariff": 477.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $954",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Long",
+        "weeklyTariff": 508.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,016",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double/1 Bedroom (single occupancy)",
+        "weeklyTariff": 626.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,252",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double/1 Bedroom (double occupancy)",
+        "weeklyTariff": 641.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,282",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double/1 Bedroom Short (single occupancy)",
+        "weeklyTariff": 604.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,208",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double/1 Bedroom Short (double occupancy)",
+        "weeklyTariff": 619.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,238",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double Accessible (single occupancy)",
+        "weeklyTariff": 626.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,252",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "Studio Double Accessible (double occupancy)",
+        "weeklyTariff": 641.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,282",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "2 Bedroom Multishare",
+        "weeklyTariff": 441.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $882",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "5 Bedroom Multishare",
+        "weeklyTariff": 410.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff",
+          "Monthly common area cleaning: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $820",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      },
+      {
+        "name": "6 Bedroom Multishare",
+        "weeklyTariff": 385.0,
+        "contractTerm": "48 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff",
+          "Monthly common area cleaning: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $770",
+          "Refundable Deposit: $1,300",
+          "Registration Fee (New students only): $400",
+          "Committee Fee: $200"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "john-xxiii-college",
+    "name": "John XXIII College",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/john-xxiii-college",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/676E5A7F/8/10/HOME-Home?UrlToken=6DD4D0BC",
+    "residentUndergrad": true,
+    "residentPostgrad": false,
+    "cateringType": "catered",
+    "weeklyRateFrom": null,
+    "address": "51 Daley Road ACT 2601",
+    "capacity": null,
+    "capacityNote": null,
+    "blurb": "John XXIII College is a catered undergraduate residential college affiliated with ANU, established in 1967 with a community grounded in Christian values and the Dominican charism, and open to students of all faiths.",
+    "accessibilityNote": null,
+    "feeNote": "2027 indicative costs for the Standard room on a 44-week contract: rent and internet are listed as 'tbc', with laundry and utilities included in the tariff, plus a $1,000 room deposit, $350 registration fee (new students) and $350 residents' association fee.",
+    "features": [
+      "Standard room",
+      "Shared bathroom",
+      "Catered, 21 meals per week",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Music facilities",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Personal Accident Insurance",
+      "Parking (limited paid resident permit parking at the Dickson parking station)"
+    ],
+    "latitude": -35.2790163,
+    "longitude": 149.1151064,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/john-xxiii.jpg?h=790be497&itok=WrLgyh9v",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/john-1.jpg?h=d03bd5df&itok=6Y5Mu7mc",
+        "alt": "John XXIII College"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/john-2.jpg?h=d03bd5df&itok=W9do5_yc",
+        "alt": "John XXIII College"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/john-3.jpeg?h=d03bd5df&itok=MVWHdZm5",
+        "alt": "John XXIII College"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/john-4.jpg?h=d03bd5df&itok=v6B5SQ5K",
+        "alt": "John XXIII College"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/john-5.jpeg?h=d03bd5df&itok=sgX7fUk_",
+        "alt": "John XXIII College"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/john-6.jpeg?h=d03bd5df&itok=HEAHAgHK",
+        "alt": "John XXIII College"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/john-7.jpeg?h=d03bd5df&itok=_ynBFm_R",
+        "alt": "John XXIII College"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/john-8.jpeg?h=d03bd5df&itok=EDWVrGS2",
+        "alt": "John XXIII College"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": null,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Internet connection: tbc",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: tbc",
+          "Room deposit: $1,000",
+          "Registration Fee (New students only): $350",
+          "Residents' Association: $350"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "burgmann-undergraduate-and-postgraduate-village",
+    "name": "Burgmann Undergraduate and Postgraduate Village",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/burgmann-undergraduate-and-postgraduate-village",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 520,
+    "address": "52 Daley Road ACT 2601",
+    "capacity": 120,
+    "capacityNote": null,
+    "blurb": "Burgmann Village is a self-catered residence for both undergraduate and postgraduate students, housing a community of about 120 residents in studio and shared apartments, with the option of catering packages and shared pastoral care and leadership programs run with neighbouring Burgmann College.",
+    "accessibilityNote": "Burgmann College has ramps, flat walkways and large rooms available for accessibility needs, with self-catered accessible rooms and studios available, a lift in the undergraduate wings, and audible signals on all emergency systems.",
+    "feeNote": "2027 indicative weekly tariffs on a 47-week contract: Studio $627, 2 & 3 Bedroom Multishare $548, 5 Bedroom Multishare $520. Phone+internet ($11.36), laundry and utilities are included in the tariff, plus a $1,000 deposit, $470 registration fee (new students) and $250 committee fee.",
+    "features": [
+      "Self-contained studio or shared apartments",
+      "Study spaces and common areas",
+      "Music facilities",
+      "Pastoral care ratio 1:18",
+      "Self-catered or catering packages available",
+      "Computer lab and printing",
+      "Academic programs and support",
+      "Principal, Deputy & Dean live onsite",
+      "Over 50 Leadership opportunities",
+      "Free internet",
+      "Free laundry facilities",
+      "Wellbeing & Residential Life programmes",
+      "Free access to Resident Kitchen Facilities",
+      "Alumni engagement and mentoring",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2800917,
+    "longitude": 149.1134821,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20Undergraduate%20and%20%20Post%20Graduate%20Village%20Main.jpeg?h=e5aec6c8&itok=XbKPs_Wk",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/Burgmann-3.jpeg?h=d03bd5df&itok=2GJP9TTR",
+        "alt": "Burgmann"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/Burgmann-7.jpeg?h=d03bd5df&itok=bHmxc37l",
+        "alt": "Burgmann"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/Burgmann-2.jpeg?h=d03bd5df&itok=EOibzRyZ",
+        "alt": "Burgmann"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20WEB-85.jpeg?h=e5aec6c8&itok=cmFdXtCE",
+        "alt": "Burgmann College gallery"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20WEB-61.jpeg?h=06f6671c&itok=stZ0bRD-",
+        "alt": "Burgmann College gallery"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20WEB-44.jpeg?h=06f6671c&itok=RssRNGSk",
+        "alt": "Burgmann College gallery"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20WEB-52.jpeg?h=06f6671c&itok=fn0iJ0G0",
+        "alt": "Burgmann College gallery"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20WEB-51.jpeg?h=06f6671c&itok=-tkwVV97",
+        "alt": "Burgmann College gallery"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20WEB-39.jpeg?h=e5aec6c8&itok=4Fs5Ligf",
+        "alt": "Burgmann College gallery"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20WEB-48.jpeg?h=0c2904f9&itok=zpqvaJi_",
+        "alt": "Burgmann College gallery"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20WEB-54.jpeg?h=e5aec6c8&itok=CHLf95b7",
+        "alt": "Burgmann College gallery"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-11/Burgmann%20College%20WEB-80.jpeg?h=e5aec6c8&itok=MmdkMRDb",
+        "alt": "Burgmann College gallery"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Studio",
+        "weeklyTariff": 627.0,
+        "contractTerm": "47 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: $11.36",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 week rent: $1,254",
+          "Refundable Deposit: $1,000",
+          "Registration Fee(New students only): $470",
+          "Committee fee: $250"
+        ]
+      },
+      {
+        "name": "2 & 3 Bedroom Multishare",
+        "weeklyTariff": 548.0,
+        "contractTerm": "47 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: $11.36",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 week rent: $1,040",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $470",
+          "Committee fee: $250"
+        ]
+      },
+      {
+        "name": "5 Bedroom Multishare",
+        "weeklyTariff": 520.0,
+        "contractTerm": "47 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: $11.36",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 week rent: $1,040",
+          "Refundable Deposit: $1,000",
+          "Registration Fee (New students only): $470",
+          "Committee fee: $250"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "university-house",
+    "name": "University House",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/university-house",
+    "applyUrl": null,
+    "residentUndergrad": false,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 330,
+    "address": "1 Balmain Crescent ACT 2600",
+    "capacity": null,
+    "capacityNote": "60 modern rooms that accommodate up to 64 residents",
+    "blurb": "University House is ANU's self-catered postgraduate residence in Building No.1 on campus, a cornerstone of the graduate community since it opened in 1954. It was recently refurbished with contemporary amenities while preserving historic Fred Ward furniture and artwork, and gives residents access to the University House hotel facilities.",
+    "accessibilityNote": "University House is accessible throughout the residence, including the external pathways around the buildings, with accessible bathroom facilities available for those with mobility aids, including wheelchairs.",
+    "feeNote": "2027 indicative weekly tariffs on a 52-week contract, each including phone+internet ($6.50), laundry ($13.50) and utilities ($32.00): Standard $330, Large standard $350, Ensuite (Accessible) single occupancy $380, Ensuite (Accessible) double occupancy $480, Double room standard $500. All room types also carry a $1,000 refundable deposit and a $100 departure cleaning fee.",
+    "features": [
+      "Standard, double, ensuite and accessible rooms",
+      "Self-catered with redesigned communal kitchen areas",
+      "Internet access",
+      "Study spaces",
+      "Laundry facilities",
+      "Access to hotel facilities, including Fellow's café and Library",
+      "No smoking",
+      "Community wellbeing",
+      "CCTV surveillance",
+      "Secure access to buildings",
+      "Multiple undercover and secure bicycle storage facilities",
+      "Parking (very limited paid resident permit parking nearby)"
+    ],
+    "latitude": -35.2865721,
+    "longitude": 149.1160416,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2026-09/Uh%20banner.jpg?h=8d8959df&itok=-RnyGJAg",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-07/uh-1.jpeg?h=d03bd5df&itok=lsIPnAbF",
+        "alt": "University house"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2026-09/University%20House%20-%20Main%20building.jpg?h=765f0cb5&itok=kSpU6w2e",
+        "alt": "UH2"
+      },
+      {
+        "url": "https://d3gu8jtw4r0om.cloudfront.net/files/styles/anu_double_narrow_16_9/public/2026-09/Standard%20room%20-%20University%20House%202026%20%231.jpg?itok=84wT1tTj",
+        "alt": "UH3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2026-09/UH_June_Selected-75.jpg?h=ddc58dd3&itok=x21DHWpl",
+        "alt": "UH fourniture"
+      },
+      {
+        "url": "https://d3gu8jtw4r0om.cloudfront.net/files/styles/anu_double_narrow_16_9/public/2026-09/University%20House%20-%20Pond%20%232.png?itok=MM7duqpx",
+        "alt": "Pond"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard room",
+        "weeklyTariff": 330.0,
+        "contractTerm": "52 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: $6.50",
+          "Laundry Facilities: $13.50",
+          "Utilities: $32.00"
+        ],
+        "otherFees": [
+          "Registration fee: $330",
+          "Refundable Deposit: $1,000",
+          "Residents Committee/Community Spirit program: $0",
+          "Departure cleaning fee: $100"
+        ]
+      },
+      {
+        "name": "Large standard room",
+        "weeklyTariff": 350.0,
+        "contractTerm": "52 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: $6.50",
+          "Laundry Facilities: $13.50",
+          "Utilities: $32.00"
+        ],
+        "otherFees": [
+          "Registration fee: $350",
+          "Refundable Deposit: $1,000",
+          "Residents Committee/Community Spirit program: $0",
+          "Departure cleaning fee: $100"
+        ]
+      },
+      {
+        "name": "Ensuite (Accessible) room (single occupancy)",
+        "weeklyTariff": 380.0,
+        "contractTerm": "52 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: $6.50",
+          "Laundry Facilities: $13.50",
+          "Utilities: $32.00"
+        ],
+        "otherFees": [
+          "Registration fee: $380",
+          "Refundable Deposit: $1,000",
+          "Residents Committee/Community Spirit program: $0",
+          "Departure cleaning fee: $100"
+        ]
+      },
+      {
+        "name": "Ensuite (Accessible) room (double occupancy)",
+        "weeklyTariff": 480.0,
+        "contractTerm": "52 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: $6.50",
+          "Laundry Facilities: $13.50",
+          "Utilities: $32.00"
+        ],
+        "otherFees": [
+          "Registration fee: $480",
+          "Refundable Deposit: $1,000",
+          "Residents Committee/Community Spirit program: $0",
+          "Departure cleaning fee: $100"
+        ]
+      },
+      {
+        "name": "Double room standard",
+        "weeklyTariff": 500.0,
+        "contractTerm": "52 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: $6.50",
+          "Laundry Facilities: $13.50",
+          "Utilities: $32.00"
+        ],
+        "otherFees": [
+          "Registration fee: $500",
+          "Refundable Deposit: $1,000",
+          "Residents Committee/Community Spirit program: $0",
+          "Departure cleaning fee: $100"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "yukeembruk",
+    "name": "Yukeembruk",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/yukeembruk",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": true,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 380,
+    "address": "165 Daley Road ACT 2601",
+    "capacity": null,
+    "capacityNote": "over 700 beds",
+    "blurb": "Yukeembruk is a large self-catered village for both undergraduate and postgraduate students, made up of four buildings around a shared amphitheatre with views of Sullivan's Creek, Black Mountain and the lake. Its name, chosen after consultation with local Indigenous custodians, honours the Eaglehawk and Crow totems of regional Aboriginal heritage.",
+    "accessibilityNote": "Yukeembruk Village is accessible to all areas of the residence, including external pathways around the buildings, with accessible bathroom facilities for those with mobility aids including wheelchairs, quieter kitchen spaces available as needed, and a designated disabled parking space about 900 metres from Kambri.",
+    "feeNote": "2027 indicative weekly tariffs across eight room types on a 44-week contract range from $380 (Standard) to $543 (Double Ensuite Room, double occupancy), including Standard Accessible $404, Large Standard $482, Ensuite Room $473, Accessible Ensuite Room $488, Double Ensuite Room single occupancy $528 and Large Ensuite Room (student leaders only) $493. Phone/internet and utilities are included in the tariff, laundry is pay-as-you-go, plus a $1,300 deposit, $400 registration fee (new students) and $240 committee fee.",
+    "features": [
+      "Single-gender floors",
+      "Standard rooms with shared bathrooms",
+      "Ensuite rooms",
+      "Self-catered with multiple master-chef style kitchens",
+      "Art & Music Rooms",
+      "BBQ areas in main courtyards",
+      "Outdoor exercise equipment including half basketball court",
+      "Internet",
+      "Multiple small and large study spaces",
+      "Large central flexible use space – communal village hall",
+      "No smoking",
+      "Communal Village green",
+      "Laundry facilities",
+      "Academic support",
+      "Wellbeing care",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Multiple undercover and secure bicycle storage facilities",
+      "Parking (very limited paid resident permit parking nearby)",
+      "Wheelchair access"
+    ],
+    "latitude": -35.2805965,
+    "longitude": 149.1117908,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Yukeembruk%20-%20Banner.jpg?h=07298254&itok=Ry92VYaB",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Yukeembruk%20-%201_0.jpg?h=e5aec6c8&itok=kLK1f0cM",
+        "alt": "Yukeembruk - 1"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Yukeembruk%20-%202.jpg?h=d8102449&itok=a2xiYO_A",
+        "alt": "Yukeembruk - 2"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Yukeembruk%20-%203.jpg?h=d8102449&itok=3GjgbqjZ",
+        "alt": "Yukeembruk - 3"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Yukeembruk%20-%204.jpg?h=d8102449&itok=OMbfmJdi",
+        "alt": "Yukeembruk - 4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Yukeembruk%20-%205.jpg?h=d8102449&itok=R90M5_tB",
+        "alt": "Yukeembruk - 5"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Yukeembruk%20-%206.jpg?h=d8102449&itok=QAuIIiKg",
+        "alt": "Yukeembruk - 6"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": 380.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $760",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Standard Accessible",
+        "weeklyTariff": 404.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $808",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Large Standard",
+        "weeklyTariff": 482.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $964",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Large Ensuite Room (Student Leaders only)",
+        "weeklyTariff": 493.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $986",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Ensuite Room",
+        "weeklyTariff": 473.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $946",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Accessible Ensuite Room",
+        "weeklyTariff": 488.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $976",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Double Ensuite Room (single occupancy)",
+        "weeklyTariff": 528.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,056",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      },
+      {
+        "name": "Double Ensuite Room (double occupancy)",
+        "weeklyTariff": 543.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Pay as you go",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $1,086",
+          "Refundable Deposit: $1,300",
+          "Registration Fee(New students only): $400",
+          "Committee Fee: $240"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "burton-garran-hall",
+    "name": "Burton & Garran Hall",
+    "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/burton-garran-hall",
+    "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "residentUndergrad": true,
+    "residentPostgrad": false,
+    "cateringType": "self_catered",
+    "weeklyRateFrom": 319,
+    "address": "49 Daley Road ACT 2601",
+    "capacity": null,
+    "capacityNote": "512 single rooms and several larger rooms accessible to returning students",
+    "blurb": "Burton & Garran Hall is a self-catered undergraduate hall formed by the 1983 merger of two 1965 residences, known for a multicultural community and strengths in arts, sport, academic and community-spirit programs.",
+    "accessibilityNote": "Not well suited to mobility requirements: all residential rooms are accessed via flights of stairs and the property has no lifts, though it has designated shared quiet spaces including a library and a regular quiet hour in the shared kitchen.",
+    "feeNote": "6 room types $319-$405/wk on 44-week contracts; $1,300 deposit, $400 registration fee (new students), $240 committee fee.",
+    "features": [
+      "Standard room",
+      "Shared bathroom",
+      "Self catered, shared kitchen",
+      "Internet",
+      "Study spaces",
+      "No smoking",
+      "Common areas",
+      "Laundry facility",
+      "Academic support",
+      "Wellbeing care",
+      "Music facilities",
+      "Computer lab",
+      "CCTV surveillance",
+      "Secured access",
+      "Sewing & Art facilities",
+      "Parking (limited paid resident permit parking)"
+    ],
+    "latitude": -35.2732453,
+    "longitude": 149.1194002,
+    "imageUrl": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Burton%20and%20Garran%20-%20Banner.jpg?h=07298254&itok=XY7Qcjf-",
+    "gallery": [
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Burton%20and%20Garran%20-%201.jpeg?h=f2fcf546&itok=hEmy67My",
+        "alt": "Burton and Garran front"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Burton%20and%20Garran%20-%202.jpeg?h=f2fcf546&itok=9bDd_-Fc",
+        "alt": "Burton and Garran room"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Burton%20and%20Garran%20-%203.jpeg?h=f2fcf546&itok=UMeVHKQp",
+        "alt": "Burton and Garran hall"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Burton%20and%20Garran%20-%204.jpeg?h=f2fcf546&itok=XgYZVlGA",
+        "alt": "Burton and Garran -4"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Burton%20and%20Garran%20-%205.jpeg?h=f2fcf546&itok=sDZYtbnV",
+        "alt": "Burton and Garran -5"
+      },
+      {
+        "url": "https://study.anu.edu.au/files/styles/anu_double_narrow_16_9/public/2023-08/Burton%20and%20Garran%20-%206.jpeg?h=f2fcf546&itok=VC-Q3UWN",
+        "alt": "Burton and Garran bathroom"
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Standard",
+        "weeklyTariff": 322.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $644",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Residents Committee fee: $240"
+        ]
+      },
+      {
+        "name": "Standard Lightwell",
+        "weeklyTariff": 319.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $638",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Residents Committee fee: $240"
+        ]
+      },
+      {
+        "name": "Studio (Student Leaders only)",
+        "weeklyTariff": 338.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $676",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Residents Committee fee: $240"
+        ]
+      },
+      {
+        "name": "Large Room (Student Leaders only)",
+        "weeklyTariff": 326.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $654",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Residents Committee fee: $240"
+        ]
+      },
+      {
+        "name": "1 Bedroom (Student Leaders only)",
+        "weeklyTariff": 405.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $810",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Residents Committee fee: $240"
+        ]
+      },
+      {
+        "name": "Large studio (Student Leaders only)",
+        "weeklyTariff": 326.0,
+        "contractTerm": "44 weeks",
+        "inclusions": [
+          "Phone + Internet Connection: Included in tariff",
+          "Laundry Facilities: Included in tariff",
+          "Utilities: Included in tariff"
+        ],
+        "otherFees": [
+          "2 weeks rent: $652",
+          "Refundable Deposit: $1,300",
+          "Registration Fee: $400",
+          "Residents Committee fee: $240"
+        ]
+      }
+    ]
+  }
+]
