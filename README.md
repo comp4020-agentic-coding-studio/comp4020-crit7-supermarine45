@@ -28,11 +28,30 @@ see "Accounts" under "What good looks like here" below.
   API), and the full [ANU Civic Loop shuttle](https://sustainability.anu.edu.au/news/anu-civic-loop-bus-route-update-17-august-2026)
   route with its 12 active stops. Each residence page names its nearest
   shuttle stop and the straight-line distance to it.
-- **Search & filter** (`/search/`) — by resident type (undergrad/postgrad/both),
-  catering style, weekly rate range, and a free-text match against name and
-  description. Every result carries a one-click "Apply now" straight to that
-  residence's real ANU/StarRez application page, and a "Save to shortlist"
-  button.
+- **Search, sort & filter** (`/search/`) — results are per **room**, not per
+  residence ("Room name — in Residence name"), so two rooms in different
+  halls sit next to each other instead of one residence card hiding behind
+  its cheapest room. Filter by resident type (undergrad/postgrad/both),
+  catering style, weekly rate range, a free-text match against name and
+  description, minimum review rating, and distance to the nearest Civic Loop
+  shuttle stop; sort by name, price, rating, or shuttle distance. Every card
+  shows its average rating and distance to the nearest stop so the
+  sort/filter it was chosen by is visible, and carries a one-click "Apply
+  now" straight to that residence's real ANU/StarRez application page, a
+  "Save to shortlist" button, and an "Add to compare" checkbox.
+- **Compare rooms side by side** (`/compare/`) — tick rooms on `/search/` and
+  submit to see them side by side across price, contract length, catering,
+  resident-type eligibility, rating, address, distance to the nearest
+  shuttle stop, inclusions, and other fees. No login required: selection is
+  a plain `?rooms=12&rooms=47...` query string, matching the no-JS-required,
+  form-first convention every other filter/selection flow in this app
+  already uses.
+- **Quick start** (`/`) — five one-click cards above the residence grid:
+  presets straight into a pre-filtered, pre-sorted `/search/` result
+  (undergrad/postgrad cheapest-first, catered top-rated, near-shuttle
+  nearest-first), plus a link into the hall-match questionnaire for a
+  personalised ranking. Plain links, no client JS — so `/search/`'s own filter
+  form loads with the matching filters already selected.
 - **Accounts** (`/login/`, `/signup/`) — a native username/password login, not
   connected to ANU's real login or StarRez in any way. Everything below that's
   personal (shortlist, hall match, reviews, room interest) is tied to this
@@ -79,12 +98,17 @@ Judgement calls I made, not enforced by any check:
   room, but this prototype has no connection to ANU's real StarRez system and
   can't actually hold anything — showing a real, aggregate "N people
   interested" count is an honest signal instead of a fake one.
-- **Hall matching's "social" score is an estimate, not an ANU-published
-  fact.** ANU's residence pages state catering style but nothing like a
-  social/culture attribute, so `src/lib/match.ts` maps catering style to a
-  rough quiet/balanced/social proxy (self-catered → quiet, catered → social,
-  flexi-catered → balanced) and says so in every match reason it shows,
-  rather than presenting it as something ANU stated.
+- **Hall matching's "social" score prefers a real reviewer answer, and
+  estimates only where there isn't one yet.** ANU's residence pages state
+  catering style but nothing like a social/culture attribute, so there was
+  nothing to compare a "social expectations" preference against. The review
+  form now asks an optional "how would you describe the social atmosphere?"
+  question (`reviews.social_vibe`); `src/lib/match.ts` uses each residence's
+  most common answer when at least one reviewer has given one, and only falls
+  back to its old catering-based proxy (self-catered → quiet, catered →
+  social, flexi-catered → balanced) for a residence with none yet — every
+  match reason says which of the two it used, rather than presenting either
+  as something ANU stated.
 - **OSM/Overpass data was fetched once, by hand, into `seed/*.json`**
   (`scripts/fetch-geo.ts`), not queried live at request time or at boot. Both
   Nominatim and the public Overpass mirrors rate-limit aggressively and are
@@ -95,6 +119,23 @@ Judgement calls I made, not enforced by any check:
   residence's street address and each shuttle stop's street description (ANU's
   own announcement names stops by street corner, not by coordinate) — expect
   building-scale, not doorway-scale, accuracy.
+- **"Location filtering" means distance to a shuttle stop, not a suburb
+  field.** ANU's residence pages don't publish a suburb/area attribute, and I
+  didn't want to invent a taxonomy or add a live geocoding dependency (see the
+  next judgement call) just for search. Every residence already has lat/lon
+  and every shuttle stop does too, so the distance filter/sort reuses that —
+  `src/lib/geo.ts`'s `haversineMeters`, shared with the per-residence "nearest
+  shuttle stop" line that already existed.
+- **Compare selection is a stateless URL, not a second account-backed
+  list.** The shortlist already models "residences I've saved"; a compare
+  list is a different, session-scoped idea ("what am I looking at right
+  now"), and this app has no anonymous-state mechanism anywhere else to
+  justify adding one just for this. Each room card's "Add to compare"
+  checkbox uses the HTML5 `form="compare-form"` attribute to associate itself
+  with a `<form>` that lives outside the card — the card already has its own
+  shortlist `<form>`, and nesting a second `<form>` inside it is invalid
+  HTML, so this was the standard way to let one checkbox submit into a form
+  it isn't physically inside.
 - **Residence photos are hotlinked to ANU's own site, not downloaded.** The
   building photography is ANU's copyrighted content; `imageUrl` in
   `seed/residences.json` points straight at each photo's real URL on
@@ -114,7 +155,18 @@ What's enforced by `spec/`:
   shortlisted on a later, independent request after being saved and gone
   after being removed, one user's shortlist stays private from another
   logged-in user, and a logged-out visitor gets a login prompt instead of
-  anyone's saved list.
+  anyone's saved list. It also covers sorting (alphabetical by default, and
+  correctly by price at either end of the seed data's known range), the
+  shuttle-distance filter actually narrows results, and the review-rating
+  filter only surfaces residences that clear the threshold. It also proves
+  the home page's five quick-start cards are real, working links: each
+  `/search/` preset returns a non-empty result and lands with its filters
+  already selected in the form, and one card points at `/hall-match/`. It
+  also covers `/compare/`: two selected rooms render side by side with a
+  price cell each, no `rooms` param shows the empty state with a link back
+  to `/search/`, an unknown room id is silently dropped rather than
+  erroring, and every search room card carries a compare checkbox wired to
+  the shared `#compare-form`.
 - `spec/auth.test.ts`: signup logs the new user in immediately, a duplicate
   username is rejected without a 500, a wrong password is rejected, and
   logging out actually invalidates the session rather than just clearing the
@@ -122,11 +174,14 @@ What's enforced by `spec/`:
 - `spec/reviews-and-room-interest.test.ts`: a logged-in review post appears
   with its rating and body and resubmitting edits it instead of duplicating;
   an unauthenticated review post redirects to login instead of creating a
-  row; room-interest toggling moves the shared count up and back down, and
-  is a login link (not a button) when logged out.
+  row; the optional social-atmosphere answer shows alongside a review;
+  room-interest toggling moves the shared count up and back down, and is a
+  login link (not a button) when logged out.
 - `spec/hall-match.test.ts`: a flexi-catering preference ranks Wright Hall —
-  the seed data's one flexi-catered residence — first, and a logged-out
-  visitor is redirected to login instead of seeing the questionnaire.
+  the seed data's one flexi-catered residence — first; a logged-out visitor
+  is redirected to login instead of seeing the questionnaire; and a real
+  reviewer's social-atmosphere answer overrides the catering-based estimate
+  in a match's reasons for that residence.
 
 ## Data & sources
 

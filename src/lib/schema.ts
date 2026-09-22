@@ -159,8 +159,9 @@ export const shortlist = sqliteTable(
 );
 
 // One saved questionnaire answer set per user, upserted on every save. The
-// "social" field has no ANU-published equivalent — src/lib/match.ts documents
-// the proxy it's compared against.
+// "social" answer here is real — it's what a residence's social vibe is
+// compared *against* that has no ANU-published equivalent; src/lib/match.ts
+// documents that estimate and how reviews.socialVibe now strengthens it.
 export const preferences = sqliteTable("preferences", {
   userId: int("user_id")
     .primaryKey()
@@ -182,7 +183,9 @@ export const preferences = sqliteTable("preferences", {
 export type Preferences = typeof preferences.$inferSelect;
 
 // One review per user per residence — resubmitting edits it rather than
-// adding a second row.
+// adding a second row. socialVibe is optional: it's how a residence's actual
+// social atmosphere gets a real, crowd-sourced answer instead of only the
+// catering-based estimate in src/lib/match.ts — see README.md.
 export const reviews = sqliteTable(
   "reviews",
   {
@@ -195,6 +198,7 @@ export const reviews = sqliteTable(
       .references(() => users.id, { onDelete: "cascade" }),
     rating: int().notNull(),
     body: text().notNull(),
+    socialVibe: text("social_vibe", { enum: ["quiet", "balanced", "social"] }),
     createdAt: text("created_at")
       .notNull()
       .default(sql`(datetime('now'))`),

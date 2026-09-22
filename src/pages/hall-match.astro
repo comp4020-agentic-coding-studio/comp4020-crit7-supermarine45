@@ -1,6 +1,6 @@
 ---
 import Nav from "../components/Nav.astro";
-import { getPreferences, listAllResidences } from "../lib/db";
+import { getPreferences, getResidenceSocialVibes, listAllResidences } from "../lib/db";
 import { matchResidences } from "../lib/match";
 import "../styles.css";
 
@@ -10,7 +10,7 @@ if (!user) {
 }
 
 const prefs = getPreferences(user.id);
-const results = prefs ? matchResidences(prefs, listAllResidences()) : [];
+const results = prefs ? matchResidences(prefs, listAllResidences(), getResidenceSocialVibes()) : [];
 ---
 
 <!doctype html>

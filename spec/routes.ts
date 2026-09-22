@@ -9,4 +9,5 @@ export const ROUTES = [
   "/login/",
   "/signup/",
   "/hall-match/",
+  "/compare/",
 ];

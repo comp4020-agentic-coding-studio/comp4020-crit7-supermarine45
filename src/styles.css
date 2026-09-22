@@ -269,7 +269,8 @@ button:hover {
   margin: 1.5rem 0;
 }
 
-.residence-card {
+.residence-card,
+.room-card {
   background: #fff;
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
@@ -281,9 +282,66 @@ button:hover {
     transform 0.15s ease;
 }
 
-.residence-card:hover {
+.residence-card:hover,
+.room-card:hover {
   box-shadow: var(--card-shadow-hover);
   transform: translateY(-2px);
+}
+
+.room-card-hall {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--anu-gray-600, #555);
+}
+
+.room-card-hall a {
+  color: inherit;
+}
+
+.compare-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.compare-bar {
+  margin: 0 0 1rem;
+}
+
+.compare-empty {
+  margin: 2rem 0;
+}
+
+.compare-table-wrapper {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.compare-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 40rem;
+}
+
+.compare-table th,
+.compare-table td {
+  border: 1px solid var(--anu-gray-200);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.compare-table thead th {
+  background: var(--anu-black);
+  color: #fff;
+}
+
+.compare-table tbody th {
+  background: var(--anu-gray-100);
+  white-space: nowrap;
 }
 
 .card-image-link {
@@ -350,6 +408,13 @@ button:hover {
   font-size: 0.85rem;
 }
 
+.card-meta {
+  margin: 0;
+  color: var(--anu-gray-700);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
 .card-blurb {
   margin: 0;
   font-size: 0.9rem;
@@ -387,6 +452,10 @@ button:hover {
   margin: 0;
 }
 
+.map-wrapper {
+  position: relative;
+}
+
 .map-container {
   height: 26rem;
   min-height: 20rem;
@@ -399,6 +468,26 @@ button:hover {
 
 .map-container.small {
   height: 18rem;
+}
+
+.map-refresh-btn {
+  position: absolute;
+  z-index: 500;
+  top: 1.75rem;
+  right: 0.75rem;
+  background: #fff;
+  color: var(--anu-black);
+  border: 1px solid var(--anu-gray-200);
+  border-radius: var(--btn-radius);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+}
+
+.map-refresh-btn:hover {
+  background: var(--anu-gray-100);
 }
 
 .no-results {
@@ -456,6 +545,73 @@ button:hover {
   color: #fff;
   max-width: 32rem;
   margin: 0.75rem 0 0;
+}
+
+/* Quick start (home page) — one-click presets into pre-filtered /search/
+   results, plus a featured card into the hall-match questionnaire for a
+   personalised ranking instead of a preset. */
+.quick-start {
+  margin-bottom: 1.5rem;
+}
+
+.quick-start h2 {
+  margin-bottom: 0.25rem;
+}
+
+.quick-start > p {
+  margin-top: 0;
+  color: var(--anu-gray-700);
+}
+
+.quick-start-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+  margin: 1rem 0 0;
+}
+
+.quick-start-card {
+  display: block;
+  height: 100%;
+  background: #fff;
+  border: 1px solid var(--anu-gray-200);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  color: var(--anu-black);
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.quick-start-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.quick-start-card-title {
+  display: block;
+  font-weight: 600;
+}
+
+.quick-start-card-desc {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--anu-gray-700);
+}
+
+.quick-start-card-featured {
+  background: var(--anu-black);
+  border-color: var(--anu-black);
+  color: #fff;
+}
+
+.quick-start-card-featured .quick-start-card-desc {
+  color: var(--anu-gray-200);
 }
 
 /* CTA bar — mirrors ANU's black "applications open" banner style. */

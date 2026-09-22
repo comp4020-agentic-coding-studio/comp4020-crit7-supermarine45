@@ -1,0 +1,157 @@
+---
+import Nav from "../components/Nav.astro";
+import { getRoomsByIds } from "../lib/db";
+import "../styles.css";
+
+const ids = [
+  ...new Set(
+    Astro.url.searchParams
+      .getAll("rooms")
+      .map((v) => Number(v))
+      .filter((n) => Number.isInteger(n) && n > 0),
+  ),
+];
+const rooms = getRoomsByIds(ids);
+
+const cateringLabel = { self_catered: "Self-catered", catered: "Catered", flexi_catered: "Flexi-catered" };
+
+function removeUrl(roomId: number): string {
+  const remaining = ids.filter((id) => id !== roomId);
+  if (remaining.length === 0) return "/compare/";
+  return `/compare/?${remaining.map((id) => `rooms=${id}`).join("&")}`;
+}
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Compare rooms — ANU Residence Explorer</title>
+  </head>
+  <body>
+    <Nav />
+    <main class="wide">
+      <h1>Compare rooms</h1>
+      {
+        rooms.length === 0 ? (
+          <p class="compare-empty">
+            Nothing to compare yet. Head to <a href="/search/">search</a> and tick "Add to compare" on a few rooms.
+          </p>
+        ) : (
+          <div class="compare-table-wrapper">
+            <table class="compare-table">
+              <caption class="visually-hidden">Side-by-side comparison of selected rooms</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Feature</th>
+                  {rooms.map((r) => (
+                    <th scope="col">
+                      {r.roomName}
+                      <br />
+                      <a href={`/residences/${r.residenceSlug}/`}>{r.residenceName}</a>
+                      <br />
+                      <a href={removeUrl(r.roomId)} class="link-button">
+                        Remove
+                      </a>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Price</th>
+                  {rooms.map((r) => <td>{r.weeklyTariff != null ? `$${r.weeklyTariff}/wk` : "Not yet published (tbc)"}</td>)}
+                </tr>
+                <tr>
+                  <th scope="row">Contract length</th>
+                  {rooms.map((r) => <td>{r.contractTerm ?? "Not stated"}</td>)}
+                </tr>
+                <tr>
+                  <th scope="row">Catering</th>
+                  {rooms.map((r) => <td>{cateringLabel[r.cateringType]}</td>)}
+                </tr>
+                <tr>
+                  <th scope="row">Resident type</th>
+                  {rooms.map((r) => (
+                    <td>
+                      {r.residentUndergrad && r.residentPostgrad
+                        ? "Undergrad & postgrad"
+                        : r.residentUndergrad
+                          ? "Undergrad"
+                          : r.residentPostgrad
+                            ? "Postgrad"
+                            : "Not specified"}
+                    </td>
+                  ))}
+                </tr>
+                <tr>
+                  <th scope="row">Rating</th>
+                  {rooms.map((r) => (
+                    <td>{r.reviewCount > 0 ? `★ ${r.avgRating?.toFixed(1)} (${r.reviewCount})` : "No reviews yet"}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <th scope="row">Address</th>
+                  {rooms.map((r) => <td>{r.address ?? "Not stated"}</td>)}
+                </tr>
+                <tr>
+                  <th scope="row">Nearest shuttle stop</th>
+                  {rooms.map((r) => (
+                    <td>{r.nearestStopMeters != null ? `${r.nearestStopName}, ${r.nearestStopMeters} m` : "Unknown"}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <th scope="row">Inclusions</th>
+                  {rooms.map((r) => (
+                    <td>
+                      {r.inclusions.length > 0 ? (
+                        <ul>
+                          {r.inclusions.map((item) => (
+                            <li>{item}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        "Not stated"
+                      )}
+                    </td>
+                  ))}
+                </tr>
+                <tr>
+                  <th scope="row">Other fees</th>
+                  {rooms.map((r) => (
+                    <td>
+                      {r.otherFees.length > 0 ? (
+                        <ul>
+                          {r.otherFees.map((item) => (
+                            <li>{item}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        "None stated"
+                      )}
+                    </td>
+                  ))}
+                </tr>
+                <tr>
+                  <th scope="row">Apply</th>
+                  {rooms.map((r) => (
+                    <td>
+                      {r.applyUrl ? (
+                        <a class="btn-primary" href={r.applyUrl} target="_blank" rel="noopener noreferrer">
+                          Apply now
+                        </a>
+                      ) : (
+                        "No application link published"
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )
+      }
+    </main>
+  </body>
+</html>

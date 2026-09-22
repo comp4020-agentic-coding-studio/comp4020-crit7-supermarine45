@@ -1,54 +1,211 @@
 # Process overview
 
-<!-- TEMPLATE: this file is a shape to fill in, not a form. Replace everything
-     in it with your own overview, and delete this comment — `pnpm
-     check:evidence` will remind you if it's still here. -->
-
-Written by you, for a reader: how you got from the brief to the harness and
-agentic workflow behind this submission. Markers read this file and follow its
-citations; they don't trawl the repo for evidence you didn't point at.
-
-This file is the shape; the course site's
-[assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
-is the requirement, and its
-[word counts](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#word-counts)
-cover every deliverable.
-
 ## What I built
 
-A sentence or two. `README.md` is where the account of what the app is and what
-good means here lives; this file is how you got there.
+**ANU Residence Explorer** — the full-stack replacement I wish existed for
+ANU's own [residences listing](https://study.anu.edu.au/accommodation/our-residences),
+which splits 19 halls, lodges and colleges across separate static pages with no
+way to compare them, search them, or see where any of them actually sit in
+Canberra. It brings all 19 into one searchable, sortable, filterable, mapped
+view, and adds the relationships a real housing decision actually needs:
+accounts, a hall-matching questionnaire, resident reviews, a non-binding
+room-interest signal, and a shortlist tied to your account instead of shared
+anonymous state. It deliberately does not touch or imitate ANU's real
+`anucomb.starrezhousing.com` StarRez system — that boundary is stated in
+`README.md` and held throughout every round of this build.
 
 ## How I got here
 
-The account of the process: how the work actually went, and how you knew the
-result was right. Tell it in whatever order makes it clear. A weekly prototype
-needs a paragraph or two; an assignment needs more.
+**Round 1 — scaffold.**
+[`28c8bd3`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-supermarine45/commit/28c8bd346d17c2548bcd7e371412c12e8d7e0166)
+settles the repo onto the course's Astro + Drizzle + SQLite starter.
 
-Cite the record as you go, as links whose text is the commit hash or range and
-whose target is this repo's commit or compare URL, so a reader clicks straight
-to the evidence:
+**Round 2 — the core slice.**
+[`59f4e17`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-supermarine45/commit/59f4e17af698a6526d3b5476596a8c6a77d5bf1b)
+builds the data model (residences, room types, features, gallery, nearby
+places, shuttle stops), the Leaflet/OpenStreetMap overview map, keyword/type/
+catering/price search, a first shortlist, and per-residence detail pages —
+each backed by `spec/residence-explorer.test.ts` asserting the contract
+(exact result counts against known seed-data facts, working apply links, real
+geodata on the map, a 404 for an unknown slug) rather than implementation
+details.
 
-- one commit: [`a1b2c3d`](https://github.com/YOUR-ORG/YOUR-REPO/commit/a1b2c3d)
-- a range:
-  [`a1b2c3d...e4f5a6b`](https://github.com/YOUR-ORG/YOUR-REPO/compare/a1b2c3d...e4f5a6b)
+**Round 3 — relationships between people and places.**
+[`15ecc52`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-supermarine45/commit/15ecc52b21a4b4a257ca4d2805683aef0150c119)
+adds native accounts (scrypt-hashed passwords, DB-backed sessions — no
+StarRez-styled clone, no third-party auth), a hall-matching questionnaire that
+scores residences against budget/catering/resident-type/social preferences,
+authenticated reviews, a room-interest toggle framed explicitly as "not a
+booking or hold, just a signal" (this project held that line last round too —
+a real StarRez hold isn't something this prototype can honestly offer), and
+migrates the shortlist from a single shared anonymous list to one row per
+`(userId, residenceId)`. `spec/auth.test.ts`, `spec/hall-match.test.ts` and
+`spec/reviews-and-room-interest.test.ts` land alongside it, plus a rewritten
+shortlist test proving one user's saved residences stay private from another.
 
-To pair a prompt with the commit it produced, quote the prompt (curated, not a
-full transcript) next to the citation:
+**Round 4 — search, sort, filter, and a map that actually scales (this
+round).** Prompted with:
 
-> the prompt, verbatim
+> add better search options include sorting, location filtering, review
+> filtering, and more
 
-Screenshots are welcome where one carries the point better than a sentence does.
-Commit the file to this repo and link it with a **relative** path, which is what
-makes it render on GitHub: `![alt text](docs/before.png)`. Images don't count
-towards the word count and don't replace the citation.
+I added five sort orders (name, price either direction, rating, nearest
+shuttle stop), a location filter (distance to the nearest ANU Civic Loop
+stop — there's no suburb field on ANU's own pages to filter by, so this reuses
+the shuttle-stop geodata already on the map, documented as a judgement call in
+`README.md`), a minimum-rating filter, and rating/distance badges on every
+card. The Haversine distance calculation was already duplicated once (the
+residence detail page's "nearest shuttle stop" line); I pulled it into
+`src/lib/geo.ts` so search filtering and the detail page share one
+implementation instead of two. Review stats moved from a per-residence query
+to one batched, grouped query (`getAllReviewStats`) reused across the search,
+home and shortlist pages, avoiding 19 separate queries per page load.
+
+The next prompt was a bug report:
+
+> The sorting does not work yet. Also, ensure the map scales correctly and
+> works for every page.
+
+Rather than assume either "the code is wrong" or "the deployment is stale," I
+checked both. I rebuilt the app locally and curled `/search/` under
+`?sort=price_desc`, `?sort=price_asc`, and no sort param, cross-checking the
+ordering against known seed-data facts (Burgmann College is the one $629/wk
+residence, Burton & Garran Hall the one $319/wk residence, and John XXIII
+College — the one residence with no published rate — correctly sorts last
+under both directions). The backend was correct. I then curled the *deployed*
+`https://comp4020-crit7-supermarine45.fly.dev/search/` directly and confirmed
+it still serves the pre-Round-4 markup (no `sort` field, no rating/distance
+badges) — this round's work had never been pushed or deployed, so the
+sorting the report described was the old build, not this one. That's fixed by
+shipping this round rather than by changing any sort logic.
+
+The map report was real, though: `src/components/Map.astro` measured its
+Leaflet container's size exactly once, at `L.map()` init, and never again. A
+window resize, an orientation change, or any layout reflow after that point
+left the tile grid stale — grey or cut-off tiles, not a map that "scales."
+I added a `ResizeObserver` on the container (falling back to a `resize`
+listener) calling `map.invalidateSize()` on every observed size change, plus
+one initial `requestAnimationFrame` call to cover layout not yet settled at
+init. This fixes it on both places the map appears — the home page's overview
+map and every one of the 19 residence detail pages' small map — rather than
+adding a map to a new page, since neither instance had ever been broken by a
+missing map, only by a missing resize hook.
+
+I also audited the app against this deliverable's published spec line by line
+using `pnpm check:evidence`, which caught this file still being the unfilled
+template and `reflections/crit-7.md` not existing at all — both spec
+requirements, not implementation details. This file and that reflection are
+the fix.
+
+**Round 5 — an accessible way to apply filters, and a real question instead
+of a proxy.** Prompted with two specific improvement ideas from that audit:
+
+> Implement this: Consider an accessible way to apply and The hall-matching
+> "social" axis is inferred from catering style (documented in README) —
+> could be strengthened later with a real question in the questionnaire
+> instead of a proxy.
+
+For the first: the search filters previously only applied on a full page
+navigation via the "Filter" button — correct, but not the best a keyboard or
+screen-reader experience could be. The tempting shortcut, auto-submitting the
+form on every `<select>`'s `change` event, is a real WCAG 3.2.2 (On Input)
+failure (Failure Technique F36): cycling a *closed* `<select>` with arrow keys
+fires `change` on every keypress in most browsers, so that shortcut would
+reload the page out from under a keyboard user on every arrow press. Instead
+`search.astro` now progressively enhances the same form: a debounced
+`fetch()` re-requests `/search/` with the current filter values and swaps in
+only the new results, updating the existing `aria-live="polite"` count node's
+*text* (never replacing the node itself, so assistive tech reliably announces
+it) and a separate, non-live results container (so a filter change doesn't
+read out every card in the grid). No navigation, no stolen focus — Success
+Technique SCR19 covers exactly this shape of in-place `onchange` update. The
+plain GET form remains fully intact underneath as the no-JS fallback, which
+is what `spec/residence-explorer.test.ts`'s search tests already exercise
+(JSDOM doesn't execute `<script>`, so they never touch the new code path).
+
+For the second: matching's "social" axis had a documented catering-based
+proxy (self-catered → quiet, catered → social, flexi-catered → balanced) on
+the *residence* side of the comparison — the user's own preference was
+already a real, required questionnaire field, so the fix belonged entirely on
+the residence side. The review form now carries an optional "how would you
+describe the social atmosphere?" question (`reviews.social_vibe`, migration
+`drizzle/0003_strong_ben_parker.sql`); `src/lib/match.ts` prefers a
+residence's most common reviewer answer when at least one exists, and only
+falls back to the catering-based estimate otherwise — every match reason
+says which of the two produced it. `spec/hall-match.test.ts` covers the
+override directly: a reviewer describes John XXIII College (catered — the
+estimate would guess "social") as "quiet", and a `social: "quiet"` match
+picks that real answer up instead.
+
+**Round 6 — a quick-start path for someone who doesn't want to fill in a
+search form first.** Prompted with:
+
+> Make an 'quick start' interface to choose a hall
+
+The home page already had two ways in — the full residence grid, and the
+`/search/` form behind the "Search & filter" button — both of which ask a
+first-time visitor to already know what they're filtering for. The home page
+now opens with a "Quick start" section: five cards, each a plain link (no
+JavaScript, no form) straight into a pre-filtered, pre-sorted `/search/`
+result — undergrad or postgrad eligible sorted cheapest-first, catered halls
+sorted top-rated, and halls within 1 km of an ANU Civic Loop stop sorted
+nearest-first — plus a fifth, visually distinct card into `/hall-match/` for
+someone who'd rather answer a few questions and get every hall ranked against
+their own preferences instead of picking a single preset. Every preset's
+query params (`type`, `catering`, `maxDistance`, `sort`) match values
+`search.astro` already parses and its filter `<select>`s already enumerate,
+so landing on `/search/` from a quick-start card shows the matching filters
+already selected in the form, not just a matching result set.
+
+**Round 7 — room-grained search, and a side-by-side comparison.** Prompted
+with:
+
+> The issue is the filter should be on a room to room bases. So the result
+> should be: room X in accomodation Y to make it easier to compare between
+> rooms. Could you also make an interface where we can compare each selected
+> side by side in their features (price, location, etc) to make comparison
+> easier?
+
+`/search/` previously listed one card per *residence*, summarised by its
+cheapest ("from") price — comparing actual room options meant opening each
+residence's own detail page. `src/lib/db.ts` gained `searchRooms()` and
+`getRoomsByIds()`, which join `residence_rooms` to `residences` and apply the
+same filters (type, catering, price, keyword, rating, shuttle distance) at
+room grain instead of residence grain; `min`/`max` now filter each room's own
+`weeklyTariff` rather than a residence-level "from" price. A new
+`RoomCard.astro` renders each result as "room X — in [residence Y]", still
+carrying the existing shortlist button (shortlist stays a residence-level
+concept — saving from any of a hall's rooms saves the whole hall) and its
+quick-apply link. Sorting by price now ties across residences (five rooms
+share the seed data's global-maximum $641), so the comparator gained an
+explicit, documented tie-break (residence name, then room order) rather than
+leaving the result order to depend on incidental row order.
+
+For the comparison interface: rather than add a second, account-gated
+selection list alongside the shortlist (more schema, more surface area, and
+this app has no anonymous-state mechanism anywhere else to begin with), each
+room card carries a "add to compare" checkbox that submits straight into a
+new `/compare/?rooms=12&rooms=47...` page — no login, no new table, matching
+the existing filter form's own GET-based, no-JS-required convention. The one
+real HTML wrinkle: each room card already has its own shortlist `<form>`, and
+nesting a second `<form>` inside it is invalid HTML — solved with the
+standard `form="compare-form"` attribute, which associates the checkbox with
+a `<form id="compare-form">` living outside the results list entirely. That
+placement is deliberate for a second reason too: the existing progressive-
+enhancement script swaps `#results-list`'s innerHTML on every filter change,
+and keeping `#compare-form` outside that container means a filter change
+never wipes it. The same script was extended a few lines to carry *ticked*
+checkboxes across that swap, since without it a live filter change would
+silently untick everything a visitor had already selected — the plain no-JS
+path needs no equivalent fix, since without JS there's no in-place swap to
+lose state across. `/compare/` itself degrades gracefully at both ends: no
+`rooms` param shows an empty state linking back to `/search/`, and a stale or
+hand-edited id that no longer resolves is silently dropped rather than
+erroring.
 
 ## Before you ship
 
-`pnpm check:evidence` verifies that this comment is gone, that your citations
-resolve to real commits, that a crit week's reflection entry is in
-`reflections/`, and that your `CLAUDE.md` is there. It checks that your account
-is traceable, not that it is good: that is the marker's call.
-
-Images aren't checked: unlike a citation whose SHA doesn't resolve, a broken
-image is visible the moment this file is rendered on GitHub.
+`pnpm check` (typecheck + `astro build` + the full `vitest` suite, 122 tests
+across 7 files) is green. `pnpm check:evidence` passes once this round's
+changes are committed — see the latest commit range in this repo's history
+for the diff described above.

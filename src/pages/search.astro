@@ -1,8 +1,8 @@
 ---
 import Nav from "../components/Nav.astro";
-import ResidenceCard from "../components/ResidenceCard.astro";
-import { getShortlistIds, searchResidences } from "../lib/db";
-import type { CateringType, ResidentType } from "../lib/db";
+import RoomCard from "../components/RoomCard.astro";
+import { getShortlistIds, searchRooms } from "../lib/db";
+import type { CateringType, ResidentType, SortOption } from "../lib/db";
 import "../styles.css";
 
 const params = Astro.url.searchParams;
@@ -11,6 +11,9 @@ const typeParam = params.get("type") || undefined;
 const cateringParam = params.get("catering") || undefined;
 const minParam = params.get("min");
 const maxParam = params.get("max");
+const sortParam = params.get("sort") || undefined;
+const minRatingParam = params.get("minRating");
+const maxDistanceParam = params.get("maxDistance");
 
 const type: ResidentType | undefined =
   typeParam === "undergrad" || typeParam === "postgrad" || typeParam === "both" ? typeParam : undefined;
@@ -20,11 +23,16 @@ const catering: CateringType | undefined =
     : undefined;
 const min = minParam ? Number(minParam) : undefined;
 const max = maxParam ? Number(maxParam) : undefined;
+const sortOptions: SortOption[] = ["name", "price_asc", "price_desc", "rating_desc", "distance_asc"];
+const sort: SortOption = sortOptions.includes(sortParam as SortOption) ? (sortParam as SortOption) : "name";
+const minRating = minRatingParam ? Number(minRatingParam) : undefined;
+const maxDistance = maxDistanceParam ? Number(maxDistanceParam) : undefined;
 
-const results = searchResidences({ q, type, catering, min, max });
+const results = searchRooms({ q, type, catering, min, max, sort, minRating, maxDistance });
 const user = Astro.locals.user;
 const shortlistIds = user ? getShortlistIds(user.id) : new Set<number>();
 const redirectTo = `${Astro.url.pathname}${Astro.url.search}`;
+const residenceCount = new Set(results.map((r) => r.residenceId)).size;
 ---
 
 <!doctype html>
@@ -62,6 +70,36 @@ const redirectTo = `${Astro.url.pathname}${Astro.url.search}`;
           <label for="min">Min $/wk<input id="min" name="min" type="number" min="0" step="1" value={min ?? ""} /></label>
           <label for="max">Max $/wk<input id="max" name="max" type="number" min="0" step="1" value={max ?? ""} /></label>
         </div>
+        <div class="filters-row">
+          <label for="sort"
+            >Sort by
+            <select id="sort" name="sort">
+              <option value="name" selected={sort === "name"}>Name (A–Z)</option>
+              <option value="price_asc" selected={sort === "price_asc"}>Price: low to high</option>
+              <option value="price_desc" selected={sort === "price_desc"}>Price: high to low</option>
+              <option value="rating_desc" selected={sort === "rating_desc"}>Rating: high to low</option>
+              <option value="distance_asc" selected={sort === "distance_asc"}>Nearest shuttle stop</option>
+            </select>
+          </label>
+          <label for="minRating"
+            >Reviews
+            <select id="minRating" name="minRating">
+              <option value="" selected={minRating === undefined}>Any rating</option>
+              <option value="3" selected={minRating === 3}>3+ stars</option>
+              <option value="4" selected={minRating === 4}>4+ stars</option>
+              <option value="4.5" selected={minRating === 4.5}>4.5+ stars</option>
+            </select>
+          </label>
+          <label for="maxDistance"
+            >Distance to shuttle stop
+            <select id="maxDistance" name="maxDistance">
+              <option value="" selected={maxDistance === undefined}>Any distance</option>
+              <option value="500" selected={maxDistance === 500}>Within 500 m</option>
+              <option value="1000" selected={maxDistance === 1000}>Within 1 km</option>
+              <option value="2000" selected={maxDistance === 2000}>Within 2 km</option>
+            </select>
+          </label>
+        </div>
         <div class="filters-actions">
           <svg class="filter-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M3 4h18v2.2l-7 7.6V19l-4 2v-7.2L3 6.2Z" />
@@ -70,20 +108,112 @@ const redirectTo = `${Astro.url.pathname}${Astro.url.search}`;
           <a class="link-button" href="/search/">Clear filters</a>
         </div>
       </form>
-      <p aria-live="polite">
-        {results.length} {results.length === 1 ? "residence" : "residences"} match.
+      <p id="results-count" aria-live="polite">
+        {results.length} {results.length === 1 ? "room" : "rooms"} across {residenceCount}{" "}
+        {residenceCount === 1 ? "residence" : "residences"} match.
       </p>
-      {
-        results.length === 0 ? (
-          <p class="no-results">No residences match those filters. Try widening the price range or clearing a filter.</p>
-        ) : (
-          <ul class="residence-grid">
-            {results.map((r) => (
-              <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo={redirectTo} loggedIn={!!user} />
-            ))}
-          </ul>
-        )
-      }
+      <form id="compare-form" class="compare-bar" method="get" action="/compare/">
+        <button type="submit">Compare selected</button>
+      </form>
+      <div id="results-list">
+        {
+          results.length === 0 ? (
+            <p class="no-results">No rooms match those filters. Try widening the price range or clearing a filter.</p>
+          ) : (
+            <ul class="residence-grid">
+              {results.map((r) => (
+                <RoomCard room={r} shortlisted={shortlistIds.has(r.residenceId)} redirectTo={redirectTo} loggedIn={!!user} />
+              ))}
+            </ul>
+          )
+        }
+      </div>
     </main>
   </body>
 </html>
+
+<script>
+  // Progressive enhancement only: the form above already works with plain
+  // GET navigation (what the no-JS path and every spec test exercise). This
+  // upgrades it to update results in place instead of reloading the page.
+  //
+  // Deliberately NOT "auto-submit on change" — a naive version of that is a
+  // WCAG 3.2.2 (On Input) failure (Failure Technique F36): a keyboard user
+  // cycling a *closed* <select> with arrow keys fires "change" on every
+  // keypress, and if that submitted the form, every keypress would reload
+  // the page out from under them. Debouncing lets rapid changes settle
+  // before anything happens, and the update itself never navigates, never
+  // moves focus, and never touches the live-region node's own identity
+  // (only its text) — see Success Technique SCR19: an in-place onchange
+  // update isn't a "change of context" at all.
+  const form = document.querySelector<HTMLFormElement>("form.filters");
+  const resultsList = document.getElementById("results-list");
+  const resultsCount = document.getElementById("results-count");
+
+  if (form && resultsList && resultsCount) {
+    let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+    let controller: AbortController | null = null;
+
+    function buildUrl(): string {
+      const params = new URLSearchParams();
+      for (const [key, value] of new FormData(form!).entries()) {
+        if (typeof value === "string" && value !== "") params.set(key, value);
+      }
+      const query = params.toString();
+      return query ? `/search/?${query}` : "/search/";
+    }
+
+    async function applyFilters() {
+      const url = buildUrl();
+      controller?.abort();
+      controller = new AbortController();
+      try {
+        const res = await fetch(url, { credentials: "same-origin", signal: controller.signal });
+        if (!res.ok) throw new Error(`unexpected status ${res.status}`);
+        const html = await res.text();
+        const fresh = new DOMParser().parseFromString(html, "text/html");
+        const freshList = fresh.getElementById("results-list");
+        const freshCount = fresh.getElementById("results-count");
+        if (!freshList || !freshCount) throw new Error("results markup not found in response");
+
+        // The compare checkboxes live inside #results-list, so swapping its
+        // innerHTML would otherwise silently untick everything a visitor had
+        // already selected. Carry the ticked room ids across the swap.
+        const checkedRooms = new Set(
+          [...resultsList!.querySelectorAll<HTMLInputElement>(".compare-checkbox:checked")].map((el) => el.value),
+        );
+        resultsList!.innerHTML = freshList.innerHTML;
+        for (const el of resultsList!.querySelectorAll<HTMLInputElement>(".compare-checkbox")) {
+          if (checkedRooms.has(el.value)) el.checked = true;
+        }
+        // Mutate the existing live-region node's text rather than replacing
+        // it, so assistive tech reliably announces the update (a freshly
+        // inserted aria-live element isn't guaranteed to be).
+        resultsCount!.textContent = freshCount.textContent;
+        history.replaceState(history.state, "", url);
+      } catch (err) {
+        if ((err as Error).name === "AbortError") return;
+        // Something unexpected (offline, a non-200, unparsable response):
+        // fall back to the plain navigation the form already supports.
+        form!.submit();
+      }
+    }
+
+    function scheduleApply(delayMs: number) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(applyFilters, delayMs);
+    }
+
+    for (const el of form.querySelectorAll("select")) {
+      el.addEventListener("change", () => scheduleApply(350));
+    }
+    for (const el of form.querySelectorAll('input[type="search"], input[type="number"]')) {
+      el.addEventListener("input", () => scheduleApply(500));
+    }
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      clearTimeout(debounceTimer);
+      applyFilters();
+    });
+  }
+</script>

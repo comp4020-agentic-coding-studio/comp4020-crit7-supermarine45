@@ -17,39 +17,73 @@ async function getDoc(path: string, cookie?: string): Promise<Document> {
   return new JSDOM(html).window.document;
 }
 
+describe("quick start (home page)", () => {
+  it("offers working preset links into pre-filtered search results, plus a link into hall matching", async () => {
+    const home = await getDoc("/");
+    const cards = [...home.querySelectorAll(".quick-start-card")];
+    const hrefs = cards.map((c) => c.getAttribute("href") ?? "");
+    expect(hrefs.length).toBe(5);
+    expect(hrefs).toContain("/hall-match/");
+
+    const searchHrefs = hrefs.filter((h) => h.startsWith("/search/"));
+    expect(searchHrefs.length).toBe(4);
+
+    for (const href of searchHrefs) {
+      const doc = await getDoc(href);
+      const resultsText = doc.getElementById("results-count")?.textContent?.trim() ?? "";
+      expect(resultsText).not.toMatch(/^0 /);
+
+      const url = new URL(href, "http://localhost");
+      for (const [key, value] of url.searchParams) {
+        const selected = doc.querySelector(`form.filters [name="${key}"]`);
+        const selectedValue =
+          selected?.tagName === "SELECT"
+            ? selected.querySelector("option[selected]")?.getAttribute("value")
+            : selected?.getAttribute("value");
+        expect(selectedValue).toBe(value);
+      }
+    }
+  });
+});
+
 describe("search filters", () => {
-  it("with no filters, lists every residence", async () => {
+  it("with no filters, lists every room across every residence", async () => {
     const doc = await getDoc("/search/");
-    expect(doc.querySelectorAll(".residence-card").length).toBe(19);
+    expect(doc.querySelectorAll(".room-card").length).toBe(96);
   });
 
-  it("type=both narrows to residences open to both undergrads and postgrads", async () => {
+  it("type=both narrows to rooms in residences open to both undergrads and postgrads", async () => {
     const doc = await getDoc("/search/?type=both");
-    const cards = doc.querySelectorAll(".residence-card");
-    expect(cards.length).toBe(9);
+    const cards = doc.querySelectorAll(".room-card");
+    expect(cards.length).toBe(62);
     for (const card of cards) {
       expect(card.textContent).toContain("Undergrad & postgrad");
     }
   });
 
-  it("catering filter narrows to the one flexi-catered residence", async () => {
+  it("catering filter narrows to the rooms in the one flexi-catered residence", async () => {
     const doc = await getDoc("/search/?catering=flexi_catered");
-    const cards = doc.querySelectorAll(".residence-card");
-    expect(cards.length).toBe(1);
-    expect(cards[0].textContent).toContain("Wright Hall");
+    const cards = doc.querySelectorAll(".room-card");
+    expect(cards.length).toBe(3);
+    for (const card of cards) {
+      expect(card.textContent).toContain("Wright Hall");
+    }
   });
 
-  it("min price excludes cheaper residences and residences with no published rate", async () => {
+  it("min price excludes cheaper rooms and rooms with no published rate", async () => {
     const doc = await getDoc("/search/?min=600");
-    const cards = doc.querySelectorAll(".residence-card");
-    expect(cards.length).toBe(1);
-    expect(cards[0].textContent).toContain("Burgmann College");
+    const cards = [...doc.querySelectorAll(".room-card")];
+    expect(cards.length).toBe(17);
+    for (const card of cards) {
+      const priceText = card.querySelector(".rate-bar strong")?.textContent ?? "";
+      expect(Number(priceText.replace("$", ""))).toBeGreaterThanOrEqual(600);
+    }
   });
 
-  it("keyword search matches across residence names", async () => {
+  it("keyword search matches rooms across residence names and blurbs", async () => {
     const doc = await getDoc("/search/?q=burgmann");
-    const cards = doc.querySelectorAll(".residence-card");
-    expect(cards.length).toBe(2);
+    const cards = doc.querySelectorAll(".room-card");
+    expect(cards.length).toBe(4);
     for (const card of cards) {
       expect(card.textContent?.toLowerCase()).toContain("burgmann");
     }
@@ -57,7 +91,7 @@ describe("search filters", () => {
 
   it("shows a no-results message instead of an empty grid when nothing matches", async () => {
     const doc = await getDoc("/search/?q=zzzznonexistentresidence");
-    expect(doc.querySelectorAll(".residence-card").length).toBe(0);
+    expect(doc.querySelectorAll(".room-card").length).toBe(0);
     expect(doc.querySelector(".no-results")).toBeTruthy();
   });
 
@@ -66,12 +100,84 @@ describe("search filters", () => {
     // Scoped to .btn-primary — logged out, .card-actions also carries a
     // "Log in to save" link (see spec/auth.test.ts and the shortlist tests
     // below), which isn't a quick-apply link and shouldn't match here.
-    const applyLinks = [...doc.querySelectorAll(".residence-card .card-actions a.btn-primary")];
+    const applyLinks = [...doc.querySelectorAll(".room-card .card-actions a.btn-primary")];
     expect(applyLinks.length).toBeGreaterThan(0);
     for (const link of applyLinks) {
       expect(link.getAttribute("href")).toMatch(/^https?:\/\//);
       expect(link.getAttribute("target")).toBe("_blank");
       expect(link.getAttribute("rel")).toContain("noopener");
+    }
+  });
+
+  it("shows each card's review status and distance to the nearest shuttle stop", async () => {
+    const doc = await getDoc("/search/");
+    const cardText = doc.querySelector(".room-card")?.textContent ?? "";
+    expect(cardText).toMatch(/No reviews yet|★/);
+    expect(cardText).toMatch(/m to nearest shuttle stop/);
+  });
+});
+
+describe("search sorting", () => {
+  it("defaults to grouping rooms by residence, alphabetically", async () => {
+    const doc = await getDoc("/search/");
+    // h2's only <a> is the "in <Residence Name>" link — grouping rooms under
+    // the same residence name consecutively still yields a sorted sequence.
+    const names = [...doc.querySelectorAll(".room-card h2 a")].map((a) => a.textContent?.trim() ?? "");
+    const sorted = [...names].sort((a, b) => a.localeCompare(b));
+    expect(names).toEqual(sorted);
+  });
+
+  it("sort=price_desc puts the highest-priced room first, tie-broken by residence name", async () => {
+    const doc = await getDoc("/search/?sort=price_desc");
+    const cards = doc.querySelectorAll(".room-card");
+    // Five rooms tie at the seed data's global-maximum $641, spanning Kinloch
+    // Lodge, Lena Karmel Lodge and Warrumbul Lodge — Kinloch sorts first.
+    expect(cards[0].textContent).toContain("Kinloch Lodge");
+    expect(cards[0].textContent).toContain("$641");
+  });
+
+  it("sort=price_asc puts the lowest-priced room first", async () => {
+    const doc = await getDoc("/search/?sort=price_asc");
+    const cards = doc.querySelectorAll(".room-card");
+    expect(cards[0].textContent).toContain("Burton & Garran Hall");
+    expect(cards[0].textContent).toContain("$319");
+  });
+});
+
+describe("search location filtering", () => {
+  it("maxDistance narrows results to rooms near a shuttle stop, and a wide radius keeps them all", async () => {
+    const allDoc = await getDoc("/search/");
+    const allCount = allDoc.querySelectorAll(".room-card").length;
+
+    const narrowDoc = await getDoc("/search/?maxDistance=1");
+    expect(narrowDoc.querySelectorAll(".room-card").length).toBeLessThan(allCount);
+
+    const wideDoc = await getDoc("/search/?maxDistance=100000");
+    expect(wideDoc.querySelectorAll(".room-card").length).toBe(allCount);
+  });
+});
+
+describe("search review filtering", () => {
+  it("minRating only shows rooms in residences meeting the threshold", async () => {
+    const cookie = await signUp(baseUrl, `search-rating-${Date.now()}`, "correct-horse-battery");
+    const doc = await getDoc("/residences/university-house/", cookie);
+    const residenceId = doc.querySelector("form.review-form input[name='residenceId']")?.getAttribute("value");
+    expect(residenceId).toBeTruthy();
+
+    await postForm(
+      baseUrl,
+      "/api/reviews/add",
+      `residenceId=${residenceId}&rating=5&body=${encodeURIComponent("Great value near campus.")}&redirect=${encodeURIComponent("/residences/university-house/")}`,
+      cookie,
+    );
+
+    const filtered = await getDoc("/search/?minRating=4");
+    const cards = [...filtered.querySelectorAll(".room-card")];
+    expect(cards.some((c) => c.textContent?.includes("University House"))).toBe(true);
+    // Every card shown must itself carry a rating — minRating drops rooms in
+    // never-reviewed residences (a null average can't clear a bar).
+    for (const card of cards) {
+      expect(card.textContent).toMatch(/★/);
     }
   });
 });
@@ -131,7 +237,7 @@ describe("shortlist persists across reload", () => {
     const cookie = await signUp(baseUrl, `shortlist-owner-${Date.now()}`, "correct-horse-battery");
 
     const searchDoc = await getDoc("/search/", cookie);
-    const card = [...searchDoc.querySelectorAll(".residence-card")].find((c) =>
+    const card = [...searchDoc.querySelectorAll(".room-card")].find((c) =>
       c.textContent?.includes("Burton & Garran Hall"),
     );
     const residenceId = card?.querySelector('input[name="residenceId"]')?.getAttribute("value");
@@ -161,7 +267,7 @@ describe("shortlist persists across reload", () => {
     const otherCookie = await signUp(baseUrl, `shortlist-b-${Date.now()}`, "correct-horse-battery");
 
     const searchDoc = await getDoc("/search/", ownerCookie);
-    const card = [...searchDoc.querySelectorAll(".residence-card")].find((c) =>
+    const card = [...searchDoc.querySelectorAll(".room-card")].find((c) =>
       c.textContent?.includes("Wright Hall"),
     );
     const residenceId = card?.querySelector('input[name="residenceId"]')?.getAttribute("value");
@@ -185,10 +291,52 @@ describe("logged out", () => {
     expect(doc.querySelectorAll(".residence-card").length).toBe(0);
   });
 
-  it("offers a login link instead of a shortlist button on a residence card", async () => {
+  it("offers a login link instead of a shortlist button on a room card", async () => {
     const doc = await getDoc("/search/");
-    const card = doc.querySelector(".residence-card");
+    const card = doc.querySelector(".room-card");
     const loginLink = card?.querySelector(".card-actions a.link-button");
     expect(loginLink?.getAttribute("href")).toMatch(/^\/login\/\?returnTo=/);
+  });
+});
+
+describe("compare rooms", () => {
+  it("shows two selected rooms side by side with their residence names and prices", async () => {
+    const searchDoc = await getDoc("/search/");
+    const ids = [...searchDoc.querySelectorAll<HTMLInputElement>(".room-card input.compare-checkbox")]
+      .slice(0, 2)
+      .map((el) => el.getAttribute("value"));
+    expect(ids.length).toBe(2);
+
+    const compareDoc = await getDoc(`/compare/?rooms=${ids[0]}&rooms=${ids[1]}`);
+    const headerCells = [...compareDoc.querySelectorAll(".compare-table thead th")];
+    expect(headerCells.length).toBe(3); // "Feature" + one column per room
+    expect(compareDoc.querySelectorAll(".compare-table tbody tr").length).toBeGreaterThan(0);
+    expect(compareDoc.body.textContent).toMatch(/\$\d+\/wk|Not yet published/);
+  });
+
+  it("shows an empty state with a link back to search when nothing is selected", async () => {
+    const doc = await getDoc("/compare/");
+    expect(doc.querySelector(".compare-empty")).toBeTruthy();
+    const backLink = [...doc.querySelectorAll("a")].find((a) => a.getAttribute("href") === "/search/");
+    expect(backLink).toBeTruthy();
+    expect(doc.querySelector(".compare-table")).toBeFalsy();
+  });
+
+  it("silently drops a room id that doesn't exist instead of erroring", async () => {
+    const res = await fetch(new URL("/compare/?rooms=999999", baseUrl));
+    expect(res.status).toBe(200);
+    const doc = new JSDOM(await res.text()).window.document;
+    expect(doc.querySelector(".compare-empty")).toBeTruthy();
+  });
+
+  it("each search room card carries a compare checkbox wired to the shared compare form", async () => {
+    const doc = await getDoc("/search/");
+    const compareForm = doc.getElementById("compare-form");
+    expect(compareForm?.getAttribute("action")).toBe("/compare/");
+    expect(compareForm?.getAttribute("method")).toBe("get");
+
+    const checkbox = doc.querySelector(".room-card input.compare-checkbox");
+    expect(checkbox?.getAttribute("name")).toBe("rooms");
+    expect(checkbox?.getAttribute("form")).toBe("compare-form");
   });
 });

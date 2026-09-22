@@ -37,4 +37,38 @@ describe("hall matching", () => {
     expect(res.status).toBe(303);
     expect(res.headers.get("location")).toContain("/login/");
   });
+
+  it("prefers a real reviewer answer over the catering-based estimate for the social axis", async () => {
+    // John XXIII College is catered (the catering-based proxy would guess
+    // "social"), and no other spec file touches its reviews — a clean
+    // residence to prove a real reviewer answer overrides that guess.
+    const reviewerCookie = await signUp(baseUrl, `vibe-reviewer-${Date.now()}`, "correct-horse-battery");
+    const residencePage = await getDoc("/residences/john-xxiii-college/", reviewerCookie);
+    const residenceId = residencePage
+      .querySelector("form.review-form input[name='residenceId']")
+      ?.getAttribute("value");
+    expect(residenceId).toBeTruthy();
+
+    await postForm(
+      baseUrl,
+      "/api/reviews/add",
+      `residenceId=${residenceId}&rating=5&body=${encodeURIComponent("Very quiet, everyone keeps to themselves.")}&socialVibe=quiet&redirect=${encodeURIComponent("/residences/john-xxiii-college/")}`,
+      reviewerCookie,
+    );
+
+    const matcherCookie = await signUp(baseUrl, `vibe-matcher-${Date.now()}`, "correct-horse-battery");
+    await postForm(
+      baseUrl,
+      "/api/preferences/save",
+      "residentType=no_preference&catering=no_preference&social=quiet&budgetMin=&budgetMax=",
+      matcherCookie,
+    );
+
+    const doc = await getDoc("/hall-match/", matcherCookie);
+    const card = [...doc.querySelectorAll(".match-card")].find(
+      (c) => c.querySelector("h3 a")?.textContent === "John XXIII College",
+    );
+    const reasons = card?.querySelector(".match-reasons")?.textContent ?? "";
+    expect(reasons).toMatch(/1 reviewer described this hall's social atmosphere as "quiet"/);
+  });
 });

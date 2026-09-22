@@ -30,16 +30,21 @@ interface Props {
 const { id, center, zoom, residences = [], places = [], shuttle = [], small = false } = Astro.props;
 ---
 
-<div
-  id={id}
-  class={`map-container${small ? " small" : ""}`}
-  data-initialized="0"
-  data-center={JSON.stringify(center)}
-  data-zoom={zoom}
-  data-residences={JSON.stringify(residences)}
-  data-places={JSON.stringify(places)}
-  data-shuttle={JSON.stringify(shuttle)}
->
+<div class="map-wrapper">
+  <div
+    id={id}
+    class={`map-container${small ? " small" : ""}`}
+    data-initialized="0"
+    data-center={JSON.stringify(center)}
+    data-zoom={zoom}
+    data-residences={JSON.stringify(residences)}
+    data-places={JSON.stringify(places)}
+    data-shuttle={JSON.stringify(shuttle)}
+  >
+  </div>
+  <button type="button" class="map-refresh-btn" data-map-refresh={id}>
+    ↻ Refresh map
+  </button>
 </div>
 
 <script>
@@ -83,7 +88,7 @@ const { id, center, zoom, residences = [], places = [], shuttle = [], small = fa
     const center = JSON.parse(el.dataset.center || "[-35.28,149.12]") as [number, number];
     const zoom = Number(el.dataset.zoom || "15");
     const map = L.map(el, { scrollWheelZoom: false }).setView(center, zoom);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    const tileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
     }).addTo(map);
@@ -119,6 +124,32 @@ const { id, center, zoom, residences = [], places = [], shuttle = [], small = fa
           .bindPopup(`${s.name}${s.note ? ` — ${s.note}` : ""} (ANU Civic Loop)`);
       }
     }
+
+    // Leaflet sizes its tile grid once, from the container's dimensions at
+    // the moment L.map() runs. It has no way to notice a later resize on its
+    // own, so without this a map that loads correctly still shows grey/cut-off
+    // tiles after a window resize, an orientation change, or any layout shift
+    // that happens after this script starts (webfonts, the flex/grid reflow
+    // around it). Re-measuring on every observed size change keeps it correct
+    // on every page it appears on, at every viewport width.
+    if (typeof ResizeObserver !== "undefined") {
+      const resizeObserver = new ResizeObserver(() => map.invalidateSize());
+      resizeObserver.observe(el);
+    } else {
+      window.addEventListener("resize", () => map.invalidateSize());
+    }
+    requestAnimationFrame(() => map.invalidateSize());
+
+    // OpenStreetMap's tile server occasionally drops a request or serves a
+    // transient error, leaving a permanently grey/blank tile that a resize
+    // doesn't fix (invalidateSize() only re-measures the container; it doesn't
+    // retry a tile that already failed). redraw() re-requests every tile
+    // currently in view, which is the actual fix for that case.
+    const refreshBtn = el.parentElement?.querySelector<HTMLButtonElement>(`[data-map-refresh="${el.id}"]`);
+    refreshBtn?.addEventListener("click", () => {
+      tileLayer.redraw();
+      map.invalidateSize();
+    });
   }
 
   document.querySelectorAll<HTMLElement>('.map-container[data-initialized="0"]').forEach(init);

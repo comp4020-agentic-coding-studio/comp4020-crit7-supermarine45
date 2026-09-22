@@ -47,6 +47,23 @@ describe("reviews", () => {
     expect(afterSecond.body.textContent).not.toContain("Good views, noisy corridor.");
   });
 
+  it("lets a reviewer optionally describe the residence's social atmosphere, and shows it alongside the review", async () => {
+    const cookie = await signUp(baseUrl, `review-vibe-user-${Date.now()}`, "correct-horse-battery");
+    const doc = await getDoc(RESIDENCE_PATH, cookie);
+    const residenceIdValue = doc.querySelector("form.review-form input[name='residenceId']")?.getAttribute("value");
+    expect(residenceIdValue).toBeTruthy();
+
+    await postForm(
+      baseUrl,
+      "/api/reviews/add",
+      `residenceId=${residenceIdValue}&rating=4&body=${encodeURIComponent("Friendly corridor, lots going on.")}&socialVibe=social&redirect=${encodeURIComponent(RESIDENCE_PATH)}`,
+      cookie,
+    );
+
+    const after = await getDoc(RESIDENCE_PATH, cookie);
+    expect(after.body.textContent).toMatch(/felt "social"/);
+  });
+
   it("redirects an unauthenticated review post to login instead of creating a row", async () => {
     const before = await getDoc(RESIDENCE_PATH);
     const countBefore = before.querySelectorAll(".review").length;

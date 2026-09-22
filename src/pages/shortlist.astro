@@ -1,11 +1,11 @@
 ---
 import Nav from "../components/Nav.astro";
 import ResidenceCard from "../components/ResidenceCard.astro";
-import { getShortlistIds, listShortlistedResidences } from "../lib/db";
+import { getShortlistIds, listShortlistedResidences, withResidenceStats } from "../lib/db";
 import "../styles.css";
 
 const user = Astro.locals.user;
-const results = user ? listShortlistedResidences(user.id) : [];
+const results = user ? withResidenceStats(listShortlistedResidences(user.id)) : [];
 const shortlistIds = user ? getShortlistIds(user.id) : new Set<number>();
 ---
 

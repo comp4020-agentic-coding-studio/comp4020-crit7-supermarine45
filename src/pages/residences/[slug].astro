@@ -1,6 +1,7 @@
 ---
 import Map from "../../components/Map.astro";
 import Nav from "../../components/Nav.astro";
+import { haversineMeters } from "../../lib/geo";
 import {
   getInterestedRoomIds,
   getMyReview,
@@ -38,15 +39,6 @@ const myReview = user ? getMyReview(residence.id, user.id) : undefined;
 
 const interestedRoomIds = user ? getInterestedRoomIds(user.id, residence.id) : new Set<number>();
 const roomInterestCounts = getRoomInterestCounts(residence.id);
-
-function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
-  const R = 6371000;
-  const toRad = (d: number) => (d * Math.PI) / 180;
-  const dLat = toRad(lat2 - lat1);
-  const dLon = toRad(lon2 - lon1);
-  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
-  return 2 * R * Math.asin(Math.sqrt(a));
-}
 
 const nearestShuttle =
   residence.latitude != null && residence.longitude != null && shuttleStops.length > 0
@@ -275,6 +267,7 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
               <li class="review">
                 <p class="review-meta">
                   <strong>{rev.rating} / 5</strong> &middot; {rev.username} &middot; <time>{rev.createdAt}</time>
+                  {rev.socialVibe && <> &middot; felt "{rev.socialVibe}"</>}
                 </p>
                 <p class="review-body">{rev.body}</p>
               </li>
@@ -301,6 +294,15 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
             <label for="review-body">
               Your review
               <textarea id="review-body" name="body" required rows="3">{myReview?.body ?? ""}</textarea>
+            </label>
+            <label for="review-social-vibe">
+              How would you describe the social atmosphere? (optional)
+              <select id="review-social-vibe" name="socialVibe">
+                <option value="" selected={!myReview?.socialVibe}>Prefer not to say</option>
+                <option value="quiet" selected={myReview?.socialVibe === "quiet"}>Quiet</option>
+                <option value="balanced" selected={myReview?.socialVibe === "balanced"}>Balanced</option>
+                <option value="social" selected={myReview?.socialVibe === "social"}>Very social</option>
+              </select>
             </label>
             <button type="submit">{myReview ? "Update review" : "Post review"}</button>
           </form>

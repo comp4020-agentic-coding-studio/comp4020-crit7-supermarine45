@@ -1,14 +1,14 @@
 ---
-import type { Residence, ResidenceStats } from "../lib/db";
+import type { RoomSearchResult } from "../lib/db";
 
 interface Props {
-  residence: Residence & Partial<ResidenceStats>;
+  room: RoomSearchResult;
   shortlisted: boolean;
   redirectTo: string;
   loggedIn: boolean;
 }
 
-const { residence: r, shortlisted, redirectTo, loggedIn } = Astro.props;
+const { room: r, shortlisted, redirectTo, loggedIn } = Astro.props;
 
 const residentLabel =
   r.residentUndergrad && r.residentPostgrad
@@ -24,40 +24,36 @@ const cateringLabel = { self_catered: "Self-catered", catered: "Catered", flexi_
 ];
 
 const ratingLabel =
-  r.reviewCount !== undefined
-    ? r.reviewCount > 0
-      ? `★ ${r.avgRating?.toFixed(1)} (${r.reviewCount} ${r.reviewCount === 1 ? "review" : "reviews"})`
-      : "No reviews yet"
-    : undefined;
+  r.reviewCount > 0
+    ? `★ ${r.avgRating?.toFixed(1)} (${r.reviewCount} ${r.reviewCount === 1 ? "review" : "reviews"})`
+    : "No reviews yet";
 const distanceLabel = r.nearestStopMeters != null ? `${r.nearestStopMeters} m to nearest shuttle stop` : undefined;
 ---
 
-<li class="residence-card">
+<li class="room-card">
   {r.imageUrl && (
-    <a href={`/residences/${r.slug}/`} class="card-image-link">
-      <img src={r.imageUrl} alt={`${r.name} building exterior`} loading="lazy" width="920" height="518" />
+    <a href={`/residences/${r.residenceSlug}/`} class="card-image-link">
+      <img src={r.imageUrl} alt={`${r.residenceName} building exterior`} loading="lazy" width="920" height="518" />
     </a>
   )}
-  {r.weeklyRateFrom != null && (
-    <p class="rate-bar">
-      Rates from <strong>${r.weeklyRateFrom}</strong>/wk
-    </p>
-  )}
+  <p class="rate-bar">
+    {r.weeklyTariff != null ? <><strong>${r.weeklyTariff}</strong>/wk</> : "Not yet published (tbc)"}
+  </p>
   <div class="card-body">
-    <h2><a href={`/residences/${r.slug}/`}>{r.name}</a></h2>
+    <h2>
+      {r.roomName}
+      <span class="room-card-hall">
+        in <a href={`/residences/${r.residenceSlug}/`}>{r.residenceName}</a>
+      </span>
+    </h2>
     <p class="card-subtitle">
       {cateringLabel} &middot; {residentLabel}
     </p>
-    {
-      (ratingLabel || distanceLabel) && (
-        <p class="card-meta">
-          {ratingLabel}
-          {ratingLabel && distanceLabel && " · "}
-          {distanceLabel}
-        </p>
-      )
-    }
-    <p class="card-blurb">{r.blurb}</p>
+    <p class="card-meta">
+      {ratingLabel}
+      {distanceLabel && " · "}
+      {distanceLabel}
+    </p>
     <div class="card-actions">
       {
         r.applyUrl && (
@@ -69,7 +65,7 @@ const distanceLabel = r.nearestStopMeters != null ? `${r.nearestStopMeters} m to
       {
         loggedIn ? (
           <form method="post" action={`/api/shortlist/${shortlisted ? "remove" : "add"}`}>
-            <input type="hidden" name="residenceId" value={r.id} />
+            <input type="hidden" name="residenceId" value={r.residenceId} />
             <input type="hidden" name="redirect" value={redirectTo} />
             <button type="submit" class="link-button">
               {shortlisted ? "Remove from shortlist" : "Save to shortlist"}
@@ -81,6 +77,10 @@ const distanceLabel = r.nearestStopMeters != null ? `${r.nearestStopMeters} m to
           </a>
         )
       }
+      <label class="compare-checkbox-label">
+        <input type="checkbox" class="compare-checkbox" name="rooms" value={r.roomId} form="compare-form" />
+        Add to compare
+      </label>
     </div>
   </div>
 </li>

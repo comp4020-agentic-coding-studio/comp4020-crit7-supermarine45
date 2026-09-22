@@ -1,4 +1,4 @@
-import type { PreferencesInput, Residence, SocialPreference } from "./db";
+import type { PreferencesInput, Residence, ResidenceSocialVibeSample, SocialPreference } from "./db";
 
 export interface MatchResult {
   residence: Residence;
@@ -7,13 +7,19 @@ export interface MatchResult {
 }
 
 // ANU's published residence pages state catering style but nothing like a
-// "social" or "culture" attribute — there's no field to compare a "social
-// expectations" answer against. This maps catering style to a rough
-// independence/social proxy instead (shared catered dining runs scheduled,
-// social meal times; self-catered is the most independent; flexi-catered
-// sits between the two). It's a judgement call, documented in README.md, not
-// something ANU's pages state — every match reason below says so via the
-// wording rather than presenting it as fact.
+// "social" or "culture" attribute, so there's nothing from ANU itself to
+// compare a "social expectations" answer against. This maps catering style to
+// a rough independence/social proxy instead (shared catered dining runs
+// scheduled, social meal times; self-catered is the most independent;
+// flexi-catered sits between the two) — a judgement call, documented in
+// README.md.
+//
+// It's only the fallback now: reviews.socialVibe (an optional question on
+// the review form) lets actual residents/prospective residents answer this
+// for real, per residence. matchResidences prefers that real, crowd-sourced
+// answer via the `socialVibes` map and only falls back to this estimate for a
+// residence with no such answers yet — every match reason says which one it
+// used, rather than presenting either as an ANU-published fact.
 const CATERING_SOCIAL: Record<Residence["cateringType"], SocialPreference> = {
   self_catered: "quiet",
   flexi_catered: "balanced",
@@ -28,7 +34,11 @@ const CATERING_LABEL: Record<Residence["cateringType"], string> = {
   flexi_catered: "Flexi-catered",
 };
 
-export function matchResidences(prefs: PreferencesInput, candidates: Residence[]): MatchResult[] {
+export function matchResidences(
+  prefs: PreferencesInput,
+  candidates: Residence[],
+  socialVibes: Map<number, ResidenceSocialVibeSample> = new Map(),
+): MatchResult[] {
   const results = candidates.map((residence) => {
     let score = 0;
     const maxScore = 30 + 30 + 20 + 20;
@@ -71,10 +81,15 @@ export function matchResidences(prefs: PreferencesInput, candidates: Residence[]
       reasons.push("Flexi-catered — a middle ground on catering");
     }
 
-    const socialGuess = CATERING_SOCIAL[residence.cateringType];
+    const reviewedVibe = socialVibes.get(residence.id);
+    const socialGuess = reviewedVibe?.vibe ?? CATERING_SOCIAL[residence.cateringType];
     if (socialGuess === prefs.social) {
       score += 20;
-      reasons.push(`${CATERING_LABEL[residence.cateringType]} halls tend to suit a ${prefs.social} preference (our estimate, not an ANU-published fact)`);
+      reasons.push(
+        reviewedVibe
+          ? `${reviewedVibe.count} reviewer${reviewedVibe.count === 1 ? "" : "s"} described this hall's social atmosphere as "${prefs.social}", matching your preference`
+          : `${CATERING_LABEL[residence.cateringType]} halls tend to suit a ${prefs.social} preference (our estimate, not an ANU-published fact — no reviewer answers yet)`,
+      );
     } else if (Math.abs(SOCIAL_ORDER[socialGuess] - SOCIAL_ORDER[prefs.social]) === 1) {
       score += 10;
     }

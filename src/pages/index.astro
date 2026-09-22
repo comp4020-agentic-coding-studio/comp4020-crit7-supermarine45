@@ -2,10 +2,10 @@
 import Map from "../components/Map.astro";
 import Nav from "../components/Nav.astro";
 import ResidenceCard from "../components/ResidenceCard.astro";
-import { getShortlistIds, listAllResidences, listShuttleStops } from "../lib/db";
+import { getShortlistIds, listAllResidences, listShuttleStops, withResidenceStats } from "../lib/db";
 import "../styles.css";
 
-const residences = listAllResidences();
+const residences = withResidenceStats(listAllResidences());
 const shuttleStops = listShuttleStops();
 const user = Astro.locals.user;
 const shortlistIds = user ? getShortlistIds(user.id) : new Set<number>();
@@ -42,6 +42,48 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
           </p>
         </div>
       </div>
+
+      <section class="quick-start" aria-labelledby="quick-start-heading">
+        <h2 id="quick-start-heading">Quick start — jump to a shortlist</h2>
+        <p>
+          Not sure where to look first? Pick whichever matters most to you, or answer a few questions for a
+          ranking built around your own preferences instead.
+        </p>
+        <ul class="quick-start-grid">
+          <li>
+            <a class="quick-start-card" href="/search/?type=undergrad&sort=price_asc">
+              <span class="quick-start-card-title">Undergrad, cheapest first</span>
+              <span class="quick-start-card-desc">Undergraduate-eligible halls, lowest published rate first.</span>
+            </a>
+          </li>
+          <li>
+            <a class="quick-start-card" href="/search/?type=postgrad&sort=price_asc">
+              <span class="quick-start-card-title">Postgrad, cheapest first</span>
+              <span class="quick-start-card-desc">Postgraduate-eligible halls, lowest published rate first.</span>
+            </a>
+          </li>
+          <li>
+            <a class="quick-start-card" href="/search/?catering=catered&sort=rating_desc">
+              <span class="quick-start-card-title">Catered, top rated</span>
+              <span class="quick-start-card-desc">Fully catered halls, highest reviewer rating first.</span>
+            </a>
+          </li>
+          <li>
+            <a class="quick-start-card" href="/search/?maxDistance=1000&sort=distance_asc">
+              <span class="quick-start-card-title">Close to the shuttle</span>
+              <span class="quick-start-card-desc">Within 1&nbsp;km of an ANU Civic Loop stop, nearest first.</span>
+            </a>
+          </li>
+          <li>
+            <a class="quick-start-card quick-start-card-featured" href="/hall-match/">
+              <span class="quick-start-card-title">Answer a few questions instead</span>
+              <span class="quick-start-card-desc"
+                >Get every hall ranked against your budget, catering and social preferences.</span
+              >
+            </a>
+          </li>
+        </ul>
+      </section>
 
       <div class="cta-bar">
         <div>
