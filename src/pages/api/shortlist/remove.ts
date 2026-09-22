@@ -1,16 +1,13 @@
 import type { APIRoute } from "astro";
 import { removeFromShortlist } from "../../../lib/db";
+import { safeRedirect } from "../../../lib/http";
 
-// Safe redirect target: only ever a path on this same site, never an
-// absolute or protocol-relative URL a form field could be tampered into.
-function safeRedirect(value: FormDataEntryValue | null): string {
-  const path = String(value ?? "");
-  return path.startsWith("/") && !path.startsWith("//") ? path : "/search/";
-}
-
-export const POST: APIRoute = async ({ request, redirect }) => {
+export const POST: APIRoute = async ({ request, locals, redirect }) => {
   const form = await request.formData();
+  const redirectTo = safeRedirect(form.get("redirect"), "/search/");
+  if (!locals.user) return redirect(`/login/?returnTo=${encodeURIComponent(redirectTo)}`, 303);
+
   const residenceId = Number(form.get("residenceId"));
-  if (Number.isInteger(residenceId)) removeFromShortlist(residenceId);
-  return redirect(safeRedirect(form.get("redirect")), 303);
+  if (Number.isInteger(residenceId)) removeFromShortlist(locals.user.id, residenceId);
+  return redirect(redirectTo, 303);
 };

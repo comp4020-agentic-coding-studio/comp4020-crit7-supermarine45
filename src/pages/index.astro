@@ -7,7 +7,8 @@ import "../styles.css";
 
 const residences = listAllResidences();
 const shuttleStops = listShuttleStops();
-const shortlistIds = getShortlistIds();
+const user = Astro.locals.user;
+const shortlistIds = user ? getShortlistIds(user.id) : new Set<number>();
 const redirectTo = "/";
 
 const mapResidences = residences
@@ -62,7 +63,9 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
 
       <h2>{residences.length} residences</h2>
       <ul class="residence-grid">
-        {residences.map((r) => <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo={redirectTo} />)}
+        {residences.map((r) => (
+          <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo={redirectTo} loggedIn={!!user} />
+        ))}
       </ul>
     </main>
   </body>

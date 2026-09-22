@@ -1,0 +1,105 @@
+---
+import Nav from "../components/Nav.astro";
+import { getPreferences, listAllResidences } from "../lib/db";
+import { matchResidences } from "../lib/match";
+import "../styles.css";
+
+const user = Astro.locals.user;
+if (!user) {
+  return Astro.redirect(`/login/?returnTo=${encodeURIComponent("/hall-match/")}`, 303);
+}
+
+const prefs = getPreferences(user.id);
+const results = prefs ? matchResidences(prefs, listAllResidences()) : [];
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hall match — ANU Residence Explorer</title>
+  </head>
+  <body>
+    <Nav />
+    <main class="wide">
+      <h1>Hall match</h1>
+      <p>
+        Save your budget, catering and resident-type preferences and we'll rank ANU's public residences against
+        them. This is our own estimate, built from ANU's published rates and catering styles — not an official
+        recommendation from ANU or StarRez.
+      </p>
+      <form method="post" action="/api/preferences/save" class="filters">
+        <input type="hidden" name="redirect" value="/hall-match/" />
+        <div class="filters-row">
+          <label for="residentType">
+            I am a
+            <select id="residentType" name="residentType">
+              <option value="no_preference" selected={!prefs || prefs.residentType === "no_preference"}>
+                No preference
+              </option>
+              <option value="undergrad" selected={prefs?.residentType === "undergrad"}>Undergraduate</option>
+              <option value="postgrad" selected={prefs?.residentType === "postgrad"}>Postgraduate</option>
+              <option value="both" selected={prefs?.residentType === "both"}>Either</option>
+            </select>
+          </label>
+          <label for="catering">
+            Catering preference
+            <select id="catering" name="catering">
+              <option value="no_preference" selected={!prefs || prefs.catering === "no_preference"}>
+                No preference
+              </option>
+              <option value="self_catered" selected={prefs?.catering === "self_catered"}>Self-catered</option>
+              <option value="flexi_catered" selected={prefs?.catering === "flexi_catered"}>Flexi-catered</option>
+              <option value="catered" selected={prefs?.catering === "catered"}>Catered</option>
+            </select>
+          </label>
+          <label for="social">
+            Social expectations
+            <select id="social" name="social">
+              <option value="quiet" selected={prefs?.social === "quiet"}>Quiet</option>
+              <option value="balanced" selected={!prefs || prefs.social === "balanced"}>Balanced</option>
+              <option value="social" selected={prefs?.social === "social"}>Very social</option>
+            </select>
+          </label>
+          <label for="budgetMin">
+            Min $/wk
+            <input id="budgetMin" name="budgetMin" type="number" min="0" step="1" value={prefs?.budgetMin ?? ""} />
+          </label>
+          <label for="budgetMax">
+            Max $/wk
+            <input id="budgetMax" name="budgetMax" type="number" min="0" step="1" value={prefs?.budgetMax ?? ""} />
+          </label>
+        </div>
+        <div class="filters-actions">
+          <button type="submit">Save &amp; match</button>
+        </div>
+      </form>
+
+      {
+        prefs && (
+          <>
+            <h2>Your ranked matches</h2>
+            <ol class="match-list">
+              {results.map((result) => (
+                <li class="match-card">
+                  <div class="match-score">{result.score}%</div>
+                  <div class="match-body">
+                    <h3>
+                      <a href={`/residences/${result.residence.slug}/`}>{result.residence.name}</a>
+                    </h3>
+                    {result.reasons.length > 0 && (
+                      <ul class="match-reasons">
+                        {result.reasons.map((reason) => <li>{reason}</li>)}
+                      </ul>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </>
+        )
+      }
+    </main>
+  </body>
+</html>

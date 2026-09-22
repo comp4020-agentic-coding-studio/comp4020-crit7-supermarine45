@@ -2,11 +2,16 @@
 import Map from "../../components/Map.astro";
 import Nav from "../../components/Nav.astro";
 import {
+  getInterestedRoomIds,
+  getMyReview,
   getResidenceBySlug,
+  getReviewStats,
+  getRoomInterestCounts,
   getShortlistIds,
   listFeatures,
   listGalleryImages,
   listNearbyPlaces,
+  listReviews,
   listRoomTypes,
   listShuttleStops,
 } from "../../lib/db";
@@ -17,13 +22,22 @@ if (!residence) {
   return new Response("Residence not found", { status: 404 });
 }
 
+const user = Astro.locals.user;
 const features = listFeatures(residence.id);
 const gallery = listGalleryImages(residence.id);
 const rooms = listRoomTypes(residence.id);
 const nearby = listNearbyPlaces(residence.id);
 const shuttleStops = listShuttleStops();
-const shortlisted = getShortlistIds().has(residence.id);
+const shortlisted = user ? getShortlistIds(user.id).has(residence.id) : false;
 const redirectTo = `/residences/${residence.slug}/`;
+const loginLink = `/login/?returnTo=${encodeURIComponent(redirectTo)}`;
+
+const reviews = listReviews(residence.id);
+const reviewStats = getReviewStats(residence.id);
+const myReview = user ? getMyReview(residence.id, user.id) : undefined;
+
+const interestedRoomIds = user ? getInterestedRoomIds(user.id, residence.id) : new Set<number>();
+const roomInterestCounts = getRoomInterestCounts(residence.id);
 
 function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = 6371000;
@@ -117,11 +131,21 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
             </a>
           )
         }
-        <form method="post" action={`/api/shortlist/${shortlisted ? "remove" : "add"}`}>
-          <input type="hidden" name="residenceId" value={residence.id} />
-          <input type="hidden" name="redirect" value={redirectTo} />
-          <button type="submit" class="link-button">{shortlisted ? "Remove from shortlist" : "Save to shortlist"}</button>
-        </form>
+        {
+          user ? (
+            <form method="post" action={`/api/shortlist/${shortlisted ? "remove" : "add"}`}>
+              <input type="hidden" name="residenceId" value={residence.id} />
+              <input type="hidden" name="redirect" value={redirectTo} />
+              <button type="submit" class="link-button">
+                {shortlisted ? "Remove from shortlist" : "Save to shortlist"}
+              </button>
+            </form>
+          ) : (
+            <a class="link-button" href={loginLink}>
+              Log in to save
+            </a>
+          )
+        }
       </div>
 
       {
@@ -154,43 +178,68 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
               ))}
             </div>
             <div class="room-tab-panels">
-              {rooms.map((room) => (
-                <div class="room-tab-panel">
-                  <table class="room-rate-table">
-                    <caption class="visually-hidden">{room.name} weekly rate and fees</caption>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Weekly tariff</th>
-                        <td>{room.weeklyTariff != null ? `$${room.weeklyTariff.toFixed(2)}/wk` : "Not yet published (tbc)"}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Contract length</th>
-                        <td>{room.contractTerm ?? "Not stated"}</td>
-                      </tr>
-                      {room.inclusions.length > 0 && (
+              {rooms.map((room) => {
+                const count = roomInterestCounts.get(room.id) ?? 0;
+                const interested = interestedRoomIds.has(room.id);
+                return (
+                  <div class="room-tab-panel">
+                    <table class="room-rate-table">
+                      <caption class="visually-hidden">{room.name} weekly rate and fees</caption>
+                      <tbody>
                         <tr>
-                          <th scope="row">Inclusions</th>
-                          <td>
-                            <ul>
-                              {room.inclusions.map((item) => <li>{item}</li>)}
-                            </ul>
-                          </td>
+                          <th scope="row">Weekly tariff</th>
+                          <td>{room.weeklyTariff != null ? `$${room.weeklyTariff.toFixed(2)}/wk` : "Not yet published (tbc)"}</td>
                         </tr>
-                      )}
-                      {room.otherFees.length > 0 && (
                         <tr>
-                          <th scope="row">Other fees</th>
-                          <td>
-                            <ul>
-                              {room.otherFees.map((item) => <li>{item}</li>)}
-                            </ul>
-                          </td>
+                          <th scope="row">Contract length</th>
+                          <td>{room.contractTerm ?? "Not stated"}</td>
                         </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              ))}
+                        {room.inclusions.length > 0 && (
+                          <tr>
+                            <th scope="row">Inclusions</th>
+                            <td>
+                              <ul>
+                                {room.inclusions.map((item) => <li>{item}</li>)}
+                              </ul>
+                            </td>
+                          </tr>
+                        )}
+                        {room.otherFees.length > 0 && (
+                          <tr>
+                            <th scope="row">Other fees</th>
+                            <td>
+                              <ul>
+                                {room.otherFees.map((item) => <li>{item}</li>)}
+                              </ul>
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                    <div class="room-interest">
+                      <p class="room-interest-count">
+                        {count} {count === 1 ? "person" : "people"} interested in this room type — not a booking or
+                        hold, just a signal.
+                      </p>
+                      {
+                        user ? (
+                          <form method="post" action={`/api/room-interest/${interested ? "remove" : "add"}`}>
+                            <input type="hidden" name="roomId" value={room.id} />
+                            <input type="hidden" name="redirect" value={redirectTo} />
+                            <button type="submit" class="link-button">
+                              {interested ? "Remove interest" : "I'm interested"}
+                            </button>
+                          </form>
+                        ) : (
+                          <a class="link-button" href={loginLink}>
+                            Log in to flag interest
+                          </a>
+                        )
+                      }
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </fieldset>
         ) : (
@@ -205,6 +254,62 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
       <ul>
         {features.map((f) => <li>{f}</li>)}
       </ul>
+
+      <h2>Reviews</h2>
+      <p class="review-stats">
+        {
+          reviewStats.count > 0 ? (
+            <>
+              Average rating: <strong>{reviewStats.average?.toFixed(1)} / 5</strong> from {reviewStats.count}{" "}
+              {reviewStats.count === 1 ? "review" : "reviews"} by residents and prospective residents using this app.
+            </>
+          ) : (
+            "No reviews yet — be the first."
+          )
+        }
+      </p>
+      {
+        reviews.length > 0 && (
+          <ul class="review-list">
+            {reviews.map((rev) => (
+              <li class="review">
+                <p class="review-meta">
+                  <strong>{rev.rating} / 5</strong> &middot; {rev.username} &middot; <time>{rev.createdAt}</time>
+                </p>
+                <p class="review-body">{rev.body}</p>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      {
+        user ? (
+          <form method="post" action="/api/reviews/add" class="review-form">
+            <input type="hidden" name="residenceId" value={residence.id} />
+            <input type="hidden" name="redirect" value={redirectTo} />
+            <label for="review-rating">
+              Your rating
+              <select id="review-rating" name="rating" required>
+                <option value="">Select…</option>
+                {[5, 4, 3, 2, 1].map((n) => (
+                  <option value={n} selected={myReview?.rating === n}>
+                    {n} / 5
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label for="review-body">
+              Your review
+              <textarea id="review-body" name="body" required rows="3">{myReview?.body ?? ""}</textarea>
+            </label>
+            <button type="submit">{myReview ? "Update review" : "Post review"}</button>
+          </form>
+        ) : (
+          <p>
+            <a href={loginLink}>Log in</a> to write a review.
+          </p>
+        )
+      }
 
       <p><a href={residence.anuUrl}>View this residence on the official ANU page</a></p>
     </main>

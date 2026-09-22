@@ -4,8 +4,9 @@ import ResidenceCard from "../components/ResidenceCard.astro";
 import { getShortlistIds, listShortlistedResidences } from "../lib/db";
 import "../styles.css";
 
-const results = listShortlistedResidences();
-const shortlistIds = getShortlistIds();
+const user = Astro.locals.user;
+const results = user ? listShortlistedResidences(user.id) : [];
+const shortlistIds = user ? getShortlistIds(user.id) : new Set<number>();
 ---
 
 <!doctype html>
@@ -19,21 +20,33 @@ const shortlistIds = getShortlistIds();
     <Nav />
     <main class="wide">
       <h1>Your shortlist</h1>
-      <p>
-        Residences you've saved while browsing. This list is stored on the server, so it's still here next time you
-        open this page — even from a different tab.
-      </p>
       {
-        results.length === 0 ? (
-          <p class="no-results">
-            Nothing saved yet. Head to <a href="/search/">search</a> and use "Save to shortlist" on any residence.
+        !user ? (
+          <p>
+            <a href="/login/?returnTo=/shortlist/">Log in</a> or <a href="/signup/?returnTo=/shortlist/">sign up</a> to
+            save and view your shortlisted residences.
           </p>
         ) : (
-          <ul class="residence-grid">
-            {results.map((r) => (
-              <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo="/shortlist/" />
-            ))}
-          </ul>
+          <>
+            <p>
+              Residences you've saved while browsing. This list is tied to your account, so it's still here next
+              time you log in — even from a different device.
+            </p>
+            {
+              results.length === 0 ? (
+                <p class="no-results">
+                  Nothing saved yet. Head to <a href="/search/">search</a> and use "Save to shortlist" on any
+                  residence.
+                </p>
+              ) : (
+                <ul class="residence-grid">
+                  {results.map((r) => (
+                    <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo="/shortlist/" loggedIn />
+                  ))}
+                </ul>
+              )
+            }
+          </>
         )
       }
     </main>

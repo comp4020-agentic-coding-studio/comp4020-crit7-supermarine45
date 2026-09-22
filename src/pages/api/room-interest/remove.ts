@@ -1,13 +1,13 @@
 import type { APIRoute } from "astro";
-import { addToShortlist } from "../../../lib/db";
+import { removeRoomInterest } from "../../../lib/db";
 import { safeRedirect } from "../../../lib/http";
 
 export const POST: APIRoute = async ({ request, locals, redirect }) => {
   const form = await request.formData();
-  const redirectTo = safeRedirect(form.get("redirect"), "/search/");
+  const redirectTo = safeRedirect(form.get("redirect"), "/");
   if (!locals.user) return redirect(`/login/?returnTo=${encodeURIComponent(redirectTo)}`, 303);
 
-  const residenceId = Number(form.get("residenceId"));
-  if (Number.isInteger(residenceId)) addToShortlist(locals.user.id, residenceId);
+  const roomId = Number(form.get("roomId"));
+  if (Number.isInteger(roomId)) removeRoomInterest(locals.user.id, roomId);
   return redirect(redirectTo, 303);
 };

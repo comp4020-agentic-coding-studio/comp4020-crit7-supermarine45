@@ -1,16 +1,18 @@
 import { JSDOM } from "jsdom";
 import { describe, expect, inject, it } from "vitest";
+import { postForm, signUp } from "./helpers";
 
 // This week's own contracts, on top of the shipped invariants: the search
 // filters actually narrow results, the quick-apply links are real, the
-// interactive map carries real geodata, the shortlist survives a reload, and
+// interactive map carries real geodata, the shortlist survives a reload (now
+// per logged-in user, not shared across everyone — see README.md), and
 // unknown residences 404 instead of crashing. Assertions lean on seed/*.json
 // facts (e.g. "exactly one flexi-catered residence") rather than
 // implementation details, so they survive a rewrite of how filtering works.
 const baseUrl = inject("baseUrl");
 
-async function getDoc(path: string): Promise<Document> {
-  const res = await fetch(new URL(path, baseUrl));
+async function getDoc(path: string, cookie?: string): Promise<Document> {
+  const res = await fetch(new URL(path, baseUrl), cookie ? { headers: { Cookie: cookie } } : undefined);
   const html = await res.text();
   return new JSDOM(html).window.document;
 }
@@ -61,7 +63,10 @@ describe("search filters", () => {
 
   it("gives every result with a published application link a working quick-apply button", async () => {
     const doc = await getDoc("/search/");
-    const applyLinks = [...doc.querySelectorAll(".residence-card .card-actions a")];
+    // Scoped to .btn-primary — logged out, .card-actions also carries a
+    // "Log in to save" link (see spec/auth.test.ts and the shortlist tests
+    // below), which isn't a quick-apply link and shouldn't match here.
+    const applyLinks = [...doc.querySelectorAll(".residence-card .card-actions a.btn-primary")];
     expect(applyLinks.length).toBeGreaterThan(0);
     for (const link of applyLinks) {
       expect(link.getAttribute("href")).toMatch(/^https?:\/\//);
@@ -123,34 +128,67 @@ describe("interactive map data", () => {
 
 describe("shortlist persists across reload", () => {
   it("saving a residence keeps it shortlisted on a later, independent request, and removing it drops it again", async () => {
-    const searchDoc = await getDoc("/search/");
+    const cookie = await signUp(baseUrl, `shortlist-owner-${Date.now()}`, "correct-horse-battery");
+
+    const searchDoc = await getDoc("/search/", cookie);
     const card = [...searchDoc.querySelectorAll(".residence-card")].find((c) =>
       c.textContent?.includes("Burton & Garran Hall"),
     );
     const residenceId = card?.querySelector('input[name="residenceId"]')?.getAttribute("value");
     expect(residenceId).toBeTruthy();
 
-    const addRes = await fetch(new URL("/api/shortlist/add", baseUrl), {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded", Origin: baseUrl },
-      body: `residenceId=${residenceId}&redirect=/shortlist/`,
-      redirect: "manual",
-    });
+    const addRes = await postForm(baseUrl, "/api/shortlist/add", `residenceId=${residenceId}&redirect=/shortlist/`, cookie);
     expect(addRes.status).toBe(303);
 
     // A fresh, independent request — standing in for a reload — must still see it.
-    const shortlistDoc = await getDoc("/shortlist/");
+    const shortlistDoc = await getDoc("/shortlist/", cookie);
     expect(shortlistDoc.body.textContent).toContain("Burton & Garran Hall");
 
-    const removeRes = await fetch(new URL("/api/shortlist/remove", baseUrl), {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded", Origin: baseUrl },
-      body: `residenceId=${residenceId}&redirect=/shortlist/`,
-      redirect: "manual",
-    });
+    const removeRes = await postForm(
+      baseUrl,
+      "/api/shortlist/remove",
+      `residenceId=${residenceId}&redirect=/shortlist/`,
+      cookie,
+    );
     expect(removeRes.status).toBe(303);
 
-    const afterRemoveDoc = await getDoc("/shortlist/");
+    const afterRemoveDoc = await getDoc("/shortlist/", cookie);
     expect(afterRemoveDoc.body.textContent).not.toContain("Burton & Garran Hall");
+  });
+
+  it("keeps one user's shortlist private from another logged-in user", async () => {
+    const ownerCookie = await signUp(baseUrl, `shortlist-a-${Date.now()}`, "correct-horse-battery");
+    const otherCookie = await signUp(baseUrl, `shortlist-b-${Date.now()}`, "correct-horse-battery");
+
+    const searchDoc = await getDoc("/search/", ownerCookie);
+    const card = [...searchDoc.querySelectorAll(".residence-card")].find((c) =>
+      c.textContent?.includes("Wright Hall"),
+    );
+    const residenceId = card?.querySelector('input[name="residenceId"]')?.getAttribute("value");
+    expect(residenceId).toBeTruthy();
+
+    await postForm(baseUrl, "/api/shortlist/add", `residenceId=${residenceId}&redirect=/shortlist/`, ownerCookie);
+
+    const ownerDoc = await getDoc("/shortlist/", ownerCookie);
+    expect(ownerDoc.body.textContent).toContain("Wright Hall");
+
+    const otherDoc = await getDoc("/shortlist/", otherCookie);
+    expect(otherDoc.body.textContent).not.toContain("Wright Hall");
+  });
+});
+
+describe("logged out", () => {
+  it("shows a login prompt on the shortlist page instead of anyone's saved list", async () => {
+    const doc = await getDoc("/shortlist/");
+    expect(doc.querySelector("h1")?.textContent).toBe("Your shortlist");
+    expect(doc.body.textContent).toMatch(/Log in|sign up/);
+    expect(doc.querySelectorAll(".residence-card").length).toBe(0);
+  });
+
+  it("offers a login link instead of a shortlist button on a residence card", async () => {
+    const doc = await getDoc("/search/");
+    const card = doc.querySelector(".residence-card");
+    const loginLink = card?.querySelector(".card-actions a.link-button");
+    expect(loginLink?.getAttribute("href")).toMatch(/^\/login\/\?returnTo=/);
   });
 });

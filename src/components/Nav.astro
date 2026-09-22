@@ -1,13 +1,37 @@
 ---
 const path = Astro.url.pathname;
+const user = Astro.locals.user;
 const links = [
   { href: "/", label: "Residences" },
   { href: "/search/", label: "Search" },
   { href: "/shortlist/", label: "Shortlist" },
+  ...(user ? [{ href: "/hall-match/", label: "Hall match" }] : []),
   { href: "/readme/", label: "About" },
 ];
 ---
 
 <nav aria-label="site">
-  {links.map((l) => <a href={l.href} aria-current={path === l.href ? "page" : undefined}>{l.label}</a>)}
+  <div class="nav-links">
+    {links.map((l) => <a href={l.href} aria-current={path === l.href ? "page" : undefined}>{l.label}</a>)}
+  </div>
+  <div class="nav-user">
+    {
+      user ? (
+        <>
+          <span class="nav-username">{user.username}</span>
+          <form method="post" action="/api/auth/logout">
+            <input type="hidden" name="redirect" value={path} />
+            <button type="submit" class="link-button nav-logout">
+              Log out
+            </button>
+          </form>
+        </>
+      ) : (
+        <>
+          <a href={`/login/?returnTo=${encodeURIComponent(path)}`}>Log in</a>
+          <a href={`/signup/?returnTo=${encodeURIComponent(path)}`}>Sign up</a>
+        </>
+      )
+    }
+  </div>
 </nav>

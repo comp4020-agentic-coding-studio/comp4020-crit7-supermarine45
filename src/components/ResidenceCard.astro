@@ -5,9 +5,10 @@ interface Props {
   residence: Residence;
   shortlisted: boolean;
   redirectTo: string;
+  loggedIn: boolean;
 }
 
-const { residence: r, shortlisted, redirectTo } = Astro.props;
+const { residence: r, shortlisted, redirectTo, loggedIn } = Astro.props;
 
 const residentLabel =
   r.residentUndergrad && r.residentPostgrad
@@ -48,11 +49,21 @@ const cateringLabel = { self_catered: "Self-catered", catered: "Catered", flexi_
           </a>
         )
       }
-      <form method="post" action={`/api/shortlist/${shortlisted ? "remove" : "add"}`}>
-        <input type="hidden" name="residenceId" value={r.id} />
-        <input type="hidden" name="redirect" value={redirectTo} />
-        <button type="submit" class="link-button">{shortlisted ? "Remove from shortlist" : "Save to shortlist"}</button>
-      </form>
+      {
+        loggedIn ? (
+          <form method="post" action={`/api/shortlist/${shortlisted ? "remove" : "add"}`}>
+            <input type="hidden" name="residenceId" value={r.id} />
+            <input type="hidden" name="redirect" value={redirectTo} />
+            <button type="submit" class="link-button">
+              {shortlisted ? "Remove from shortlist" : "Save to shortlist"}
+            </button>
+          </form>
+        ) : (
+          <a class="link-button" href={`/login/?returnTo=${encodeURIComponent(redirectTo)}`}>
+            Log in to save
+          </a>
+        )
+      }
     </div>
   </div>
 </li>

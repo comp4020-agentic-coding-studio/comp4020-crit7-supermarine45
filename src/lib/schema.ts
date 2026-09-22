@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { int, primaryKey, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { int, primaryKey, real, sqliteTable, text, unique } from "drizzle-orm/sqlite-core";
 
 // The schema is the ground truth for the database. To change it: edit here,
 // run `pnpm db:generate` to turn the diff into a migration under drizzle/,
@@ -113,11 +113,112 @@ export const shuttleStops = sqliteTable("shuttle_stops", {
 
 export type ShuttleStop = typeof shuttleStops.$inferSelect;
 
-export const shortlist = sqliteTable("shortlist", {
-  residenceId: int("residence_id")
-    .primaryKey()
-    .references(() => residences.id, { onDelete: "cascade" }),
+// Accounts are native to this app — a plain username/password login of our
+// own, scoped to this prototype only. See README.md for why: the brief asks
+// us to model relationships between people and places, which needs a real
+// user to attach a shortlist, a review, a preference set or a room-interest
+// flag to. This is NOT, and must never become, any kind of StarRez
+// integration or lookalike.
+export const users = sqliteTable("users", {
+  id: int().primaryKey({ autoIncrement: true }),
+  username: text().notNull().unique(),
+  // "<scrypt salt hex>:<scrypt hash hex>" — see src/lib/auth.ts.
+  passwordHash: text("password_hash").notNull(),
   createdAt: text("created_at")
     .notNull()
     .default(sql`(datetime('now'))`),
 });
+
+export type User = typeof users.$inferSelect;
+
+export const sessions = sqliteTable("sessions", {
+  id: text().primaryKey(),
+  userId: int("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  expiresAt: text("expires_at").notNull(),
+  createdAt: text("created_at")
+    .notNull()
+    .default(sql`(datetime('now'))`),
+});
+
+export const shortlist = sqliteTable(
+  "shortlist",
+  {
+    userId: int("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    residenceId: int("residence_id")
+      .notNull()
+      .references(() => residences.id, { onDelete: "cascade" }),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.residenceId] })],
+);
+
+// One saved questionnaire answer set per user, upserted on every save. The
+// "social" field has no ANU-published equivalent — src/lib/match.ts documents
+// the proxy it's compared against.
+export const preferences = sqliteTable("preferences", {
+  userId: int("user_id")
+    .primaryKey()
+    .references(() => users.id, { onDelete: "cascade" }),
+  budgetMin: int("budget_min"),
+  budgetMax: int("budget_max"),
+  catering: text({
+    enum: ["self_catered", "catered", "flexi_catered", "no_preference"],
+  }).notNull(),
+  residentType: text("resident_type", {
+    enum: ["undergrad", "postgrad", "both", "no_preference"],
+  }).notNull(),
+  social: text({ enum: ["quiet", "balanced", "social"] }).notNull(),
+  updatedAt: text("updated_at")
+    .notNull()
+    .default(sql`(datetime('now'))`),
+});
+
+export type Preferences = typeof preferences.$inferSelect;
+
+// One review per user per residence — resubmitting edits it rather than
+// adding a second row.
+export const reviews = sqliteTable(
+  "reviews",
+  {
+    id: int().primaryKey({ autoIncrement: true }),
+    residenceId: int("residence_id")
+      .notNull()
+      .references(() => residences.id, { onDelete: "cascade" }),
+    userId: int("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    rating: int().notNull(),
+    body: text().notNull(),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+  },
+  (t) => [unique().on(t.residenceId, t.userId)],
+);
+
+export type Review = typeof reviews.$inferSelect;
+
+// A non-binding "I'm interested in this room type" flag — deliberately not a
+// reservation or hold. See README.md for why this app doesn't model a real
+// booking flow.
+export const roomInterest = sqliteTable(
+  "room_interest",
+  {
+    userId: int("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    roomId: int("room_id")
+      .notNull()
+      .references(() => residenceRooms.id, { onDelete: "cascade" }),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.roomId] })],
+);

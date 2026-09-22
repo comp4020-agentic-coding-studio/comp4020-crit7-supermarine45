@@ -6,15 +6,19 @@ with no way to see them together, compare prices or catering side by side, or
 tell where any of them actually sit relative to the city, the shuttle, or each
 other. This prototype pulls the public content of those pages into one small
 app that a prospective resident can actually search, filter, and place on a
-map — plus a shortlist that survives closing the tab, and quick links straight
-through to the real StarRez application page for whichever hall they land on.
+map — plus a personal shortlist, hall-matching against their own preferences,
+reviews from other residents, and quick links straight through to the real
+StarRez application page for whichever hall they land on.
 
 It reads ANU's own public listing and public geodata only. It does **not**
 touch ANU's real StarRez housing portal (`anucomb.starrezhousing.com`) — that
 system is out of scope and I have no authorisation to integrate with it. Every
 "Apply now" link on this site is just the same public StarRez URL that already
 sits on ANU's own page for that residence; clicking it hands off entirely to
-ANU's real system.
+ANU's real system. The account system added this round is likewise entirely
+**native to this app** — its own username/password login, its own sessions —
+not a StarRez-styled clone and not connected to ANU's real login in any way;
+see "Accounts" under "What good looks like here" below.
 
 ## What's here
 
@@ -29,9 +33,22 @@ ANU's real system.
   description. Every result carries a one-click "Apply now" straight to that
   residence's real ANU/StarRez application page, and a "Save to shortlist"
   button.
-- **A shortlist** (`/shortlist/`) — saved residences persist server-side, so
-  they're still there after a reload or in a different tab, not just in this
-  browser's local storage.
+- **Accounts** (`/login/`, `/signup/`) — a native username/password login, not
+  connected to ANU's real login or StarRez in any way. Everything below that's
+  personal (shortlist, hall match, reviews, room interest) is tied to this
+  account.
+- **A shortlist** (`/shortlist/`) — saved residences persist server-side
+  against your account, so they're still there after a reload, in a different
+  tab, or on a different device, and stay private to you.
+- **Hall matching** (`/hall-match/`) — save a budget range, catering, resident
+  type and social preference, and get every residence ranked against it with
+  plain-language reasons, not just a bare score.
+- **Reviews** — on each residence's detail page, logged-in residents can rate
+  and review a hall (one review per person, edited by resubmitting), and
+  anyone can read the average rating and existing reviews.
+- **Room interest** — a non-binding "I'm interested in this room type" toggle
+  per room, showing a real cross-user count. Deliberately not a
+  reserve/hold/booking flow — see the judgement call below.
 - **A detail page per residence** (`/residences/[slug]/`) — a photo gallery
   and a room-type tab set (CSS-only, no client JS) showing each room type's
   weekly tariff, contract length, inclusions and other fees side by side,
@@ -46,11 +63,28 @@ the real application form.
 
 Judgement calls I made, not enforced by any check:
 
-- **The shortlist has no login and is shared server-side**, the same shape as
-  the starter's own guestbook. For a real deployment this would need
-  per-visitor state (a session cookie at minimum); for a one-week prototype
-  with no auth story, a shared list matching the starter's existing pattern
-  was the honest trade-off rather than building throwaway auth.
+- **Accounts are native to this app**, not a StarRez integration: usernames
+  and passwords hashed with Node's built-in `scrypt` (no new dependency), and
+  DB-backed sessions via a cookie. No email, no password reset, no
+  lockout/rate-limiting — deliberately minimal for a one-week prototype where
+  the point is modelling a person-to-place relationship, not building a
+  production auth system. This replaced last round's shortlist, which had no
+  login and was a single shared, anonymous list; that trade-off no longer
+  applies now that every visitor can have their own account, and the
+  migration that added `users`/`sessions` drops those old anonymous shortlist
+  rows outright rather than inventing an owner for them (see
+  `drizzle/0002_lean_speed.sql`).
+- **Room interest is a non-binding "I'm interested" flag, not a
+  reservation.** It would be easy to make this look like holding or booking a
+  room, but this prototype has no connection to ANU's real StarRez system and
+  can't actually hold anything — showing a real, aggregate "N people
+  interested" count is an honest signal instead of a fake one.
+- **Hall matching's "social" score is an estimate, not an ANU-published
+  fact.** ANU's residence pages state catering style but nothing like a
+  social/culture attribute, so `src/lib/match.ts` maps catering style to a
+  rough quiet/balanced/social proxy (self-catered → quiet, catered → social,
+  flexi-catered → balanced) and says so in every match reason it shows,
+  rather than presenting it as something ANU stated.
 - **OSM/Overpass data was fetched once, by hand, into `seed/*.json`**
   (`scripts/fetch-geo.ts`), not queried live at request time or at boot. Both
   Nominatim and the public Overpass mirrors rate-limit aggressively and are
@@ -71,15 +105,28 @@ What's enforced by `spec/`:
 
 - The shipped invariants (nav landmark, one `h1`, language, viewport, alt
   text, an axe-core accessibility pass) on every route in `spec/routes.ts`.
-- `spec/residence-explorer.test.ts`, written for this week: the search
-  filters actually narrow results (by resident type, catering, price, and
-  keyword) against known facts in the seed data, every quick-apply link is a
-  real external link opened safely (`target="_blank" rel="noopener"`), the
-  map carries real coordinates for every residence and the whole shuttle
-  route, unknown residence slugs 404 instead of crashing, and — the one
-  explicitly asked for — a shortlisted residence is still shortlisted on a
-  later, independent request after being saved, and is gone after being
-  removed.
+- `spec/residence-explorer.test.ts`: the search filters actually narrow
+  results (by resident type, catering, price, and keyword) against known
+  facts in the seed data, every quick-apply link is a real external link
+  opened safely (`target="_blank" rel="noopener"`), the map carries real
+  coordinates for every residence and the whole shuttle route, unknown
+  residence slugs 404 instead of crashing, a shortlisted residence is still
+  shortlisted on a later, independent request after being saved and gone
+  after being removed, one user's shortlist stays private from another
+  logged-in user, and a logged-out visitor gets a login prompt instead of
+  anyone's saved list.
+- `spec/auth.test.ts`: signup logs the new user in immediately, a duplicate
+  username is rejected without a 500, a wrong password is rejected, and
+  logging out actually invalidates the session rather than just clearing the
+  cookie client-side.
+- `spec/reviews-and-room-interest.test.ts`: a logged-in review post appears
+  with its rating and body and resubmitting edits it instead of duplicating;
+  an unauthenticated review post redirects to login instead of creating a
+  row; room-interest toggling moves the shared count up and back down, and
+  is a login link (not a button) when logged out.
+- `spec/hall-match.test.ts`: a flexi-catering preference ranks Wright Hall —
+  the seed data's one flexi-catered residence — first, and a logged-out
+  visitor is redirected to login instead of seeing the questionnaire.
 
 ## Data & sources
 

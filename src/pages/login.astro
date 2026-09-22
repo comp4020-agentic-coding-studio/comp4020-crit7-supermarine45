@@ -1,0 +1,50 @@
+---
+import Nav from "../components/Nav.astro";
+import { safeRedirect } from "../lib/http";
+import "../styles.css";
+
+const returnTo = safeRedirect(Astro.url.searchParams.get("returnTo"), "/");
+if (Astro.locals.user) {
+  return Astro.redirect(returnTo, 303);
+}
+const error = Astro.url.searchParams.get("error");
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Log in — ANU Residence Explorer</title>
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <h1>Log in</h1>
+      <p>
+        This account is native to ANU Residence Explorer — it's not connected to ANU's real StarRez housing
+        portal or any ANU login.
+      </p>
+      {error && <p class="auth-error">{error}</p>}
+      <form method="post" action="/api/auth/login" class="filters auth-form">
+        <input type="hidden" name="returnTo" value={returnTo} />
+        <div class="filters-row">
+          <label for="username">
+            Username
+            <input id="username" name="username" type="text" autocomplete="username" required />
+          </label>
+          <label for="password">
+            Password
+            <input id="password" name="password" type="password" autocomplete="current-password" required />
+          </label>
+        </div>
+        <div class="filters-actions">
+          <button type="submit">Log in</button>
+        </div>
+      </form>
+      <p class="auth-switch">
+        Don't have an account? <a href={`/signup/?returnTo=${encodeURIComponent(returnTo)}`}>Sign up</a>.
+      </p>
+    </main>
+  </body>
+</html>

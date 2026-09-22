@@ -1,22 +1,28 @@
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import Database from "better-sqlite3";
-import { and, eq, gte, inArray, like, lte, or } from "drizzle-orm";
+import { and, desc, eq, gte, inArray, like, lte, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 import { seed } from "../../scripts/seed";
 import {
   type NearbyPlace,
+  type Preferences,
   type Residence,
   type ResidenceGalleryImage,
+  type Review,
   type ShuttleStop,
   nearbyPlaces,
+  preferences,
   residenceFeatures,
   residenceGalleryImages,
   residenceRooms,
   residences,
+  reviews,
+  roomInterest,
   shortlist,
   shuttleStops,
+  users,
 } from "./schema";
 
 // One SQLite file is the app's whole persistent state. In production
@@ -47,7 +53,7 @@ migrate(db, { migrationsFolder: "./drizzle" });
 // start, including in spec/global-setup.ts's fresh test database.
 seed(db);
 
-export type { NearbyPlace, Residence, ResidenceGalleryImage, ShuttleStop };
+export type { NearbyPlace, Preferences, Residence, ResidenceGalleryImage, Review, ShuttleStop };
 
 export interface RoomType {
   id: number;
@@ -145,21 +151,117 @@ export function listShuttleStops(): ShuttleStop[] {
   return db.select().from(shuttleStops).orderBy(shuttleStops.sequence).all();
 }
 
-export function getShortlistIds(): Set<number> {
-  const rows = db.select({ residenceId: shortlist.residenceId }).from(shortlist).all();
+// Per-user now (see src/lib/auth.ts) — last session's shared, no-login
+// shortlist is gone, along with whatever anonymous rows it held.
+export function getShortlistIds(userId: number): Set<number> {
+  const rows = db.select({ residenceId: shortlist.residenceId }).from(shortlist).where(eq(shortlist.userId, userId)).all();
   return new Set(rows.map((row) => row.residenceId));
 }
 
-export function listShortlistedResidences(): Residence[] {
-  const ids = [...getShortlistIds()];
+export function listShortlistedResidences(userId: number): Residence[] {
+  const ids = [...getShortlistIds(userId)];
   if (ids.length === 0) return [];
   return db.select().from(residences).where(inArray(residences.id, ids)).orderBy(residences.name).all();
 }
 
-export function addToShortlist(residenceId: number): void {
-  db.insert(shortlist).values({ residenceId }).onConflictDoNothing().run();
+export function addToShortlist(userId: number, residenceId: number): void {
+  db.insert(shortlist).values({ userId, residenceId }).onConflictDoNothing().run();
 }
 
-export function removeFromShortlist(residenceId: number): void {
-  db.delete(shortlist).where(eq(shortlist.residenceId, residenceId)).run();
+export function removeFromShortlist(userId: number, residenceId: number): void {
+  db.delete(shortlist).where(and(eq(shortlist.userId, userId), eq(shortlist.residenceId, residenceId))).run();
+}
+
+export type CateringPreference = CateringType | "no_preference";
+export type ResidentPreference = ResidentType | "no_preference";
+export type SocialPreference = "quiet" | "balanced" | "social";
+
+export interface PreferencesInput {
+  budgetMin: number | null;
+  budgetMax: number | null;
+  catering: CateringPreference;
+  residentType: ResidentPreference;
+  social: SocialPreference;
+}
+
+export function getPreferences(userId: number): Preferences | undefined {
+  return db.select().from(preferences).where(eq(preferences.userId, userId)).get();
+}
+
+export function savePreferences(userId: number, prefs: PreferencesInput): void {
+  db.insert(preferences)
+    .values({ userId, ...prefs })
+    .onConflictDoUpdate({
+      target: preferences.userId,
+      set: { ...prefs, updatedAt: sql`(datetime('now'))` },
+    })
+    .run();
+}
+
+export interface ReviewWithAuthor {
+  id: number;
+  rating: number;
+  body: string;
+  createdAt: string;
+  username: string;
+}
+
+export function listReviews(residenceId: number): ReviewWithAuthor[] {
+  return db
+    .select({ id: reviews.id, rating: reviews.rating, body: reviews.body, createdAt: reviews.createdAt, username: users.username })
+    .from(reviews)
+    .innerJoin(users, eq(reviews.userId, users.id))
+    .where(eq(reviews.residenceId, residenceId))
+    .orderBy(desc(reviews.createdAt))
+    .all();
+}
+
+export function getReviewStats(residenceId: number): { average: number | null; count: number } {
+  const rows = db.select({ rating: reviews.rating }).from(reviews).where(eq(reviews.residenceId, residenceId)).all();
+  if (rows.length === 0) return { average: null, count: 0 };
+  const average = rows.reduce((sum, row) => sum + row.rating, 0) / rows.length;
+  return { average, count: rows.length };
+}
+
+export function getMyReview(residenceId: number, userId: number): Review | undefined {
+  return db.select().from(reviews).where(and(eq(reviews.residenceId, residenceId), eq(reviews.userId, userId))).get();
+}
+
+export function upsertReview(userId: number, residenceId: number, rating: number, body: string): void {
+  db.insert(reviews)
+    .values({ userId, residenceId, rating, body })
+    .onConflictDoUpdate({
+      target: [reviews.residenceId, reviews.userId],
+      set: { rating, body },
+    })
+    .run();
+}
+
+export function addRoomInterest(userId: number, roomId: number): void {
+  db.insert(roomInterest).values({ userId, roomId }).onConflictDoNothing().run();
+}
+
+export function removeRoomInterest(userId: number, roomId: number): void {
+  db.delete(roomInterest).where(and(eq(roomInterest.userId, userId), eq(roomInterest.roomId, roomId))).run();
+}
+
+export function getInterestedRoomIds(userId: number, residenceId: number): Set<number> {
+  const rows = db
+    .select({ roomId: roomInterest.roomId })
+    .from(roomInterest)
+    .innerJoin(residenceRooms, eq(roomInterest.roomId, residenceRooms.id))
+    .where(and(eq(roomInterest.userId, userId), eq(residenceRooms.residenceId, residenceId)))
+    .all();
+  return new Set(rows.map((row) => row.roomId));
+}
+
+export function getRoomInterestCounts(residenceId: number): Map<number, number> {
+  const rows = db
+    .select({ roomId: roomInterest.roomId, count: sql<number>`count(*)`.as("count") })
+    .from(roomInterest)
+    .innerJoin(residenceRooms, eq(roomInterest.roomId, residenceRooms.id))
+    .where(eq(residenceRooms.residenceId, residenceId))
+    .groupBy(roomInterest.roomId)
+    .all();
+  return new Map(rows.map((row) => [row.roomId, row.count]));
 }

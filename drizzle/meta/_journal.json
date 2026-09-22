@@ -15,6 +15,13 @@
       "when": 1789998961579,
       "tag": "0001_previous_kulan_gath",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790036146657,
+      "tag": "0002_lean_speed",
+      "breakpoints": true
     }
   ]
 }

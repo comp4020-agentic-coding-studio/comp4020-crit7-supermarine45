@@ -22,7 +22,8 @@ const min = minParam ? Number(minParam) : undefined;
 const max = maxParam ? Number(maxParam) : undefined;
 
 const results = searchResidences({ q, type, catering, min, max });
-const shortlistIds = getShortlistIds();
+const user = Astro.locals.user;
+const shortlistIds = user ? getShortlistIds(user.id) : new Set<number>();
 const redirectTo = `${Astro.url.pathname}${Astro.url.search}`;
 ---
 
@@ -78,7 +79,7 @@ const redirectTo = `${Astro.url.pathname}${Astro.url.search}`;
         ) : (
           <ul class="residence-grid">
             {results.map((r) => (
-              <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo={redirectTo} />
+              <ResidenceCard residence={r} shortlisted={shortlistIds.has(r.id)} redirectTo={redirectTo} loggedIn={!!user} />
             ))}
           </ul>
         )
