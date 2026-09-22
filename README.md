@@ -29,17 +29,20 @@ see "Accounts" under "What good looks like here" below.
   route with its 12 active stops. Each residence page names its nearest
   shuttle stop, its nearest real public bus stop, and its nearest bike
   parking, each with the straight-line distance to it.
-- **Search, sort & filter** (`/search/`) — results are per **room**, not per
-  residence ("Room name — in Residence name"), so two rooms in different
-  halls sit next to each other instead of one residence card hiding behind
-  its cheapest room. Filter by resident type (undergrad/postgrad/both),
+- **Search, sort & filter** (`/search/`) — results are per **hall**, one card
+  per residence, so the grid reads as "which halls match" rather than a wall
+  of individual rooms. Filter by resident type (undergrad/postgrad/both),
   catering style, weekly rate range, a free-text match against name and
   description, minimum review rating, and distance to the nearest Civic Loop
-  shuttle stop; sort by name, price, rating, or shuttle distance. Every card
-  shows its average rating and distance to the nearest stop so the
-  sort/filter it was chosen by is visible, and carries a one-click "Apply
-  now" straight to that residence's real ANU/StarRez application page, a
-  "Save to shortlist" button, and an "Add to compare" checkbox.
+  shuttle stop; sort by name, price, rating, or shuttle distance (sorting by
+  price still orders halls by their cheapest/priciest room). Every hall card
+  shows its average rating and distance to the nearest stop, and carries a
+  one-click "Apply now" straight to that residence's real ANU/StarRez
+  application page and a "Save to shortlist" button. Underneath, an
+  expandable "N room types — view & compare" disclosure lists that hall's
+  actual room options with their own price, estimated annual cost, and an
+  "Add to compare" checkbox — open one hall or several at once, tick rooms
+  across any of them, and they all feed the same compare selection below.
 - **Compare rooms side by side** (`/compare/`) — tick rooms on `/search/` and
   submit to see them side by side across price, contract length, catering,
   resident-type eligibility, rating, address, distance to the nearest

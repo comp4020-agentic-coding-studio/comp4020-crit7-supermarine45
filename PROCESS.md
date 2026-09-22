@@ -291,9 +291,64 @@ page (sitting among several existing `<h2>` siblings). This is exactly the
 kind of thing `spec/invariants.test.ts` exists to catch before it ships, and
 it did.
 
+**Round 9 — grouping search results back to one card per hall, without losing
+the room-level comparison Round 7 added.** Prompted with:
+
+> instead of displaying all the available accomodation individually, I'd like
+> to display only the hall. Then upon clicking, show the available options in
+> that hall, and add option to compare.
+
+Round 7 deliberately went the other way — one card per *room* — specifically
+so rooms could sit side by side for comparison. This round asked for the
+hall-level list back, but without giving up that comparison. The two aren't
+actually in tension: `searchRooms()` already returns a flat, sorted
+`RoomSearchResult[]` with every hall-level fact (rating, distance, catering,
+resident type, apply link, shortlist) duplicated onto each room row, so
+grouping it by `residenceId` in `search.astro` is pure presentation — no
+schema change, no new query. Grouping by first-occurrence order for halls and
+preserving each room's existing relative order within its hall reproduces
+every existing sort's observable behaviour for free: `price_desc`'s first
+hall card is still the one holding the single highest-priced room, because
+that room's occurrence is what put its hall first in the grouped list.
+
+The one real decision was how a hall's rooms get revealed: expand inline on
+`/search/` (an accordion), or navigate to the hall's existing
+`/residences/[slug]/` detail page. Navigating there would mean either
+building a new cross-page compare-selection mechanism (this app has no
+anonymous session/cart concept anywhere else) or losing the ability to
+compare rooms *across* halls in one pass — a regression on what Round 7
+shipped. Asked the user directly; they chose the inline accordion. A new
+`HallResultCard.astro` (replacing `RoomCard.astro`, deleted) renders each
+hall's shared facts once, with a native `<details class="hall-rooms">`
+disclosure underneath listing that hall's actual room options — name, price,
+estimated annual cost, and the same "add to compare" checkbox Round 7 added,
+untouched down to the `name="rooms"` / `form="compare-form"` markup, so
+`/compare/` needed zero changes. The disclosure is native HTML, not
+JS-driven: the room list is present in the initial server-rendered response
+(verified by fetching `/search/?catering=flexi_catered` directly and
+confirming its one hall card's three rooms are already in the markup),
+collapsed by default via CSS/browser default rather than requiring
+JavaScript to appear at all.
+
+`spec/residence-explorer.test.ts` needed a matching, but mostly mechanical,
+rewrite: any assertion on a hall-level fact (resident type, catering, rating,
+distance, shortlist, apply button) moved its selector from `.room-card` to
+`.hall-card`, since that fact now renders once per hall instead of once per
+room. Assertions on room-level facts (price, compare checkbox, plain room
+counts) were untouched, since those stayed nested inside `.room-card`
+exactly as before. One new test protects the disclosure behaviour directly:
+a hall's `<details>` carries no `open` attribute, yet its `.room-card` rows
+are already present underneath it — collapsed-by-default, not
+absent-until-JS. Confirming that assertion was safe meant checking jsdom's
+actual behaviour first: `.textContent` on a closed `<details>` still includes
+its nested content, since collapsing is a rendering/accessibility-tree
+behaviour, not a DOM-content removal — so the existing sort-order tests
+(`cards[0].textContent` containing both a hall name and a nested room price)
+kept working unchanged once their selector moved to `.hall-card`.
+
 ## Before you ship
 
-`pnpm check` (typecheck + `astro build` + the full `vitest` suite, 131 tests
+`pnpm check` (typecheck + `astro build` + the full `vitest` suite, 132 tests
 across 8 files) is green. `pnpm check:evidence` passes once this round's
 changes are committed — see the latest commit range in this repo's history
 for the diff described above.

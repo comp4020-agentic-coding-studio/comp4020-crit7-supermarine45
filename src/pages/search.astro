@@ -1,9 +1,9 @@
 ---
 import Nav from "../components/Nav.astro";
 import PolicyNote from "../components/PolicyNote.astro";
-import RoomCard from "../components/RoomCard.astro";
+import HallResultCard from "../components/HallResultCard.astro";
 import { getShortlistIds, searchRooms } from "../lib/db";
-import type { CateringType, ResidentType, SortOption } from "../lib/db";
+import type { CateringType, ResidentType, RoomSearchResult, SortOption } from "../lib/db";
 import "../styles.css";
 
 const params = Astro.url.searchParams;
@@ -33,7 +33,23 @@ const results = searchRooms({ q, type, catering, min, max, sort, minRating, maxD
 const user = Astro.locals.user;
 const shortlistIds = user ? getShortlistIds(user.id) : new Set<number>();
 const redirectTo = `${Astro.url.pathname}${Astro.url.search}`;
-const residenceCount = new Set(results.map((r) => r.residenceId)).size;
+
+// Group the flat, already-sorted room results by hall for display, without
+// disturbing the sort: each hall keeps the position of its first-occurring
+// room, and rooms keep their existing relative order within a hall. This is
+// why price_desc's first hall card is still the one holding the single
+// highest-priced room, etc.
+const hallOrder: number[] = [];
+const hallsById = new Map<number, RoomSearchResult[]>();
+for (const r of results) {
+  if (!hallsById.has(r.residenceId)) {
+    hallOrder.push(r.residenceId);
+    hallsById.set(r.residenceId, []);
+  }
+  hallsById.get(r.residenceId)!.push(r);
+}
+const halls = hallOrder.map((id) => hallsById.get(id)!);
+const residenceCount = halls.length;
 ---
 
 <!doctype html>
@@ -123,8 +139,13 @@ const residenceCount = new Set(results.map((r) => r.residenceId)).size;
             <p class="no-results">No rooms match those filters. Try widening the price range or clearing a filter.</p>
           ) : (
             <ul class="residence-grid">
-              {results.map((r) => (
-                <RoomCard room={r} shortlisted={shortlistIds.has(r.residenceId)} redirectTo={redirectTo} loggedIn={!!user} />
+              {halls.map((roomsForHall) => (
+                <HallResultCard
+                  rooms={roomsForHall}
+                  shortlisted={shortlistIds.has(roomsForHall[0].residenceId)}
+                  redirectTo={redirectTo}
+                  loggedIn={!!user}
+                />
               ))}
             </ul>
           )

@@ -1,0 +1,122 @@
+---
+import type { RoomSearchResult } from "../lib/db";
+import { estimateAnnualCost } from "../lib/cost";
+import { extractUrl } from "../lib/text";
+
+interface Props {
+  rooms: RoomSearchResult[];
+  shortlisted: boolean;
+  redirectTo: string;
+  loggedIn: boolean;
+}
+
+const { rooms, shortlisted, redirectTo, loggedIn } = Astro.props;
+// Every RoomSearchResult already carries its residence's fields duplicated
+// onto it (see searchRooms in src/lib/db.ts), so the hall-level facts shown
+// once here come straight off the first room rather than a second query.
+const hall = rooms[0];
+const applyNoteUrl = extractUrl(hall.applyNote);
+
+const residentLabel =
+  hall.residentUndergrad && hall.residentPostgrad
+    ? "Undergrad & postgrad"
+    : hall.residentUndergrad
+      ? "Undergrad"
+      : hall.residentPostgrad
+        ? "Postgrad"
+        : "Resident type unknown";
+
+const cateringLabel = { self_catered: "Self-catered", catered: "Catered", flexi_catered: "Flexi-catered" }[
+  hall.cateringType
+];
+
+const ratingLabel =
+  hall.reviewCount > 0
+    ? `★ ${hall.avgRating?.toFixed(1)} (${hall.reviewCount} ${hall.reviewCount === 1 ? "review" : "reviews"})`
+    : "No reviews yet";
+const distanceLabel = hall.nearestStopMeters != null ? `${hall.nearestStopMeters} m to nearest shuttle stop` : undefined;
+
+const tariffs = rooms.map((r) => r.weeklyTariff).filter((t): t is number => t != null);
+const priceFrom = tariffs.length > 0 ? Math.min(...tariffs) : null;
+---
+
+<li class="hall-card">
+  {hall.imageUrl && (
+    <a href={`/residences/${hall.residenceSlug}/`} class="card-image-link">
+      <img src={hall.imageUrl} alt={`${hall.residenceName} building exterior`} loading="lazy" width="920" height="518" />
+    </a>
+  )}
+  <p class="rate-bar">
+    {priceFrom != null ? <>Rates from <strong>${priceFrom}</strong>/wk</> : "Rates not yet published"}
+  </p>
+  <div class="card-body">
+    <h2><a href={`/residences/${hall.residenceSlug}/`}>{hall.residenceName}</a></h2>
+    <p class="card-subtitle">
+      {cateringLabel} &middot; {residentLabel}
+    </p>
+    <p class="card-meta">
+      {ratingLabel}
+      {distanceLabel && " · "}
+      {distanceLabel}
+    </p>
+    <div class="card-actions">
+      {
+        hall.applyUrl ? (
+          <a class="btn-primary" href={hall.applyUrl} target="_blank" rel="noopener noreferrer">
+            Apply now
+          </a>
+        ) : (
+          applyNoteUrl && (
+            <a class="btn-primary" href={applyNoteUrl} target="_blank" rel="noopener noreferrer">
+              How to apply
+            </a>
+          )
+        )
+      }
+      {
+        loggedIn ? (
+          <form method="post" action={`/api/shortlist/${shortlisted ? "remove" : "add"}`}>
+            <input type="hidden" name="residenceId" value={hall.residenceId} />
+            <input type="hidden" name="redirect" value={redirectTo} />
+            <button type="submit" class="link-button">
+              {shortlisted ? "Remove from shortlist" : "Save to shortlist"}
+            </button>
+          </form>
+        ) : (
+          <a class="link-button" href={`/login/?returnTo=${encodeURIComponent(redirectTo)}`}>
+            Log in to save
+          </a>
+        )
+      }
+    </div>
+  </div>
+  <details class="hall-rooms">
+    <summary>{rooms.length} room type{rooms.length === 1 ? "" : "s"} — view &amp; compare</summary>
+    <ul class="room-list">
+      {
+        rooms.map((r) => {
+          const cost = estimateAnnualCost(r);
+          return (
+            <li class="room-card">
+              <div class="room-card-info">
+                <span class="room-card-name">{r.roomName}</span>
+                <span class="room-card-price">
+                  {r.weeklyTariff != null ? <><strong>${r.weeklyTariff}</strong>/wk</> : "Not yet published (tbc)"}
+                </span>
+                {cost && (
+                  <span class="room-card-cost">
+                    ~${cost.total.toLocaleString()} for the {cost.weeks}-week contract
+                  </span>
+                )}
+              </div>
+              <label class="compare-checkbox-label">
+                <input type="checkbox" class="compare-checkbox" name="rooms" value={r.roomId} form="compare-form" />
+                Add to compare
+              </label>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </details>
+</li>
