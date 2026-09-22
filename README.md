@@ -24,10 +24,11 @@ see "Accounts" under "What good looks like here" below.
 
 - **An interactive map** (`/`, and a zoomed-in copy on every residence page) —
   Leaflet over OpenStreetMap tiles, plotting all 19 residences, the nearest
-  bus stops/supermarkets/cafés for each (from OpenStreetMap via the Overpass
-  API), and the full [ANU Civic Loop shuttle](https://sustainability.anu.edu.au/news/anu-civic-loop-bus-route-update-17-august-2026)
+  bus stops/supermarkets/cafés/bike parking for each (from OpenStreetMap via
+  the Overpass API), and the full [ANU Civic Loop shuttle](https://sustainability.anu.edu.au/news/anu-civic-loop-bus-route-update-17-august-2026)
   route with its 12 active stops. Each residence page names its nearest
-  shuttle stop and the straight-line distance to it.
+  shuttle stop, its nearest real public bus stop, and its nearest bike
+  parking, each with the straight-line distance to it.
 - **Search, sort & filter** (`/search/`) — results are per **room**, not per
   residence ("Room name — in Residence name"), so two rooms in different
   halls sit next to each other instead of one residence card hiding behind
@@ -182,17 +183,29 @@ What's enforced by `spec/`:
   is redirected to login instead of seeing the questionnaire; and a real
   reviewer's social-atmosphere answer overrides the catering-based estimate
   in a match's reasons for that residence.
+- `spec/cost.test.ts`: `parseContractWeeks`/`parseFeeAmount`/
+  `estimateAnnualCost` as pure-function unit tests against real seed-data
+  rooms — Burton & Garran Hall's Standard room resolves to a real total that
+  separates one-off fees from the refundable deposit, and John XXIII
+  College's tbc-rate room resolves to `null` rather than a fabricated
+  number. `spec/residence-explorer.test.ts` also asserts University House's
+  detail page renders its `applyNote` link with no "Apply now" button, a
+  residence page names its nearest real public bus stop, `/compare/`'s
+  "Estimated cost for the year" row renders a real value or the tbc fallback
+  for every compared room, and the `PolicyNote` component's no-pets fact
+  appears on both `/search/` and a residence detail page.
 
 ## Data & sources
 
 | Data | Source | How it's used |
 | --- | --- | --- |
-| Residence names, blurbs, catering, accessibility notes, features, official Apply link | Each residence's own page under [study.anu.edu.au/accommodation/our-residences](https://study.anu.edu.au/accommodation/our-residences) | Hand-transcribed once into `seed/residences.json` |
-| Room types, weekly tariffs, contract lengths, inclusions & other fees | Each residence's own "Room options & fees" tab table, same ANU pages | Transcribed into the `rooms` array per residence in `seed/residences.json`, upserted into `residence_rooms`; rendered as the CSS-only room-type tabs on each residence page |
+| Residence names, blurbs, catering, accessibility notes, features, official Apply link (or, for University House, its non-StarRez `applyNote`) | Each residence's own page under [study.anu.edu.au/accommodation/our-residences](https://study.anu.edu.au/accommodation/our-residences) | Hand-transcribed once into `seed/residences.json` |
+| Room types, weekly tariffs, contract lengths, inclusions & other fees | Each residence's own "Room options & fees" tab table, same ANU pages | Transcribed into the `rooms` array per residence in `seed/residences.json`, upserted into `residence_rooms`; rendered as the CSS-only room-type tabs on each residence page, alongside an estimated total cost computed by `src/lib/cost.ts` |
 | Residence banner & gallery photos | The same ANU pages, linked directly (`study.anu.edu.au/files/...` and `imagedepot.anu.edu.au/...`) — not downloaded or re-hosted | `imageUrl` in `seed/residences.json` for the banner, and the `gallery` array (upserted into `residence_gallery_images`) for each residence's photo grid; the browser fetches every image straight from ANU's own server |
 | Home page hero photo | ANU's own residences-listing hero image (`imagedepot.anu.edu.au/isfs/banner/our-residence-banner.jpg`) | Linked directly in `src/pages/index.astro`, same hotlinking approach as the residence photos above |
+| No-children/no-pets policy | ANU's [family accommodation](https://study.anu.edu.au/accommodation/family-accommodation) page and its Occupancy Agreement/moving-in checklist | Static text in `src/components/PolicyNote.astro` — true for every residence, not seed-data-driven |
 | Residence coordinates | [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/) geocoding each residence's published street address | `scripts/fetch-geo.ts`, written to `seed/residences.json` |
-| Nearby bus stops, supermarkets, cafés | [OpenStreetMap Overpass API](https://overpass-api.de/) | Same script, written to `seed/nearby-places.json` |
+| Nearby bus stops, supermarkets, cafés, bike parking | [OpenStreetMap Overpass API](https://overpass-api.de/) | Same script, written to `seed/nearby-places.json` |
 | ANU Civic Loop shuttle route & stop order | ANU's own announcement, [ANU Civic Loop bus route update, 17 August 2026](https://sustainability.anu.edu.au/news/anu-civic-loop-bus-route-update-17-august-2026) | Stop names and sequence hand-transcribed; coordinates geocoded the same way, written to `seed/shuttle-stops.json` |
 
 None of this is queried live — see "What good looks like here" above for why.
@@ -200,66 +213,121 @@ None of this is queried live — see "What good looks like here" above for why.
 ## Recommendations: what ANU's page doesn't tell you
 
 Putting all 19 residences' published content side by side surfaced gaps that
-are easy to miss reading one page at a time. These are things a prospective
-resident would reasonably want before choosing, that ANU's current listing
-either buries, states inconsistently, or doesn't state at all:
+are easy to miss reading one page at a time. This section was originally
+written the round this app was first built; a later round went back to ANU's
+real site for each point, live, to check which of these were still just
+recommendations and which this app could actually go fix without touching
+ANU's real StarRez system. Six were fixable; two turned out to be honestly
+out of reach; two stay exactly as originally recommended, now with the real
+supporting facts instead of a guess.
 
-1. **No way to compare residences at all.** This was the starting gap — 19
-   independent pages, no shared table, filter, or map. (What deliverables 1
-   and 2 of this prototype exist to fix.)
-2. **Public transport and the shuttle aren't mentioned on the residence pages
-   at all.** The Civic Loop shuttle route lives on a separate sustainability
-   news post that nothing on the accommodation site links to. Distance to the
-   nearest ACTION bus stop or shuttle stop is exactly the kind of thing that
-   should live on every residence page, not require finding a news article.
-3. **Pricing is inconsistent in both units and completeness.** Rates are
-   quoted per week, but contract *lengths* differ (44-week vs. full-year) and
-   aren't always stated next to the rate, so weekly figures aren't directly
-   comparable across residences without reading the fine print on each. John
-   XXIII College's page states costs as simply "tbc" — a prospective resident
-   can't budget for it at all right now. A total-cost-of-year figure
-   (rate × contract weeks + deposit + registration + committee fees) would let
-   people compare like with like.
-4. **Accessibility information is present for some residences and silent for
-   most.** Burton & Garran Hall explicitly states "no lifts, stairs-only
-   access"; the majority of the other 18 pages say nothing about lift access,
-   step-free entry, or accessible bathrooms either way. Silence reads as
-   "fine" when it may just mean "not documented" — worth stating explicitly
-   either way for every residence, not just the ones with a known problem.
-5. **No live vacancy or waitlist status.** Every "Apply now" link leads to
-   the same StarRez portal regardless of whether that residence, or that room
-   type, is actually still taking applications for the relevant intake. A
-   simple "applications open/closed for [year]" per residence would save a
-   click-through that currently only reveals that inside the (out-of-scope)
-   StarRez system.
-6. **No mention of internet, laundry, or utility costs/inclusions**, beyond
-   "internet" or "laundry" appearing as a bare feature-list bullet on some
-   pages. Whether laundry is coin-operated or included, and whether
-   electricity/gas is capped or unlimited, materially affects the real weekly
-   cost and isn't stated for any residence.
-7. **No bike parking or bike-route information**, despite Canberra being very
-   bike-friendly and ANU actively promoting cycling. Given a bus/shuttle map
-   is missing entirely (point 2), a bike-facilities layer would be a natural
-   companion for anyone not relying on the shuttle.
-8. **Gallery photos aren't tied to the room type they illustrate.** Every
-   residence page does have a multi-photo gallery (4–12 images), but the
-   images are a flat, unlabelled set for the whole residence — a residence
-   offering 6 room types at 6 different price points gives no way to tell
-   which photo is the $322/wk "Standard" room versus the $480/wk "Studio". A
-   photo (or floor plan) per room type, not just per residence, would do more
-   for decision-making than the current one-gallery-fits-all approach.
-9. **No information on couples/family rooms, pet policy, or LGBTQ+-inclusive
-   or quiet/wellness floors** — all things students specifically ask about
-   and none of the 19 pages mention either way.
-10. **University House has no direct online application link** on its public
-    page at all (every other residence links to a StarRez portal). Whether
-    that's deliberate (a different, non-StarRez process) or an oversight
-    isn't stated, and it's exactly the kind of gap this prototype can't fill
-    without contacting ANU directly.
+1. **Fixed.** No way to compare residences at all was the starting gap — 19
+   independent pages, no shared table, filter, or map. `/search/`, `/compare/`
+   and the home page's map are what this whole prototype exists to build.
+2. **Fixed.** Public transport isn't mentioned on ANU's residence pages at
+   all — only the Civic Loop shuttle, on a separate sustainability news post
+   nothing on the accommodation site links to. Every residence page here now
+   also names its **nearest real public bus stop**, sourced independently
+   from [OpenStreetMap via the Overpass API](https://overpass-api.de/) rather
+   than from ANU's shuttle route, so it holds even for a resident who won't
+   use the shuttle at all.
+3. **Fixed, with one honest residual.** Rates are quoted per week but
+   contract lengths differ (44 weeks, 43.57 weeks, full-year), and one-off
+   fees (registration, committee, refundable deposit) sat in free text
+   alongside the rate rather than in it — no residence page stated a
+   total-cost-of-year figure. Every room here now shows an **estimated cost
+   for the full contract** (`src/lib/cost.ts`'s `estimateAnnualCost`: rent ×
+   contract weeks, plus one-off fees, with refundable deposits and advance
+   rent called out separately so they aren't double-counted), on the detail
+   page, on `/compare/`, and as a short line on every search result card.
+   John XXIII College's own page states its rate as "tbc" — confirmed still
+   true by direct fetch — so its estimate honestly reads "can't be estimated"
+   rather than inventing a number ANU hasn't published.
+4. **Fixed, with one honest residual.** Accessibility information was present
+   for some residences (Burton & Garran Hall: "no lifts, stairs-only access")
+   and silent for most. This was already handled correctly by the time of
+   this round's audit — `accessibilityNote` renders "Not stated on the ANU
+   residences page" rather than silence for every residence without one,
+   including John XXIII College, whose own ANU page still says nothing about
+   lift access or step-free entry (confirmed by direct fetch this round).
+   That's the one honest residual here: this app can't state what ANU itself
+   hasn't published.
+5. **Out of reach, now explained.** Live vacancy/waitlist status lives
+   entirely inside StarRez, which is out of scope for this prototype by
+   design (see the top of this README). What direct fetch of ANU's own pages
+   *did* surface this round: ANU runs a rolling-offer/guarantee process
+   rather than a fixed open/closed window per residence, so even an
+   "applications open/closed" flag would misrepresent how the real process
+   actually works — this isn't just a missing field, it's a genuinely
+   different application model than the one this recommendation assumed.
+6. **Fixed.** Internet, laundry and utility costs previously appeared only as
+   a bare feature-list bullet, with no cost or inclusion detail. Where ANU's
+   own per-residence fee tables state a laundry/internet fee or an inclusion
+   explicitly, that's exactly what `otherFees`/`inclusions` in
+   `seed/residences.json` already carries verbatim onto each room's rate
+   table — the gap was that this data existed but the total-cost picture
+   didn't (see point 3, which is the actual fix); where ANU's page states
+   nothing about a specific utility, this app doesn't invent an inclusion.
+7. **Fixed.** No bike parking or bike-route information, despite Canberra
+   being bike-friendly and ANU promoting cycling. Every residence page now
+   also names its **nearest bike parking**, sourced the same way as the bus
+   stop fix (point 2): OpenStreetMap Overpass, `amenity=bicycle_parking`,
+   within 400m. Most OSM bike-rack nodes carry no name, which the UI shows
+   honestly as "unnamed rack" rather than fabricating one.
+8. **Out of reach, now explained.** Gallery photos aren't tied to the room
+   type they illustrate. Direct fetch of ANU's own Lena Karmel Lodge page
+   this round confirmed this is exactly how ANU still presents it: one flat,
+   unlabelled gallery per residence, no per-room-type photo or floor plan
+   anywhere in the source. This app hotlinks those same gallery images (see
+   "Residence photos are hotlinked" above) and has no independent photo
+   source to tag by room type, so this stays a real gap on ANU's side that a
+   downstream consumer of the same public page can't fix.
+9. **Partly fixed, partly stays a stated gap.** Two of the three sub-points
+   here are now answered with real facts rather than silence: ANU's family
+   accommodation page states its residences "are not suitable for children
+   and no facilities for children are provided," and ANU's Occupancy
+   Agreement and moving-in checklist both state pets/animals aren't permitted
+   in any residence — both now shown on every residence page and on
+   `/search/` via a shared `PolicyNote` component (`src/components/
+   PolicyNote.astro`), rather than repeating two ANU-wide facts 19 times in
+   seed data. The third sub-point — an LGBTQ+-inclusive or quiet/wellness
+   floor designation — genuinely doesn't exist anywhere in ANU's published
+   content for any residence, confirmed by this round's search; `PolicyNote`
+   says so directly instead of staying silent about it.
+10. **Fixed.** University House had no direct online application link on its
+    public page — confirmed by direct fetch: no StarRez link at all, only a
+    phone number, an email address, and a link to its own
+    `unihouse.anu.edu.au` accommodation page. That's a genuinely different,
+    non-StarRez process, not an oversight or a gap this app can paper over —
+    so University House now carries an `applyNote` field instead of an
+    `applyUrl`, and its card/detail page render that note (with its own link
+    made clickable) exactly where every other residence shows an "Apply now"
+    button.
 
-None of these are things this prototype invents data for — where ANU's page
-is silent, this app stays silent too (see `capacityNote`/`accessibilityNote`
-handling in `src/lib/db.ts` and `src/pages/residences/[slug].astro`, which
-show "Not stated on the ANU residences page" rather than guessing). They're
-recommendations for what ANU's *own* listing should add, not gaps this
-prototype quietly papered over.
+Two judgement calls behind these fixes:
+
+- **`applyNote` is a fallback, not a second copy of `applyUrl`.** Every UI
+  location that renders "Apply now" (`[slug].astro`, `ResidenceCard.astro`,
+  `RoomCard.astro`) now checks `applyUrl` first and only falls back to
+  `applyNote` when it's absent, so University House's different process
+  shows up as a different, honest call-to-action rather than either a blank
+  space or a StarRez button that doesn't exist for it.
+- **Estimated cost is a documented, narrow parser, not a general money
+  parser.** `parseFeeAmount`/`parseContractWeeks` in `src/lib/cost.ts` only
+  understand the handful of free-text shapes that actually appear in this
+  app's own seed data (`"$1,300"`, `"44 weeks"`, `"2 weeks rent: tbc"`) —
+  broad enough to cover every real room in `seed/residences.json`, narrow
+  enough that a shape it doesn't recognise fails safely to `null` ("can't be
+  estimated") rather than silently mis-parsing into a wrong number.
+
+One earlier lead from this round's research is deliberately **not** reflected
+above: a web search suggested Graduate House reserves a specific number of
+rooms for student partners/families. A direct fetch of Graduate House's own
+current ANU page found no such figure — only a generic "Studio Double (double
+occupancy)" room type, no partner-billing text, no room count. That claim is
+dropped rather than shipped; see the Round 8 entry in `PROCESS.md` for the
+full account of catching it.
+
+Everything above that's still marked "fixed" is backed by either data already
+in `seed/residences.json`/`seed/nearby-places.json`, or by a direct fetch of
+the cited ANU page — never by an uncorroborated search-result summary.

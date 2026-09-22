@@ -947,3 +947,41 @@ form.review-form textarea {
   font-size: 0.85rem;
   color: var(--anu-gray-700);
 }
+
+.apply-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--anu-gray-700);
+  max-width: 32rem;
+}
+
+.policy-note {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: var(--anu-cream);
+  border-radius: var(--card-radius);
+}
+
+.policy-note h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.policy-note ul {
+  margin: 0 0 0.5rem;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+}
+
+.policy-note-gap {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--anu-gray-700);
+  font-style: italic;
+}
+
+.room-card-cost {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--anu-gray-700);
+}

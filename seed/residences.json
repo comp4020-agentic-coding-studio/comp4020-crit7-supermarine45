@@ -4,6 +4,7 @@
     "name": "Davey Lodge",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/davey-lodge",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -61,7 +62,7 @@
     "rooms": [
       {
         "name": "Studio Long",
-        "weeklyTariff": 463.0,
+        "weeklyTariff": 463,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -77,7 +78,7 @@
       },
       {
         "name": "Studio Double/1 Bedroom (single occupancy)",
-        "weeklyTariff": 566.0,
+        "weeklyTariff": 566,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -93,7 +94,7 @@
       },
       {
         "name": "Studio Double/1 Bedroom (double occupancy)",
-        "weeklyTariff": 581.0,
+        "weeklyTariff": 581,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -109,7 +110,7 @@
       },
       {
         "name": "Studio Double/1 Bedroom Mezzanine (single occupancy)",
-        "weeklyTariff": 558.0,
+        "weeklyTariff": 558,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -125,7 +126,7 @@
       },
       {
         "name": "Studio Double/1 Bedroom Mezzanine (double occupancy)",
-        "weeklyTariff": 573.0,
+        "weeklyTariff": 573,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -141,7 +142,7 @@
       },
       {
         "name": "2 Bedroom Multishare",
-        "weeklyTariff": 405.0,
+        "weeklyTariff": 405,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -157,7 +158,7 @@
       },
       {
         "name": "2 and 3 Bedroom Multishare Lightwell",
-        "weeklyTariff": 365.0,
+        "weeklyTariff": 365,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -173,7 +174,7 @@
       },
       {
         "name": "3 Bedroom Multishare",
-        "weeklyTariff": 401.0,
+        "weeklyTariff": 401,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -189,7 +190,7 @@
       },
       {
         "name": "3 Bedroom Multishare Mezzanine",
-        "weeklyTariff": 407.0,
+        "weeklyTariff": 407,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -205,7 +206,7 @@
       },
       {
         "name": "5 Bedroom Multishare",
-        "weeklyTariff": 374.0,
+        "weeklyTariff": 374,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -227,6 +228,7 @@
     "name": "Ursula Hall Laurus Wing",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/ursula-hall-laurus-wing",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": false,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -285,7 +287,7 @@
     "rooms": [
       {
         "name": "Studio Single",
-        "weeklyTariff": 436.0,
+        "weeklyTariff": 436,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -301,7 +303,7 @@
       },
       {
         "name": "Studio Large",
-        "weeklyTariff": 448.0,
+        "weeklyTariff": 448,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -317,7 +319,7 @@
       },
       {
         "name": "Studio Accessible",
-        "weeklyTariff": 448.0,
+        "weeklyTariff": 448,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -333,7 +335,7 @@
       },
       {
         "name": "1 Bedroom",
-        "weeklyTariff": 448.0,
+        "weeklyTariff": 448,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -349,7 +351,7 @@
       },
       {
         "name": "Studio Double (Single Occupancy)",
-        "weeklyTariff": 577.0,
+        "weeklyTariff": 577,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -365,7 +367,7 @@
       },
       {
         "name": "Studio Double (Double Occupancy)",
-        "weeklyTariff": 608.0,
+        "weeklyTariff": 608,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -386,6 +388,7 @@
     "name": "Wamburun Hall",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/wamburun-hall",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -444,7 +447,7 @@
     "rooms": [
       {
         "name": "Standard",
-        "weeklyTariff": 383.0,
+        "weeklyTariff": 383,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -460,7 +463,7 @@
       },
       {
         "name": "Standard Corner",
-        "weeklyTariff": 379.0,
+        "weeklyTariff": 379,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -476,7 +479,7 @@
       },
       {
         "name": "Standard Accessible",
-        "weeklyTariff": 407.0,
+        "weeklyTariff": 407,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -497,6 +500,7 @@
     "name": "Bruce Hall Packard Wing",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/bruce-hall-packard-wing",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/676E5A7F/8/10/HOME-Home?UrlToken=6DD4D0BC",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -551,7 +555,7 @@
     "rooms": [
       {
         "name": "Studio Single",
-        "weeklyTariff": 417.0,
+        "weeklyTariff": 417,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -567,7 +571,7 @@
       },
       {
         "name": "Standard Accessible",
-        "weeklyTariff": 427.0,
+        "weeklyTariff": 427,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -583,7 +587,7 @@
       },
       {
         "name": "Studio Double (single occupancy)",
-        "weeklyTariff": 457.0,
+        "weeklyTariff": 457,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -599,7 +603,7 @@
       },
       {
         "name": "Studio Double (double occupancy)",
-        "weeklyTariff": 481.0,
+        "weeklyTariff": 481,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -620,6 +624,7 @@
     "name": "Toad Hall",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/toad-hall",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": false,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -681,7 +686,7 @@
     "rooms": [
       {
         "name": "Standard",
-        "weeklyTariff": 335.0,
+        "weeklyTariff": 335,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -697,7 +702,7 @@
       },
       {
         "name": "Large",
-        "weeklyTariff": 358.0,
+        "weeklyTariff": 358,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -713,7 +718,7 @@
       },
       {
         "name": "1 Bedroom (Student Leaders only, single occupancy)",
-        "weeklyTariff": 477.0,
+        "weeklyTariff": 477,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -729,7 +734,7 @@
       },
       {
         "name": "1 Bedroom (Student Leaders only, single occupancy)",
-        "weeklyTariff": 504.0,
+        "weeklyTariff": 504,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -750,6 +755,7 @@
     "name": "Kinloch Lodge",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/kinloch-lodge",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -807,7 +813,7 @@
     "rooms": [
       {
         "name": "Studio Single",
-        "weeklyTariff": 465.0,
+        "weeklyTariff": 465,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -823,7 +829,7 @@
       },
       {
         "name": "Studio Long",
-        "weeklyTariff": 496.0,
+        "weeklyTariff": 496,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -839,7 +845,7 @@
       },
       {
         "name": "Studio Double Accessible",
-        "weeklyTariff": 641.0,
+        "weeklyTariff": 641,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -855,7 +861,7 @@
       },
       {
         "name": "Studio Double (single occupancy)",
-        "weeklyTariff": 626.0,
+        "weeklyTariff": 626,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -871,7 +877,7 @@
       },
       {
         "name": "Studio Double (double occupancy)",
-        "weeklyTariff": 641.0,
+        "weeklyTariff": 641,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -887,7 +893,7 @@
       },
       {
         "name": "2 Bedroom Multishare",
-        "weeklyTariff": 434.0,
+        "weeklyTariff": 434,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -903,7 +909,7 @@
       },
       {
         "name": "3 Bedroom Multishare",
-        "weeklyTariff": 436.0,
+        "weeklyTariff": 436,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -919,7 +925,7 @@
       },
       {
         "name": "4 Bedroom Multishare",
-        "weeklyTariff": 396.0,
+        "weeklyTariff": 396,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -936,7 +942,7 @@
       },
       {
         "name": "5 Bedroom Multishare",
-        "weeklyTariff": 397.0,
+        "weeklyTariff": 397,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -953,7 +959,7 @@
       },
       {
         "name": "6 Bedroom Multishare",
-        "weeklyTariff": 371.0,
+        "weeklyTariff": 371,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -975,6 +981,7 @@
     "name": "Warrumbul Lodge",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/warrumbul-lodge",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -1027,7 +1034,7 @@
     "rooms": [
       {
         "name": "Studio Single",
-        "weeklyTariff": 446.0,
+        "weeklyTariff": 446,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1043,7 +1050,7 @@
       },
       {
         "name": "Studio Long",
-        "weeklyTariff": 492.0,
+        "weeklyTariff": 492,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1059,7 +1066,7 @@
       },
       {
         "name": "Studio Long (student leaders only)",
-        "weeklyTariff": 492.0,
+        "weeklyTariff": 492,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1075,7 +1082,7 @@
       },
       {
         "name": "Studio Double (single occupancy)",
-        "weeklyTariff": 626.0,
+        "weeklyTariff": 626,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1091,7 +1098,7 @@
       },
       {
         "name": "Studio Double (double occupancy)",
-        "weeklyTariff": 641.0,
+        "weeklyTariff": 641,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1107,7 +1114,7 @@
       },
       {
         "name": "Studio Double Accessible (single occupancy)",
-        "weeklyTariff": 626.0,
+        "weeklyTariff": 626,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1123,7 +1130,7 @@
       },
       {
         "name": "Studio Accessible (double occupancy)",
-        "weeklyTariff": 641.0,
+        "weeklyTariff": 641,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1139,7 +1146,7 @@
       },
       {
         "name": "2 and 3 Bedroom Multishare",
-        "weeklyTariff": 436.0,
+        "weeklyTariff": 436,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1155,7 +1162,7 @@
       },
       {
         "name": "5 Bedroom Multishare",
-        "weeklyTariff": 402.0,
+        "weeklyTariff": 402,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1172,7 +1179,7 @@
       },
       {
         "name": "6 Bedroom Multishare",
-        "weeklyTariff": 380.0,
+        "weeklyTariff": 380,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1194,6 +1201,7 @@
     "name": "Fenner Hall",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/fenner-hall",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -1253,7 +1261,7 @@
     "rooms": [
       {
         "name": "Standard",
-        "weeklyTariff": 395.0,
+        "weeklyTariff": 395,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1269,7 +1277,7 @@
       },
       {
         "name": "Standard Accessible",
-        "weeklyTariff": 411.0,
+        "weeklyTariff": 411,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1285,7 +1293,7 @@
       },
       {
         "name": "1 Bedroom (Student Leaders only)",
-        "weeklyTariff": 425.0,
+        "weeklyTariff": 425,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1306,6 +1314,7 @@
     "name": "Ursula Hall Main Wing",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/ursula-hall-main-wing",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": false,
     "cateringType": "catered",
@@ -1361,7 +1370,7 @@
     "rooms": [
       {
         "name": "Standard",
-        "weeklyTariff": 512.0,
+        "weeklyTariff": 512,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1377,7 +1386,7 @@
       },
       {
         "name": "Ensuite (Student Leaders only)",
-        "weeklyTariff": 530.0,
+        "weeklyTariff": 530,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1398,6 +1407,7 @@
     "name": "Bruce Hall Main Wing",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/bruce-hall-main-wing",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": false,
     "cateringType": "catered",
@@ -1459,7 +1469,7 @@
     "rooms": [
       {
         "name": "Standard",
-        "weeklyTariff": 595.0,
+        "weeklyTariff": 595,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1475,7 +1485,7 @@
       },
       {
         "name": "Standard Accessible",
-        "weeklyTariff": 608.0,
+        "weeklyTariff": 608,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1491,7 +1501,7 @@
       },
       {
         "name": "Studio (Student Leaders/By direct allocation only)",
-        "weeklyTariff": 585.0,
+        "weeklyTariff": 585,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1512,6 +1522,7 @@
     "name": "Wright Hall",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/wright-hall",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": false,
     "cateringType": "flexi_catered",
@@ -1572,7 +1583,7 @@
     "rooms": [
       {
         "name": "Standard",
-        "weeklyTariff": 558.0,
+        "weeklyTariff": 558,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1588,7 +1599,7 @@
       },
       {
         "name": "Standard Accessible",
-        "weeklyTariff": 572.0,
+        "weeklyTariff": 572,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1604,7 +1615,7 @@
       },
       {
         "name": "1 Bedroom (Student Leaders only)",
-        "weeklyTariff": 583.0,
+        "weeklyTariff": 583,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1625,6 +1636,7 @@
     "name": "Graduate House",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/graduate-house",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": false,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -1680,7 +1692,7 @@
     "rooms": [
       {
         "name": "Studio Single",
-        "weeklyTariff": 400.0,
+        "weeklyTariff": 400,
         "contractTerm": "52 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1696,7 +1708,7 @@
       },
       {
         "name": "Studio Double (single occupancy)",
-        "weeklyTariff": 554.0,
+        "weeklyTariff": 554,
         "contractTerm": "52 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1712,7 +1724,7 @@
       },
       {
         "name": "Studio Double (double occupancy)",
-        "weeklyTariff": 581.0,
+        "weeklyTariff": 581,
         "contractTerm": "52 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1733,6 +1745,7 @@
     "name": "Burgmann College",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/burgmann-college",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": false,
     "cateringType": "catered",
@@ -1812,7 +1825,7 @@
     "rooms": [
       {
         "name": "Standard",
-        "weeklyTariff": 629.0,
+        "weeklyTariff": 629,
         "contractTerm": "43.57 weeks (new)",
         "inclusions": [
           "Phone + Internet Connection: $11.36",
@@ -1833,6 +1846,7 @@
     "name": "Lena Karmel Lodge",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/lena-karmel-lodge",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -1894,7 +1908,7 @@
     "rooms": [
       {
         "name": "Studio Single",
-        "weeklyTariff": 477.0,
+        "weeklyTariff": 477,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1910,7 +1924,7 @@
       },
       {
         "name": "Studio Long",
-        "weeklyTariff": 508.0,
+        "weeklyTariff": 508,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1926,7 +1940,7 @@
       },
       {
         "name": "Studio Double/1 Bedroom (single occupancy)",
-        "weeklyTariff": 626.0,
+        "weeklyTariff": 626,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1942,7 +1956,7 @@
       },
       {
         "name": "Studio Double/1 Bedroom (double occupancy)",
-        "weeklyTariff": 641.0,
+        "weeklyTariff": 641,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1958,7 +1972,7 @@
       },
       {
         "name": "Studio Double/1 Bedroom Short (single occupancy)",
-        "weeklyTariff": 604.0,
+        "weeklyTariff": 604,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1974,7 +1988,7 @@
       },
       {
         "name": "Studio Double/1 Bedroom Short (double occupancy)",
-        "weeklyTariff": 619.0,
+        "weeklyTariff": 619,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -1990,7 +2004,7 @@
       },
       {
         "name": "Studio Double Accessible (single occupancy)",
-        "weeklyTariff": 626.0,
+        "weeklyTariff": 626,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2006,7 +2020,7 @@
       },
       {
         "name": "Studio Double Accessible (double occupancy)",
-        "weeklyTariff": 641.0,
+        "weeklyTariff": 641,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2022,7 +2036,7 @@
       },
       {
         "name": "2 Bedroom Multishare",
-        "weeklyTariff": 441.0,
+        "weeklyTariff": 441,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2038,7 +2052,7 @@
       },
       {
         "name": "5 Bedroom Multishare",
-        "weeklyTariff": 410.0,
+        "weeklyTariff": 410,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2055,7 +2069,7 @@
       },
       {
         "name": "6 Bedroom Multishare",
-        "weeklyTariff": 385.0,
+        "weeklyTariff": 385,
         "contractTerm": "48 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2077,6 +2091,7 @@
     "name": "John XXIII College",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/john-xxiii-college",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/676E5A7F/8/10/HOME-Home?UrlToken=6DD4D0BC",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": false,
     "cateringType": "catered",
@@ -2166,6 +2181,7 @@
     "name": "Burgmann Undergraduate and Postgraduate Village",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/burgmann-undergraduate-and-postgraduate-village",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -2249,7 +2265,7 @@
     "rooms": [
       {
         "name": "Studio",
-        "weeklyTariff": 627.0,
+        "weeklyTariff": 627,
         "contractTerm": "47 weeks",
         "inclusions": [
           "Phone + Internet Connection: $11.36",
@@ -2265,7 +2281,7 @@
       },
       {
         "name": "2 & 3 Bedroom Multishare",
-        "weeklyTariff": 548.0,
+        "weeklyTariff": 548,
         "contractTerm": "47 weeks",
         "inclusions": [
           "Phone + Internet Connection: $11.36",
@@ -2281,7 +2297,7 @@
       },
       {
         "name": "5 Bedroom Multishare",
-        "weeklyTariff": 520.0,
+        "weeklyTariff": 520,
         "contractTerm": "47 weeks",
         "inclusions": [
           "Phone + Internet Connection: $11.36",
@@ -2302,6 +2318,7 @@
     "name": "University House",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/university-house",
     "applyUrl": null,
+    "applyNote": "University House doesn't use the StarRez portal — apply directly: 02 6125 1551, unihouse@anu.edu.au, or see https://unihouse.anu.edu.au/accommodation/student-accommodation/",
     "residentUndergrad": false,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -2354,7 +2371,7 @@
     "rooms": [
       {
         "name": "Standard room",
-        "weeklyTariff": 330.0,
+        "weeklyTariff": 330,
         "contractTerm": "52 weeks",
         "inclusions": [
           "Phone + Internet Connection: $6.50",
@@ -2370,7 +2387,7 @@
       },
       {
         "name": "Large standard room",
-        "weeklyTariff": 350.0,
+        "weeklyTariff": 350,
         "contractTerm": "52 weeks",
         "inclusions": [
           "Phone + Internet Connection: $6.50",
@@ -2386,7 +2403,7 @@
       },
       {
         "name": "Ensuite (Accessible) room (single occupancy)",
-        "weeklyTariff": 380.0,
+        "weeklyTariff": 380,
         "contractTerm": "52 weeks",
         "inclusions": [
           "Phone + Internet Connection: $6.50",
@@ -2402,7 +2419,7 @@
       },
       {
         "name": "Ensuite (Accessible) room (double occupancy)",
-        "weeklyTariff": 480.0,
+        "weeklyTariff": 480,
         "contractTerm": "52 weeks",
         "inclusions": [
           "Phone + Internet Connection: $6.50",
@@ -2418,7 +2435,7 @@
       },
       {
         "name": "Double room standard",
-        "weeklyTariff": 500.0,
+        "weeklyTariff": 500,
         "contractTerm": "52 weeks",
         "inclusions": [
           "Phone + Internet Connection: $6.50",
@@ -2439,6 +2456,7 @@
     "name": "Yukeembruk",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/yukeembruk",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": true,
     "cateringType": "self_catered",
@@ -2504,7 +2522,7 @@
     "rooms": [
       {
         "name": "Standard",
-        "weeklyTariff": 380.0,
+        "weeklyTariff": 380,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2520,7 +2538,7 @@
       },
       {
         "name": "Standard Accessible",
-        "weeklyTariff": 404.0,
+        "weeklyTariff": 404,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2536,7 +2554,7 @@
       },
       {
         "name": "Large Standard",
-        "weeklyTariff": 482.0,
+        "weeklyTariff": 482,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2552,7 +2570,7 @@
       },
       {
         "name": "Large Ensuite Room (Student Leaders only)",
-        "weeklyTariff": 493.0,
+        "weeklyTariff": 493,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2568,7 +2586,7 @@
       },
       {
         "name": "Ensuite Room",
-        "weeklyTariff": 473.0,
+        "weeklyTariff": 473,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2584,7 +2602,7 @@
       },
       {
         "name": "Accessible Ensuite Room",
-        "weeklyTariff": 488.0,
+        "weeklyTariff": 488,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2600,7 +2618,7 @@
       },
       {
         "name": "Double Ensuite Room (single occupancy)",
-        "weeklyTariff": 528.0,
+        "weeklyTariff": 528,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2616,7 +2634,7 @@
       },
       {
         "name": "Double Ensuite Room (double occupancy)",
-        "weeklyTariff": 543.0,
+        "weeklyTariff": 543,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2637,6 +2655,7 @@
     "name": "Burton & Garran Hall",
     "anuUrl": "https://study.anu.edu.au/accommodation/our-residences/burton-garran-hall",
     "applyUrl": "https://anucomb.starrezhousing.com/StarRezPortalX/B7D5E4A0/8/10/HOME-Home?UrlToken=960ABAB6",
+    "applyNote": null,
     "residentUndergrad": true,
     "residentPostgrad": false,
     "cateringType": "self_catered",
@@ -2697,7 +2716,7 @@
     "rooms": [
       {
         "name": "Standard",
-        "weeklyTariff": 322.0,
+        "weeklyTariff": 322,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2713,7 +2732,7 @@
       },
       {
         "name": "Standard Lightwell",
-        "weeklyTariff": 319.0,
+        "weeklyTariff": 319,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2729,7 +2748,7 @@
       },
       {
         "name": "Studio (Student Leaders only)",
-        "weeklyTariff": 338.0,
+        "weeklyTariff": 338,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2745,7 +2764,7 @@
       },
       {
         "name": "Large Room (Student Leaders only)",
-        "weeklyTariff": 326.0,
+        "weeklyTariff": 326,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2761,7 +2780,7 @@
       },
       {
         "name": "1 Bedroom (Student Leaders only)",
-        "weeklyTariff": 405.0,
+        "weeklyTariff": 405,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",
@@ -2777,7 +2796,7 @@
       },
       {
         "name": "Large studio (Student Leaders only)",
-        "weeklyTariff": 326.0,
+        "weeklyTariff": 326,
         "contractTerm": "44 weeks",
         "inclusions": [
           "Phone + Internet Connection: Included in tariff",

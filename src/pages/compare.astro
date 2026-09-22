@@ -1,6 +1,7 @@
 ---
 import Nav from "../components/Nav.astro";
 import { getRoomsByIds } from "../lib/db";
+import { estimateAnnualCost } from "../lib/cost";
 import "../styles.css";
 
 const ids = [
@@ -66,6 +67,13 @@ function removeUrl(roomId: number): string {
                 <tr>
                   <th scope="row">Contract length</th>
                   {rooms.map((r) => <td>{r.contractTerm ?? "Not stated"}</td>)}
+                </tr>
+                <tr>
+                  <th scope="row">Estimated cost for the year</th>
+                  {rooms.map((r) => {
+                    const cost = estimateAnnualCost(r);
+                    return <td>{cost ? `$${cost.total.toLocaleString()} over ${cost.weeks} weeks` : "Can't be estimated (tbc)"}</td>;
+                  })}
                 </tr>
                 <tr>
                   <th scope="row">Catering</th>
@@ -142,7 +150,7 @@ function removeUrl(roomId: number): string {
                           Apply now
                         </a>
                       ) : (
-                        "No application link published"
+                        r.applyNote ?? "No application link published"
                       )}
                     </td>
                   ))}

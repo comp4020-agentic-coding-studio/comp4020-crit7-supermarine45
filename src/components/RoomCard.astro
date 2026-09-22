@@ -1,5 +1,7 @@
 ---
 import type { RoomSearchResult } from "../lib/db";
+import { estimateAnnualCost } from "../lib/cost";
+import { extractUrl } from "../lib/text";
 
 interface Props {
   room: RoomSearchResult;
@@ -9,6 +11,9 @@ interface Props {
 }
 
 const { room: r, shortlisted, redirectTo, loggedIn } = Astro.props;
+
+const cost = estimateAnnualCost(r);
+const applyNoteUrl = extractUrl(r.applyNote);
 
 const residentLabel =
   r.residentUndergrad && r.residentPostgrad
@@ -39,6 +44,7 @@ const distanceLabel = r.nearestStopMeters != null ? `${r.nearestStopMeters} m to
   <p class="rate-bar">
     {r.weeklyTariff != null ? <><strong>${r.weeklyTariff}</strong>/wk</> : "Not yet published (tbc)"}
   </p>
+  {cost && <p class="room-card-cost">~${cost.total.toLocaleString()} for the {cost.weeks}-week contract</p>}
   <div class="card-body">
     <h2>
       {r.roomName}
@@ -56,10 +62,16 @@ const distanceLabel = r.nearestStopMeters != null ? `${r.nearestStopMeters} m to
     </p>
     <div class="card-actions">
       {
-        r.applyUrl && (
+        r.applyUrl ? (
           <a class="btn-primary" href={r.applyUrl} target="_blank" rel="noopener noreferrer">
             Apply now
           </a>
+        ) : (
+          applyNoteUrl && (
+            <a class="btn-primary" href={applyNoteUrl} target="_blank" rel="noopener noreferrer">
+              How to apply
+            </a>
+          )
         )
       }
       {

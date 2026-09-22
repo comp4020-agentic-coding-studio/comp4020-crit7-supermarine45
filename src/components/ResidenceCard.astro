@@ -1,5 +1,6 @@
 ---
 import type { Residence, ResidenceStats } from "../lib/db";
+import { extractUrl } from "../lib/text";
 
 interface Props {
   residence: Residence & Partial<ResidenceStats>;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { residence: r, shortlisted, redirectTo, loggedIn } = Astro.props;
+const applyNoteUrl = extractUrl(r.applyNote);
 
 const residentLabel =
   r.residentUndergrad && r.residentPostgrad
@@ -60,10 +62,16 @@ const distanceLabel = r.nearestStopMeters != null ? `${r.nearestStopMeters} m to
     <p class="card-blurb">{r.blurb}</p>
     <div class="card-actions">
       {
-        r.applyUrl && (
+        r.applyUrl ? (
           <a class="btn-primary" href={r.applyUrl} target="_blank" rel="noopener noreferrer">
             Apply now
           </a>
+        ) : (
+          applyNoteUrl && (
+            <a class="btn-primary" href={applyNoteUrl} target="_blank" rel="noopener noreferrer">
+              How to apply
+            </a>
+          )
         )
       }
       {

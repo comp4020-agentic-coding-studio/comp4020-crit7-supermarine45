@@ -151,12 +151,15 @@ interface OverpassElement {
   tags?: Record<string, string>;
 }
 
-function categoryFor(tags: Record<string, string> | undefined): "bus_stop" | "tram_stop" | "supermarket" | "cafe" | null {
+function categoryFor(
+  tags: Record<string, string> | undefined,
+): "bus_stop" | "tram_stop" | "supermarket" | "cafe" | "bicycle_parking" | null {
   if (!tags) return null;
   if (tags.highway === "bus_stop") return "bus_stop";
   if (tags.railway === "tram_stop") return "tram_stop";
   if (tags.shop === "supermarket") return "supermarket";
   if (tags.amenity === "cafe") return "cafe";
+  if (tags.amenity === "bicycle_parking") return "bicycle_parking";
   return null;
 }
 
@@ -187,6 +190,7 @@ async function overpassBbox(south: number, west: number, north: number, east: nu
       node(${south},${west},${north},${east})[railway=tram_stop];
       node(${south},${west},${north},${east})[shop=supermarket];
       node(${south},${west},${north},${east})[amenity=cafe];
+      node(${south},${west},${north},${east})[amenity=bicycle_parking];
     );
     out body;
   `;
@@ -234,6 +238,7 @@ async function fetchNearbyPlaces(residences: ResidenceRow[]): Promise<void> {
     tram_stop: 1500,
     supermarket: 1000,
     cafe: 800,
+    bicycle_parking: 400,
   };
 
   const results: {

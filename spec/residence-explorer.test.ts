@@ -192,10 +192,14 @@ describe("residence detail pages", () => {
     expect(anuLink?.getAttribute("href")).toMatch(/^https:\/\/study\.anu\.edu\.au/);
   });
 
-  it("omits the apply button for a residence with no published application link", async () => {
+  it("omits the apply button for a residence with no published application link, showing its apply note instead", async () => {
     const doc = await getDoc("/residences/university-house/");
     const applyLink = [...doc.querySelectorAll("a")].find((a) => a.textContent?.trim() === "Apply now");
     expect(applyLink).toBeUndefined();
+    const note = doc.querySelector(".apply-note");
+    expect(note?.textContent).toMatch(/doesn't use the StarRez portal/);
+    const noteLink = note?.querySelector("a");
+    expect(noteLink?.getAttribute("href")).toMatch(/^https:\/\/unihouse\.anu\.edu\.au/);
   });
 
   it("404s for a residence slug that doesn't exist", async () => {
@@ -229,6 +233,21 @@ describe("interactive map data", () => {
   it("names the nearest ANU Civic Loop shuttle stop", async () => {
     const doc = await getDoc("/residences/burton-garran-hall/");
     expect(doc.body.textContent).toMatch(/Nearest ANU Civic Loop stop:/);
+  });
+
+  it("also names the nearest real public bus stop, sourced from OSM rather than the ANU shuttle route", async () => {
+    const doc = await getDoc("/residences/burton-garran-hall/");
+    expect(doc.body.textContent).toMatch(/Nearest public bus stop:/);
+  });
+});
+
+describe("good-to-know policy note", () => {
+  it("appears on a residence detail page and on search, citing the no-pets and family-unsuitability facts", async () => {
+    const detail = await getDoc("/residences/burton-garran-hall/");
+    expect(detail.querySelector(".policy-note")?.textContent).toMatch(/No pets\./);
+
+    const search = await getDoc("/search/");
+    expect(search.querySelector(".policy-note")?.textContent).toMatch(/No pets\./);
   });
 });
 
@@ -312,6 +331,14 @@ describe("compare rooms", () => {
     expect(headerCells.length).toBe(3); // "Feature" + one column per room
     expect(compareDoc.querySelectorAll(".compare-table tbody tr").length).toBeGreaterThan(0);
     expect(compareDoc.body.textContent).toMatch(/\$\d+\/wk|Not yet published/);
+
+    const costRow = [...compareDoc.querySelectorAll(".compare-table tbody tr")].find(
+      (tr) => tr.querySelector("th")?.textContent === "Estimated cost for the year",
+    );
+    expect(costRow).toBeTruthy();
+    for (const cell of costRow!.querySelectorAll("td")) {
+      expect(cell.textContent).toMatch(/^\$[\d,]+ over [\d.]+ weeks$|^Can't be estimated \(tbc\)$/);
+    }
   });
 
   it("shows an empty state with a link back to search when nothing is selected", async () => {

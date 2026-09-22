@@ -208,6 +208,7 @@ export interface RoomSearchResult {
   cateringType: CateringType;
   address: string | null;
   applyUrl: string | null;
+  applyNote: string | null;
   imageUrl: string | null;
   inclusions: string[];
   otherFees: string[];
@@ -233,6 +234,7 @@ const roomSelection = {
   cateringType: residences.cateringType,
   address: residences.address,
   applyUrl: residences.applyUrl,
+  applyNote: residences.applyNote,
   imageUrl: residences.imageUrl,
   latitude: residences.latitude,
   longitude: residences.longitude,
@@ -255,6 +257,7 @@ function toRoomSearchResult(
     cateringType: CateringType;
     address: string | null;
     applyUrl: string | null;
+    applyNote: string | null;
     imageUrl: string | null;
     latitude: number | null;
     longitude: number | null;
@@ -278,6 +281,7 @@ function toRoomSearchResult(
     cateringType: row.cateringType,
     address: row.address,
     applyUrl: row.applyUrl,
+    applyNote: row.applyNote,
     imageUrl: row.imageUrl,
     inclusions: JSON.parse(row.inclusions) as string[],
     otherFees: JSON.parse(row.otherFees) as string[],

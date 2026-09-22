@@ -203,9 +203,97 @@ lose state across. `/compare/` itself degrades gracefully at both ends: no
 hand-edited id that no longer resolves is silently dropped rather than
 erroring.
 
+**Round 8 — going back to ANU's real site to fix the recommendations this app
+made about it.** Prompted with (condensed):
+
+> Can you fix the following points? Search for these information from the
+> internet (ANU website): [the 10-point "Recommendations: what ANU's page
+> doesn't tell you" list from README.md] — no way to compare residences;
+> public transport/shuttle distance missing from residence pages; pricing
+> inconsistent and incomplete, no total-cost figure; accessibility info
+> present for some, silent for most; no live vacancy/waitlist status; no
+> internet/laundry/utility cost detail; no bike parking/route info; gallery
+> photos not tied to room type; no couples/family/pet/LGBTQ+/quiet-floor
+> info; University House has no direct application link.
+
+First step was an audit, not a rewrite: that section was written the round
+this app was first built, and two of its ten points (1, the comparison UI;
+4's general "silence exists" observation) were already fully or partly solved
+by features later rounds shipped — the README just hadn't been revisited to
+say so. Rewriting it honestly meant checking each point against both the
+current codebase *and* ANU's real site as it stands today, not just
+rephrasing the original ten guesses.
+
+The live research: direct `WebFetch` against University House's own ANU page
+confirmed it carries no StarRez link at all, only a phone number, an email
+address, and a link through to `unihouse.anu.edu.au`'s own accommodation
+page — a genuinely different, non-StarRez process, not an oversight (fixes
+point 10). The same direct-fetch approach against John XXIII College's page
+confirmed its rate is still stated as "tbc" and its accessibility section is
+still silent — both a real ANU-side gap, not something this app can fabricate
+around (the residual half of points 3 and 4). `WebFetch` against ANU's family
+accommodation page turned up the "not suitable for children... no facilities
+for children are provided" line directly; `WebSearch` for ANU's pets policy,
+followed by a direct fetch to confirm it against ANU's own Occupancy
+Agreement/moving-in checklist wording rather than trusting the search
+summary alone, confirmed no pets/animals are permitted in any residence
+(point 9). A fetch of Lena Karmel Lodge's own gallery confirmed it's still
+exactly the flat, unlabelled set of photos the original point 8 described —
+this app hotlinks those same images and has no independent source to tag by
+room type, so that point stays an honest, explained gap rather than a fixed
+one.
+
+One lead didn't survive that discipline and is worth recording as a caught
+failure, not a footnote: an initial `WebSearch` for Graduate House's
+accommodation returned a summary claiming it reserves a specific number of
+rooms (something like "9 of 150") for student partners/families. Before
+writing that number into `seed/residences.json`, I ran a direct `WebFetch`
+against Graduate House's actual current ANU page — it names only a generic
+"Studio Double (double occupancy)" room type, with no partner-billing text
+and no room count anywhere. The search summary either hallucinated the
+figure or was describing a page that no longer exists in that form. It's
+dropped from this round entirely rather than shipped on the strength of a
+search result alone — exactly the kind of thing a "corroborate with a direct
+fetch before it becomes seed data" discipline exists to catch, and worth
+naming here so it isn't quietly repeated next round.
+
+What that research turned into, concretely: a new `applyNote` field
+(`src/lib/schema.ts`, migration `drizzle/0004_steady_blur.sql`) so University
+House's real process renders in place of a silently-missing "Apply now"
+button, in `[slug].astro`, `ResidenceCard.astro` and `RoomCard.astro` alike.
+Two new "nearest" facts per residence — a real public bus stop and the
+nearest bike parking — both sourced by extending the existing OSM Overpass
+pipeline in `scripts/fetch-geo.ts` with a fifth category
+(`amenity=bicycle_parking`, 400m radius) rather than inventing a new data
+source; re-running it live against `overpass-api.de` returned real,
+frequently-unnamed bike-rack nodes for all 19 residences, which the existing
+`?? "unnamed rack"` fallback already handled without a UI change. A new
+`src/lib/cost.ts` turns each room's existing `weeklyTariff`, `contractTerm`
+and free-text `otherFees` into a real total-cost-for-the-contract figure,
+deliberately via narrow, documented regexes over the handful of shapes that
+actually appear in this app's own seed data rather than a general money
+parser — a shape it doesn't recognise (John XXIII College's "tbc" rate) fails
+safely to "can't be estimated" instead of guessing, which is what makes it
+trustworthy enough to put in `/compare/`, the detail page, and every search
+card. And a new shared `PolicyNote.astro` component states the two
+ANU-wide, now-confirmed policy facts once, on `/search/` and every detail
+page, alongside an explicit, honest note that no LGBTQ+ or quiet-floor
+designation exists anywhere in ANU's published content — naming a gap
+outright is worth more here than staying silent about it.
+
+One accessibility bug surfaced by the existing test suite while building
+this, not by manual review: `PolicyNote.astro` originally used an `<h3>`, and
+`spec/invariants.test.ts`'s axe-core pass on `/search/` failed with a
+heading-order violation — `/search/` only has an `<h1>` before it, so jumping
+straight to `<h3>` skips a level. Changed to `<h2>`, which is accurate on
+both `/search/` (nothing else claims that level yet) and the residence detail
+page (sitting among several existing `<h2>` siblings). This is exactly the
+kind of thing `spec/invariants.test.ts` exists to catch before it ships, and
+it did.
+
 ## Before you ship
 
-`pnpm check` (typecheck + `astro build` + the full `vitest` suite, 122 tests
-across 7 files) is green. `pnpm check:evidence` passes once this round's
+`pnpm check` (typecheck + `astro build` + the full `vitest` suite, 131 tests
+across 8 files) is green. `pnpm check:evidence` passes once this round's
 changes are committed — see the latest commit range in this repo's history
 for the diff described above.

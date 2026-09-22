@@ -19,6 +19,10 @@ export const residences = sqliteTable("residences", {
   name: text().notNull(),
   anuUrl: text("anu_url").notNull(),
   applyUrl: text("apply_url"),
+  // Set only for a residence with no StarRez application link at all (e.g.
+  // University House) — a short, factual "how to actually apply" pointer,
+  // rendered instead of the "Apply now" button rather than leaving a blank.
+  applyNote: text("apply_note"),
   residentUndergrad: int("resident_undergrad", { mode: "boolean" }).notNull().default(false),
   residentPostgrad: int("resident_postgrad", { mode: "boolean" }).notNull().default(false),
   cateringType: text("catering_type", {
@@ -91,7 +95,7 @@ export const nearbyPlaces = sqliteTable("nearby_places", {
     .notNull()
     .references(() => residences.id, { onDelete: "cascade" }),
   category: text({
-    enum: ["bus_stop", "tram_stop", "supermarket", "cafe"],
+    enum: ["bus_stop", "tram_stop", "supermarket", "cafe", "bicycle_parking"],
   }).notNull(),
   name: text(),
   latitude: real().notNull(),

@@ -1,6 +1,8 @@
 ---
 import Map from "../../components/Map.astro";
 import Nav from "../../components/Nav.astro";
+import PolicyNote from "../../components/PolicyNote.astro";
+import { estimateAnnualCost } from "../../lib/cost";
 import { haversineMeters } from "../../lib/geo";
 import {
   getInterestedRoomIds,
@@ -65,6 +67,15 @@ const mapResidences =
     : [];
 const mapPlaces = nearby.map((p) => ({ lat: p.latitude, lon: p.longitude, name: p.name, category: p.category }));
 const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude, name: s.name, note: s.note }));
+
+// `nearby` is already ordered by distance (listNearbyPlaces), so the first
+// match per category is the nearest one of that category.
+const nearestBusStop = nearby.find((p) => p.category === "bus_stop");
+const nearestBikeParking = nearby.find((p) => p.category === "bicycle_parking");
+
+// Split on the URL so it can be rendered as a real <a> without resorting to
+// set:html — the rest of the note is plain text either side of it.
+const applyNoteParts = residence.applyNote ? residence.applyNote.split(/(https?:\/\/\S+)/g) : [];
 ---
 
 <!doctype html>
@@ -114,13 +125,43 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
           </p>
         )
       }
+      {
+        nearestBusStop && (
+          <p>
+            Nearest public bus stop: <strong>{nearestBusStop.name ?? "unnamed stop"}</strong>, about{" "}
+            {nearestBusStop.distanceMeters}m away.
+          </p>
+        )
+      }
+      {
+        nearestBikeParking && (
+          <p>
+            Nearest bike parking: <strong>{nearestBikeParking.name ?? "unnamed rack"}</strong>, about{" "}
+            {nearestBikeParking.distanceMeters}m away.
+          </p>
+        )
+      }
 
       <div class="card-actions">
         {
-          residence.applyUrl && (
+          residence.applyUrl ? (
             <a class="btn-primary" href={residence.applyUrl} target="_blank" rel="noopener noreferrer">
               Apply now
             </a>
+          ) : (
+            residence.applyNote && (
+              <p class="apply-note">
+                {applyNoteParts.map((part) =>
+                  /^https?:\/\//.test(part) ? (
+                    <a href={part} target="_blank" rel="noopener noreferrer">
+                      {part}
+                    </a>
+                  ) : (
+                    part
+                  ),
+                )}
+              </p>
+            )
           )
         }
         {
@@ -173,6 +214,7 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
               {rooms.map((room) => {
                 const count = roomInterestCounts.get(room.id) ?? 0;
                 const interested = interestedRoomIds.has(room.id);
+                const cost = estimateAnnualCost(room);
                 return (
                   <div class="room-tab-panel">
                     <table class="room-rate-table">
@@ -185,6 +227,23 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
                         <tr>
                           <th scope="row">Contract length</th>
                           <td>{room.contractTerm ?? "Not stated"}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Estimated cost for the {room.contractTerm}</th>
+                          <td>
+                            {cost ? (
+                              <>
+                                <strong>${cost.total.toLocaleString()}</strong> (${cost.rent.toLocaleString()} rent + $
+                                {cost.oneOffFees.toLocaleString()} fees
+                                {cost.excludedRefundable > 0 && (
+                                  <>; plus a refundable ${cost.excludedRefundable.toLocaleString()} not counted here</>
+                                )}
+                                )
+                              </>
+                            ) : (
+                              "Cost can't be estimated — ANU's page states this rate as tbc."
+                            )}
+                          </td>
                         </tr>
                         {room.inclusions.length > 0 && (
                           <tr>
@@ -241,6 +300,8 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
 
       <h2>Accessibility</h2>
       <p>{residence.accessibilityNote ?? "Not stated on the ANU residences page."}</p>
+
+      <PolicyNote />
 
       <h2>Features</h2>
       <ul>

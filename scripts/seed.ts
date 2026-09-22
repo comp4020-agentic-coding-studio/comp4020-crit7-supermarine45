@@ -19,13 +19,14 @@ import {
 } from "../src/lib/schema";
 
 type CateringType = "self_catered" | "catered" | "flexi_catered";
-type PlaceCategory = "bus_stop" | "tram_stop" | "supermarket" | "cafe";
+type PlaceCategory = "bus_stop" | "tram_stop" | "supermarket" | "cafe" | "bicycle_parking";
 
 interface ResidenceSeed {
   slug: string;
   name: string;
   anuUrl: string;
   applyUrl: string | null;
+  applyNote: string | null;
   residentUndergrad: boolean;
   residentPostgrad: boolean;
   cateringType: CateringType;

@@ -1,5 +1,6 @@
 ---
 import Nav from "../components/Nav.astro";
+import PolicyNote from "../components/PolicyNote.astro";
 import RoomCard from "../components/RoomCard.astro";
 import { getShortlistIds, searchRooms } from "../lib/db";
 import type { CateringType, ResidentType, SortOption } from "../lib/db";
@@ -46,6 +47,7 @@ const residenceCount = new Set(results.map((r) => r.residenceId)).size;
     <Nav />
     <main class="wide">
       <h1>Search residences</h1>
+      <PolicyNote />
       <form class="filters" method="get" action="/search/">
         <div class="filters-row">
           <label for="q">Keyword<input id="q" name="q" type="search" value={q ?? ""} placeholder="e.g. balcony, creek" /></label>

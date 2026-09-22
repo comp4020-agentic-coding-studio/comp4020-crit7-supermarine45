@@ -37,6 +37,24 @@
   },
   {
     "residenceSlug": "davey-lodge",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.27693,
+    "longitude": 149.1269969,
+    "distanceMeters": 153,
+    "sourceId": "node/9061784009"
+  },
+  {
+    "residenceSlug": "davey-lodge",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2771978,
+    "longitude": 149.1278852,
+    "distanceMeters": 229,
+    "sourceId": "node/654042504"
+  },
+  {
+    "residenceSlug": "davey-lodge",
     "category": "supermarket",
     "name": "Daily Market",
     "latitude": -35.2767939,
@@ -91,6 +109,24 @@
   },
   {
     "residenceSlug": "ursula-hall-laurus-wing",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2785522,
+    "longitude": 149.1137087,
+    "distanceMeters": 76,
+    "sourceId": "node/6991380611"
+  },
+  {
+    "residenceSlug": "ursula-hall-laurus-wing",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2788455,
+    "longitude": 149.1132839,
+    "distanceMeters": 118,
+    "sourceId": "node/6991379035"
+  },
+  {
+    "residenceSlug": "ursula-hall-laurus-wing",
     "category": "supermarket",
     "name": "Daily Market Groceries",
     "latitude": -35.2775468,
@@ -133,6 +169,24 @@
     "longitude": 149.1203267,
     "distanceMeters": 582,
     "sourceId": "node/13694455478"
+  },
+  {
+    "residenceSlug": "wamburun-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2785522,
+    "longitude": 149.1137087,
+    "distanceMeters": 134,
+    "sourceId": "node/6991380611"
+  },
+  {
+    "residenceSlug": "wamburun-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2778837,
+    "longitude": 149.1156318,
+    "distanceMeters": 164,
+    "sourceId": "node/6392155026"
   },
   {
     "residenceSlug": "wamburun-hall",
@@ -198,6 +252,24 @@
     "sourceId": "node/1667351768"
   },
   {
+    "residenceSlug": "bruce-hall-packard-wing",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.274887,
+    "longitude": 149.1177438,
+    "distanceMeters": 130,
+    "sourceId": "node/6424427133"
+  },
+  {
+    "residenceSlug": "bruce-hall-packard-wing",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2752155,
+    "longitude": 149.1183027,
+    "distanceMeters": 185,
+    "sourceId": "node/6412881181"
+  },
+  {
     "residenceSlug": "toad-hall",
     "category": "bus_stop",
     "name": "ANU Rimmer St",
@@ -232,6 +304,24 @@
     "longitude": 149.1210466,
     "distanceMeters": 185,
     "sourceId": "node/6317612744"
+  },
+  {
+    "residenceSlug": "toad-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2762838,
+    "longitude": 149.1208345,
+    "distanceMeters": 221,
+    "sourceId": "node/796970644"
+  },
+  {
+    "residenceSlug": "toad-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2776498,
+    "longitude": 149.1200605,
+    "distanceMeters": 277,
+    "sourceId": "node/12735546870"
   },
   {
     "residenceSlug": "toad-hall",
@@ -289,6 +379,24 @@
   },
   {
     "residenceSlug": "kinloch-lodge",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.27693,
+    "longitude": 149.1269969,
+    "distanceMeters": 153,
+    "sourceId": "node/9061784009"
+  },
+  {
+    "residenceSlug": "kinloch-lodge",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2771978,
+    "longitude": 149.1278852,
+    "distanceMeters": 229,
+    "sourceId": "node/654042504"
+  },
+  {
+    "residenceSlug": "kinloch-lodge",
     "category": "supermarket",
     "name": "Daily Market",
     "latitude": -35.2767939,
@@ -340,6 +448,24 @@
     "longitude": 149.1258935,
     "distanceMeters": 203,
     "sourceId": "node/1518611963"
+  },
+  {
+    "residenceSlug": "warrumbul-lodge",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.27693,
+    "longitude": 149.1269969,
+    "distanceMeters": 239,
+    "sourceId": "node/9061784009"
+  },
+  {
+    "residenceSlug": "warrumbul-lodge",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2771978,
+    "longitude": 149.1278852,
+    "distanceMeters": 323,
+    "sourceId": "node/654042504"
   },
   {
     "residenceSlug": "warrumbul-lodge",
@@ -397,6 +523,24 @@
   },
   {
     "residenceSlug": "fenner-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2762838,
+    "longitude": 149.1208345,
+    "distanceMeters": 65,
+    "sourceId": "node/796970644"
+  },
+  {
+    "residenceSlug": "fenner-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2764904,
+    "longitude": 149.1200644,
+    "distanceMeters": 113,
+    "sourceId": "node/6296823969"
+  },
+  {
+    "residenceSlug": "fenner-hall",
     "category": "supermarket",
     "name": "Daily Market Groceries",
     "latitude": -35.2775468,
@@ -448,6 +592,24 @@
     "longitude": 149.1191235,
     "distanceMeters": 495,
     "sourceId": "node/14072461701"
+  },
+  {
+    "residenceSlug": "ursula-hall-main-wing",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2785522,
+    "longitude": 149.1137087,
+    "distanceMeters": 76,
+    "sourceId": "node/6991380611"
+  },
+  {
+    "residenceSlug": "ursula-hall-main-wing",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2788455,
+    "longitude": 149.1132839,
+    "distanceMeters": 118,
+    "sourceId": "node/6991379035"
   },
   {
     "residenceSlug": "ursula-hall-main-wing",
@@ -513,6 +675,24 @@
     "sourceId": "node/1667351768"
   },
   {
+    "residenceSlug": "bruce-hall-main-wing",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.274887,
+    "longitude": 149.1177438,
+    "distanceMeters": 130,
+    "sourceId": "node/6424427133"
+  },
+  {
+    "residenceSlug": "bruce-hall-main-wing",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2752155,
+    "longitude": 149.1183027,
+    "distanceMeters": 185,
+    "sourceId": "node/6412881181"
+  },
+  {
     "residenceSlug": "wright-hall",
     "category": "bus_stop",
     "name": null,
@@ -567,6 +747,24 @@
     "sourceId": "node/1667351768"
   },
   {
+    "residenceSlug": "wright-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2765747,
+    "longitude": 149.1167415,
+    "distanceMeters": 206,
+    "sourceId": "node/6406101258"
+  },
+  {
+    "residenceSlug": "wright-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.274887,
+    "longitude": 149.1177438,
+    "distanceMeters": 206,
+    "sourceId": "node/6424427133"
+  },
+  {
     "residenceSlug": "graduate-house",
     "category": "bus_stop",
     "name": "Garran Road at Graduate House",
@@ -601,6 +799,24 @@
     "longitude": 149.1191235,
     "distanceMeters": 361,
     "sourceId": "node/14072461701"
+  },
+  {
+    "residenceSlug": "graduate-house",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2840357,
+    "longitude": 149.114762,
+    "distanceMeters": 246,
+    "sourceId": "node/1717636642"
+  },
+  {
+    "residenceSlug": "graduate-house",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2823371,
+    "longitude": 149.1186178,
+    "distanceMeters": 307,
+    "sourceId": "node/12735542605"
   },
   {
     "residenceSlug": "graduate-house",
@@ -649,6 +865,24 @@
   },
   {
     "residenceSlug": "burgmann-college",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2788455,
+    "longitude": 149.1132839,
+    "distanceMeters": 140,
+    "sourceId": "node/6991379035"
+  },
+  {
+    "residenceSlug": "burgmann-college",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2785522,
+    "longitude": 149.1137087,
+    "distanceMeters": 172,
+    "sourceId": "node/6991380611"
+  },
+  {
+    "residenceSlug": "burgmann-college",
     "category": "supermarket",
     "name": "Daily Market Groceries",
     "latitude": -35.2775468,
@@ -691,6 +925,24 @@
     "longitude": 149.1269709,
     "distanceMeters": 144,
     "sourceId": "node/4064801795"
+  },
+  {
+    "residenceSlug": "lena-karmel-lodge",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.27693,
+    "longitude": 149.1269969,
+    "distanceMeters": 161,
+    "sourceId": "node/9061784009"
+  },
+  {
+    "residenceSlug": "lena-karmel-lodge",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2771978,
+    "longitude": 149.1278852,
+    "distanceMeters": 244,
+    "sourceId": "node/654042504"
   },
   {
     "residenceSlug": "lena-karmel-lodge",
@@ -765,6 +1017,24 @@
     "sourceId": "node/1667351768"
   },
   {
+    "residenceSlug": "john-xxiii-college",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2778837,
+    "longitude": 149.1156318,
+    "distanceMeters": 135,
+    "sourceId": "node/6392155026"
+  },
+  {
+    "residenceSlug": "john-xxiii-college",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2785522,
+    "longitude": 149.1137087,
+    "distanceMeters": 137,
+    "sourceId": "node/6991380611"
+  },
+  {
     "residenceSlug": "burgmann-undergraduate-and-postgraduate-village",
     "category": "bus_stop",
     "name": "Ward Street (via Yukeembruk)",
@@ -799,6 +1069,24 @@
     "longitude": 149.1191235,
     "distanceMeters": 522,
     "sourceId": "node/14072461701"
+  },
+  {
+    "residenceSlug": "burgmann-undergraduate-and-postgraduate-village",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2788455,
+    "longitude": 149.1132839,
+    "distanceMeters": 140,
+    "sourceId": "node/6991379035"
+  },
+  {
+    "residenceSlug": "burgmann-undergraduate-and-postgraduate-village",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2785522,
+    "longitude": 149.1137087,
+    "distanceMeters": 172,
+    "sourceId": "node/6991380611"
   },
   {
     "residenceSlug": "burgmann-undergraduate-and-postgraduate-village",
@@ -846,6 +1134,24 @@
     "sourceId": "node/5921587174"
   },
   {
+    "residenceSlug": "university-house",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2871034,
+    "longitude": 149.1167022,
+    "distanceMeters": 84,
+    "sourceId": "node/2176515374"
+  },
+  {
+    "residenceSlug": "university-house",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.287387,
+    "longitude": 149.1163947,
+    "distanceMeters": 96,
+    "sourceId": "node/6991444101"
+  },
+  {
     "residenceSlug": "yukeembruk",
     "category": "bus_stop",
     "name": "Ward Street (via Yukeembruk)",
@@ -883,6 +1189,24 @@
   },
   {
     "residenceSlug": "yukeembruk",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2788455,
+    "longitude": 149.1132839,
+    "distanceMeters": 237,
+    "sourceId": "node/6991379035"
+  },
+  {
+    "residenceSlug": "yukeembruk",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2785522,
+    "longitude": 149.1137087,
+    "distanceMeters": 286,
+    "sourceId": "node/6991380611"
+  },
+  {
+    "residenceSlug": "yukeembruk",
     "category": "supermarket",
     "name": "Daily Market Groceries",
     "latitude": -35.2775468,
@@ -907,6 +1231,24 @@
     "longitude": 149.1203052,
     "distanceMeters": 95,
     "sourceId": "node/5190396432"
+  },
+  {
+    "residenceSlug": "burton-garran-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.274887,
+    "longitude": 149.1177438,
+    "distanceMeters": 237,
+    "sourceId": "node/6424427133"
+  },
+  {
+    "residenceSlug": "burton-garran-hall",
+    "category": "bicycle_parking",
+    "name": null,
+    "latitude": -35.2752155,
+    "longitude": 149.1183027,
+    "distanceMeters": 241,
+    "sourceId": "node/6412881181"
   },
   {
     "residenceSlug": "burton-garran-hall",

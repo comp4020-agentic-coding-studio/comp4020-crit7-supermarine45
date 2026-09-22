@@ -1,0 +1,1 @@
+ALTER TABLE `residences` ADD `apply_note` text;
