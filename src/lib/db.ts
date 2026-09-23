@@ -5,20 +5,24 @@ import { and, desc, eq, gte, inArray, like, lte, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 import { seed } from "../../scripts/seed";
+import { parseContractWeeks } from "./cost";
 import { haversineMeters } from "./geo";
 import {
   type NearbyPlace,
   type Preferences,
   type Residence,
   type ResidenceGalleryImage,
+  type ResidentRequest,
   type Review,
   type ShuttleStop,
+  contracts,
   nearbyPlaces,
   preferences,
   residenceFeatures,
   residenceGalleryImages,
   residenceRooms,
   residences,
+  residentRequests,
   reviews,
   roomInterest,
   shortlist,
@@ -54,7 +58,7 @@ migrate(db, { migrationsFolder: "./drizzle" });
 // start, including in spec/global-setup.ts's fresh test database.
 seed(db);
 
-export type { NearbyPlace, Preferences, Residence, ResidenceGalleryImage, Review, ShuttleStop };
+export type { NearbyPlace, Preferences, Residence, ResidenceGalleryImage, ResidentRequest, Review, ShuttleStop };
 
 export interface RoomType {
   id: number;
@@ -593,4 +597,132 @@ export function getRoomInterestCounts(residenceId: number): Map<number, number> 
     .groupBy(roomInterest.roomId)
     .all();
   return new Map(rows.map((row) => [row.roomId, row.count]));
+}
+
+// --- Mock contracts & resident requests ("My accommodation") ---
+//
+// A mock contract for the prototype's benefit only — see schema.ts. At most
+// one active contract per user is enforced here (setMyAccommodation), one
+// layer above the table itself, the same way upsertReview enforces "one
+// review per user per residence" above its own unique() constraint.
+
+export interface ActiveContract {
+  id: number;
+  roomId: number;
+  roomName: string;
+  residenceId: number;
+  residenceName: string;
+  residenceSlug: string;
+  weeklyTariff: number | null;
+  contractTerm: string | null;
+  startDate: string;
+  endDate: string | null;
+  status: "active" | "cancelled";
+  cancelledAt: string | null;
+  cancellationSignature: string | null;
+}
+
+const contractSelection = {
+  id: contracts.id,
+  roomId: contracts.roomId,
+  roomName: residenceRooms.name,
+  residenceId: residences.id,
+  residenceName: residences.name,
+  residenceSlug: residences.slug,
+  weeklyTariff: residenceRooms.weeklyTariff,
+  contractTerm: residenceRooms.contractTerm,
+  startDate: contracts.startDate,
+  endDate: contracts.endDate,
+  status: contracts.status,
+  cancelledAt: contracts.cancelledAt,
+  cancellationSignature: contracts.cancellationSignature,
+};
+
+function contractQuery() {
+  return db
+    .select(contractSelection)
+    .from(contracts)
+    .innerJoin(residenceRooms, eq(contracts.roomId, residenceRooms.id))
+    .innerJoin(residences, eq(residenceRooms.residenceId, residences.id));
+}
+
+export function getActiveContract(userId: number): ActiveContract | undefined {
+  return contractQuery().where(and(eq(contracts.userId, userId), eq(contracts.status, "active"))).get();
+}
+
+export function listContractHistory(userId: number): ActiveContract[] {
+  return contractQuery()
+    .where(and(eq(contracts.userId, userId), eq(contracts.status, "cancelled")))
+    .orderBy(desc(contracts.id))
+    .all();
+}
+
+// Scoped to the owning user, regardless of status — this is what backs the
+// full contract document view (both the still-active document and the
+// cancelled receipt read through the same page).
+export function getContractById(userId: number, contractId: number): ActiveContract | undefined {
+  return contractQuery().where(and(eq(contracts.id, contractId), eq(contracts.userId, userId))).get();
+}
+
+// Cancels any existing active contract for this user, then starts a new
+// one — a user can only ever have one active mock contract at a time.
+export function setMyAccommodation(userId: number, roomId: number): void {
+  const room = db.select().from(residenceRooms).where(eq(residenceRooms.id, roomId)).get();
+  if (!room) return;
+
+  const now = new Date();
+  const startDate = now.toISOString().slice(0, 10);
+  const weeks = parseContractWeeks(room.contractTerm);
+  const endDate =
+    weeks != null ? new Date(now.getTime() + weeks * 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10) : null;
+
+  db.update(contracts)
+    .set({ status: "cancelled", cancelledAt: sql`(datetime('now'))` })
+    .where(and(eq(contracts.userId, userId), eq(contracts.status, "active")))
+    .run();
+  db.insert(contracts).values({ userId, roomId, startDate, endDate }).run();
+}
+
+// `signature` is the typed name from the cancellation notice's "sign" step
+// (src/pages/contract/[id]/cancel.astro) — required so cancelling is a
+// deliberate, reviewed action rather than a bare button press.
+export function cancelMyContract(userId: number, signature: string): void {
+  db.update(contracts)
+    .set({ status: "cancelled", cancelledAt: sql`(datetime('now'))`, cancellationSignature: signature })
+    .where(and(eq(contracts.userId, userId), eq(contracts.status, "active")))
+    .run();
+}
+
+export type ResidentRequestKind = "maintenance" | "ra_message";
+
+export function addResidentRequest(
+  contractId: number,
+  kind: ResidentRequestKind,
+  category: string | null,
+  message: string,
+): void {
+  db.insert(residentRequests).values({ contractId, kind, category, message }).run();
+}
+
+export function listResidentRequests(contractId: number, kind: ResidentRequestKind): ResidentRequest[] {
+  return db
+    .select()
+    .from(residentRequests)
+    .where(and(eq(residentRequests.contractId, contractId), eq(residentRequests.kind, kind)))
+    .orderBy(desc(residentRequests.id))
+    .all();
+}
+
+// Scoped by joining back to contracts.userId, so one user can't withdraw
+// another's request by guessing its id — same guard style as
+// removeFromShortlist's and(eq(userId), eq(residenceId)).
+export function withdrawResidentRequest(userId: number, requestId: number): void {
+  const owned = db
+    .select({ id: residentRequests.id })
+    .from(residentRequests)
+    .innerJoin(contracts, eq(residentRequests.contractId, contracts.id))
+    .where(and(eq(residentRequests.id, requestId), eq(contracts.userId, userId)))
+    .get();
+  if (!owned) return;
+  db.update(residentRequests).set({ status: "withdrawn" }).where(eq(residentRequests.id, requestId)).run();
 }

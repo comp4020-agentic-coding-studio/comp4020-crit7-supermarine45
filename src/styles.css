@@ -1018,3 +1018,155 @@ form.review-form textarea {
   font-size: 0.8rem;
   color: var(--anu-gray-700);
 }
+
+/* My accommodation — mock contract card, direct-debit widget, and the
+   maintenance/RA-message forms & lists (the latter reuse form.review-form's
+   card look). */
+.contract-card {
+  background: #fff;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+}
+
+.contract-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.contract-card form {
+  margin-top: 0.75rem;
+}
+
+.contract-card .filters-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+/* The full contract document (/contract/[id]/) and the notice-of-cancellation
+   sign-flow (/contract/[id]/cancel/) — both reuse .contract-card's paper look
+   at a wider max-width, since they're a document rather than a summary card. */
+.contract-document {
+  background: #fff;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem 1.75rem;
+  margin: 1rem 0;
+  max-width: 36rem;
+}
+
+.contract-document dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 1rem;
+  margin: 1rem 0;
+}
+
+.contract-document dt {
+  font-weight: 600;
+  color: var(--anu-gray-700);
+}
+
+.contract-document dd {
+  margin: 0;
+}
+
+.contract-status {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.cancellation-record {
+  background: var(--anu-cream);
+  border-radius: var(--btn-radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}
+
+.checkbox-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-weight: 400 !important;
+}
+
+.checkbox-row input[type="checkbox"] {
+  flex: none;
+  width: auto;
+  margin-top: 0.2rem;
+}
+
+.direct-debit-widget {
+  display: inline-block;
+  background: var(--anu-cream);
+  border-radius: var(--card-radius);
+  padding: 1rem 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+.direct-debit-date {
+  margin: 0.35rem 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.request-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.request {
+  background: #fff;
+  border-radius: var(--btn-radius);
+  box-shadow: var(--card-shadow);
+  padding: 0.9rem 1.1rem;
+}
+
+.request-meta {
+  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+  color: var(--anu-gray-500);
+}
+
+.request-body {
+  margin: 0 0 0.5rem;
+}
+
+.request form {
+  margin: 0;
+}
+
+form.request-form {
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 32rem;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+form.request-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--anu-gray-700);
+}
+
+form.request-form textarea {
+  font: inherit;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--anu-gray-200);
+  border-radius: 6px;
+  color: var(--anu-black);
+  resize: vertical;
+}

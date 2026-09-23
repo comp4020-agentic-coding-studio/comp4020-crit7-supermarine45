@@ -10,4 +10,7 @@ export const ROUTES = [
   "/signup/",
   "/hall-match/",
   "/compare/",
+  "/my-accommodation/",
+  "/contract/1/",
+  "/contract/1/cancel/",
 ];

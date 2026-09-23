@@ -1,0 +1,76 @@
+---
+import Nav from "../../../components/Nav.astro";
+import { getContractById } from "../../../lib/db";
+import { formatDate, remainingTermLabel } from "../../../lib/contractFormat";
+import "../../../styles.css";
+
+const user = Astro.locals.user;
+const returnTo = `/contract/${Astro.params.id}/cancel/`;
+if (!user) {
+  return Astro.redirect(`/login/?returnTo=${encodeURIComponent(returnTo)}`, 303);
+}
+
+const id = Number(Astro.params.id);
+const contract = Number.isInteger(id) ? getContractById(user.id, id) : undefined;
+if (!contract) {
+  return new Response("Contract not found", { status: 404 });
+}
+if (contract.status !== "active") {
+  return Astro.redirect(`/contract/${id}/`, 303);
+}
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notice of Cancellation — ANU Residence Explorer</title>
+  </head>
+  <body>
+    <Nav />
+    <main class="wide">
+      <h1>Notice of Cancellation</h1>
+      <p class="policy-note-gap">
+        This is a mock cancellation process for this prototype — it doesn't send anything to ANU or end a real
+        housing contract.
+      </p>
+
+      <article class="contract-document">
+        <p>You are about to cancel the following mock contract:</p>
+        <dl>
+          <dt>Property</dt>
+          <dd>{contract.residenceName} — {contract.roomName}</dd>
+          <dt>Weekly tariff</dt>
+          <dd>{contract.weeklyTariff != null ? <>${contract.weeklyTariff}/wk</> : "Rate not yet published"}</dd>
+          <dt>Start date</dt>
+          <dd>{formatDate(contract.startDate)}</dd>
+          <dt>Remaining term</dt>
+          <dd>{remainingTermLabel(contract.endDate)}</dd>
+        </dl>
+        <p>
+          By signing below, you confirm you wish to end this mock residential contract effective immediately. In this
+          prototype, no notice period, cancellation fee, or refund calculation applies — those are exactly the kind
+          of real contractual terms this app doesn't model or fabricate.
+        </p>
+
+        <form method="post" action="/api/contract/cancel" class="request-form">
+          <input type="hidden" name="redirect" value={`/contract/${contract.id}/`} />
+          <label class="checkbox-row">
+            <input type="checkbox" name="agree" required />
+            I have read this notice and confirm I want to cancel this contract.
+          </label>
+          <label>
+            Type your full name as your signature
+            <input type="text" name="signature" required placeholder="Full name" autocomplete="name" />
+          </label>
+          <button type="submit">Sign &amp; submit cancellation notice</button>
+        </form>
+      </article>
+
+      <div class="filters-actions">
+        <a href={`/contract/${contract.id}/`}>Back to contract without cancelling</a>
+      </div>
+    </main>
+  </body>
+</html>

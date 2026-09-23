@@ -1,0 +1,202 @@
+---
+import Nav from "../components/Nav.astro";
+import { getActiveContract, listContractHistory, listResidentRequests, searchRooms } from "../lib/db";
+import { nextDirectDebitDate } from "../lib/directDebit";
+import { formatDate, remainingTermLabel } from "../lib/contractFormat";
+import "../styles.css";
+
+const user = Astro.locals.user;
+if (!user) {
+  return Astro.redirect(`/login/?returnTo=${encodeURIComponent("/my-accommodation/")}`, 303);
+}
+
+const contract = getActiveContract(user.id);
+const history = listContractHistory(user.id);
+const rooms = contract ? [] : searchRooms({});
+const maintenanceRequests = contract ? listResidentRequests(contract.id, "maintenance") : [];
+const raMessages = contract ? listResidentRequests(contract.id, "ra_message") : [];
+const nextDebit = contract ? nextDirectDebitDate(contract.residenceName) : null;
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My accommodation — ANU Residence Explorer</title>
+  </head>
+  <body>
+    <Nav />
+    <main class="wide">
+      <h1>My accommodation</h1>
+      <p class="policy-note-gap">
+        This is a mock contract for the prototype — ANU's real accommodation contracts, maintenance system and
+        residence assistants aren't connected here.
+      </p>
+
+      {
+        !contract ? (
+          rooms.length === 0 ? (
+            <p class="no-results">No rooms available to set as your accommodation.</p>
+          ) : (
+            <form method="post" action="/api/contract/set" class="filters">
+              <input type="hidden" name="redirect" value="/my-accommodation/" />
+              <div class="filters-row">
+                <label for="roomId">
+                  Choose a room
+                  <select id="roomId" name="roomId">
+                    {rooms.map((r) => (
+                      <option value={r.roomId}>
+                        {r.residenceName} — {r.roomName} ({r.weeklyTariff != null ? `$${r.weeklyTariff}/wk` : "rate tbc"})
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <div class="filters-actions">
+                <button type="submit">Set as my accommodation</button>
+              </div>
+            </form>
+          )
+        ) : (
+          <>
+            <div class="contract-card">
+              <h2>
+                <a href={`/residences/${contract.residenceSlug}/`}>{contract.residenceName}</a> — {contract.roomName}
+              </h2>
+              <p class="card-meta">
+                {contract.weeklyTariff != null ? <>${contract.weeklyTariff}/wk</> : "Rate not yet published"} &middot; started{" "}
+                {formatDate(contract.startDate)}
+              </p>
+              <p>{remainingTermLabel(contract.endDate)}</p>
+              <div class="filters-actions">
+                <a href={`/contract/${contract.id}/`}>View contract</a>
+                <a href={`/contract/${contract.id}/cancel/`} class="link-button">
+                  Cancel contract
+                </a>
+              </div>
+            </div>
+
+            <div class="direct-debit-widget">
+              <span class="quick-start-card-title">Next direct debit</span>
+              {nextDebit ? <p class="direct-debit-date">{formatDate(nextDebit)}</p> : <p>No upcoming date published.</p>}
+              <p class="policy-note-gap">
+                From ANU's real published{" "}
+                <a href="https://d3gu8jtw4r0om.cloudfront.net/files/2026-07/Direct%20debit%20dates%202026_v5.pdf">
+                  2026 direct debit schedule
+                </a>
+                , applied to this mock contract.
+              </p>
+            </div>
+
+            <section>
+              <h2>Maintenance requests</h2>
+              <p class="policy-note-gap">Prototype only — nothing submitted here reaches ANU staff.</p>
+              <form method="post" action="/api/requests/add" class="filters request-form">
+                <input type="hidden" name="redirect" value="/my-accommodation/" />
+                <input type="hidden" name="kind" value="maintenance" />
+                <div class="filters-row">
+                  <label for="category">
+                    Category
+                    <select id="category" name="category">
+                      <option value="plumbing">Plumbing</option>
+                      <option value="electrical">Electrical</option>
+                      <option value="appliance">Appliance</option>
+                      <option value="pest">Pest control</option>
+                      <option value="other" selected>
+                        Other
+                      </option>
+                    </select>
+                  </label>
+                </div>
+                <label for="maintenance-message">
+                  Describe the issue
+                  <textarea id="maintenance-message" name="message" required rows="3" />
+                </label>
+                <div class="filters-actions">
+                  <button type="submit">Submit request</button>
+                </div>
+              </form>
+              {maintenanceRequests.length === 0 ? (
+                <p class="no-results">No maintenance requests yet.</p>
+              ) : (
+                <ul class="request-list">
+                  {maintenanceRequests.map((r) => (
+                    <li class="request">
+                      <p class="request-meta">
+                        {r.category ?? "Other"} &middot; <time>{r.createdAt}</time> &middot;{" "}
+                        {r.status === "withdrawn" ? "Withdrawn" : "Submitted"}
+                      </p>
+                      <p class="request-body">{r.message}</p>
+                      {r.status === "submitted" && (
+                        <form method="post" action="/api/requests/withdraw">
+                          <input type="hidden" name="redirect" value="/my-accommodation/" />
+                          <input type="hidden" name="requestId" value={r.id} />
+                          <button type="submit" class="link-button">Withdraw</button>
+                        </form>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+
+            <section>
+              <h2>Contact the residence assistant</h2>
+              <p class="policy-note-gap">Prototype only — nothing submitted here reaches ANU staff.</p>
+              <form method="post" action="/api/requests/add" class="filters request-form">
+                <input type="hidden" name="redirect" value="/my-accommodation/" />
+                <input type="hidden" name="kind" value="ra_message" />
+                <label for="ra-message">
+                  Message
+                  <textarea id="ra-message" name="message" required rows="3" />
+                </label>
+                <div class="filters-actions">
+                  <button type="submit">Send message</button>
+                </div>
+              </form>
+              {raMessages.length === 0 ? (
+                <p class="no-results">No messages yet.</p>
+              ) : (
+                <ul class="request-list">
+                  {raMessages.map((r) => (
+                    <li class="request">
+                      <p class="request-meta">
+                        <time>{r.createdAt}</time> &middot; {r.status === "withdrawn" ? "Withdrawn" : "Sent"}
+                      </p>
+                      <p class="request-body">{r.message}</p>
+                      {r.status === "submitted" && (
+                        <form method="post" action="/api/requests/withdraw">
+                          <input type="hidden" name="redirect" value="/my-accommodation/" />
+                          <input type="hidden" name="requestId" value={r.id} />
+                          <button type="submit" class="link-button">Withdraw</button>
+                        </form>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          </>
+        )
+      }
+
+      {
+        history.length > 0 && (
+          <section>
+            <h2>Past accommodation</h2>
+            <ul class="request-list">
+              {history.map((h) => (
+                <li class="request">
+                  <a href={`/residences/${h.residenceSlug}/`}>{h.residenceName}</a> — {h.roomName}, {formatDate(h.startDate)}{" "}
+                  to {h.endDate ? formatDate(h.endDate) : "unknown"} &middot;{" "}
+                  <a href={`/contract/${h.id}/`}>View contract</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </main>
+  </body>
+</html>

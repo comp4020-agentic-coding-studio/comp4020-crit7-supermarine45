@@ -1,0 +1,85 @@
+---
+import Nav from "../../../components/Nav.astro";
+import { getContractById } from "../../../lib/db";
+import { formatDate, remainingTermLabel } from "../../../lib/contractFormat";
+import "../../../styles.css";
+
+const user = Astro.locals.user;
+const returnTo = `/contract/${Astro.params.id}/`;
+if (!user) {
+  return Astro.redirect(`/login/?returnTo=${encodeURIComponent(returnTo)}`, 303);
+}
+
+const id = Number(Astro.params.id);
+const contract = Number.isInteger(id) ? getContractById(user.id, id) : undefined;
+if (!contract) {
+  return new Response("Contract not found", { status: 404 });
+}
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contract — {contract.residenceName} — ANU Residence Explorer</title>
+  </head>
+  <body>
+    <Nav />
+    <main class="wide">
+      <h1>Residential contract (mock)</h1>
+      <p class="policy-note-gap">
+        This is a mock contract generated for this prototype — it isn't a real ANU or StarRez accommodation contract.
+      </p>
+
+      <article class="contract-document">
+        <p class="contract-status">
+          Status: <strong>{contract.status === "active" ? "Active" : "Cancelled"}</strong>
+        </p>
+        <dl>
+          <dt>Resident</dt>
+          <dd>{user.username}</dd>
+          <dt>Provider</dt>
+          <dd>ANU Residences (mock)</dd>
+          <dt>Property</dt>
+          <dd>
+            <a href={`/residences/${contract.residenceSlug}/`}>{contract.residenceName}</a> — {contract.roomName}
+          </dd>
+          <dt>Weekly tariff</dt>
+          <dd>{contract.weeklyTariff != null ? <>${contract.weeklyTariff}/wk</> : "Rate not yet published"}</dd>
+          <dt>Contract term</dt>
+          <dd>{contract.contractTerm ?? "Not published"}</dd>
+          <dt>Start date</dt>
+          <dd>{formatDate(contract.startDate)}</dd>
+          <dt>{contract.status === "active" ? "Remaining term" : "End date"}</dt>
+          <dd>
+            {contract.status === "active"
+              ? remainingTermLabel(contract.endDate)
+              : contract.endDate
+                ? formatDate(contract.endDate)
+                : "Not published"}
+          </dd>
+        </dl>
+
+        {
+          contract.status === "cancelled" && (
+            <p class="cancellation-record">
+              Cancelled on <time>{contract.cancelledAt}</time>, signed by "{contract.cancellationSignature}".
+            </p>
+          )
+        }
+      </article>
+
+      <div class="filters-actions">
+        {
+          contract.status === "active" && (
+            <a href={`/contract/${contract.id}/cancel/`} class="link-button">
+              Cancel this contract
+            </a>
+          )
+        }
+        <a href="/my-accommodation/">Back to My accommodation</a>
+      </div>
+    </main>
+  </body>
+</html>

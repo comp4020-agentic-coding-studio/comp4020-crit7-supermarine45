@@ -346,9 +346,140 @@ behaviour, not a DOM-content removal — so the existing sort-order tests
 (`cards[0].textContent` containing both a hall name and a nested room price)
 kept working unchanged once their selector moved to `.hall-card`.
 
+**Round 10 — a logged-in "my accommodation" area: a mock contract, its
+remaining term, cancelling it, maintenance requests, contacting the
+residence assistant, and a next-direct-debit-date widget.** Prompted with:
+
+> if a user is logged in, I'd like to see a menu detailing the contracts
+> (make a mock contract for an accommodation), remaining terms, cancelling
+> contracts, maintenance request, and contact the residence assistant. Also,
+> add a widget for the next direct debit date (dates are outlined here:
+> [ANU's Direct debit dates 2026 PDF](https://d3gu8jtw4r0om.cloudfront.net/files/2026-07/Direct%20debit%20dates%202026_v5.pdf))
+
+This app had no booking/contract concept before this round — accounts only
+carried `shortlist`, `preferences`, `reviews` and `roomInterest`, and
+`roomInterest` is explicitly documented as "not a reservation or hold." A
+mock contract is genuinely new state, so it got two new tables
+(`contracts`, `resident_requests` — the latter covers both a maintenance
+request and an RA message, since they're the same shape: what it says,
+submitted or withdrawn) rather than overloading `roomInterest`, but followed
+the same account-scoped-feature pattern this app already uses four times
+over: a Drizzle table with a cascade-delete FK to `users`, a function per
+operation in `src/lib/db.ts`, a `POST`-only API route per mutation, and an
+Astro page gated on `Astro.locals.user`.
+
+Two decisions asked of the user directly rather than guessed:
+
+- **"Contact the residence assistant" is an in-app mock message form, not
+  fabricated contact details.** Inventing an RA email or phone number would
+  read as real ANU contact information without being any — this app's
+  accounts are already explicitly native and not a StarRez integration, and
+  a made-up phone number would break that same discipline. The chosen
+  option stores the message and lists it back, captioned prototype-only,
+  the same shape as the maintenance-request list right next to it.
+- **The room picker that creates the mock contract lives only on the new
+  `/my-accommodation/` page**, not also bolted onto the residence detail
+  page's existing room-interest UI — keeps the diff contained to one new
+  page rather than touching `[slug].astro`'s already-established layout for
+  a feature that only needs to exist in one place.
+
+Sourcing the direct-debit dates from the PDF surfaced the same kind of
+extraction anomaly Round 8 already had a rule for: a straight text pull of
+the "billing period From/To" columns next to each debit date reads the first
+two rows of each table's span *backwards in time*, which looks like a
+table-extraction artefact rather than genuine ANU data. Rather than guess at
+a fix, `src/lib/directDebit.ts` only hardcodes the debit-date column itself
+— cross-checked by hand against the PDF's own year-at-a-glance calendar
+graphic — and leaves the billing-period span out entirely. Same "don't ship
+data you can't verify" call as `parseContractWeeks`/`estimateAnnualCost` in
+Round 8. The PDF also turned out to publish two distinct fortnightly
+schedules, "ANU Residences" and "ANU Lodges," that briefly coincide and then
+diverge (Lodges bill on Wednesdays through mid-2026, Residences the day
+after) — `isLodge()` picks the right one by checking for "Lodge" in the
+residence's name, which matches exactly four of the nineteen seeded
+residences (Davey, Kinloch, Warrumbul, and Lena Karmel Lodge) and nothing
+ambiguously.
+
+A planning assumption turned out to be wrong and is worth recording rather
+than quietly dropping: the plan for this round's tests assumed John XXIII
+College's room would be a real example of a `contractTerm` that fails to
+parse into weeks (its rate is famously "tbc" — see Round 8), giving an
+integration-test case for the "contract length not published" state a mock
+contract can be in. Checking `seed/residences.json` directly before writing
+that test found the opposite: John XXIII's `contractTerm` is "44 weeks" (it
+parses fine) — the "tbc" is its *weekly tariff*, a different field, already
+covered by the existing `estimateAnnualCost` fallback from Round 8. A full
+sweep of every room in the seed data for a non-parsing `contractTerm` found
+none at all. The code path itself is real and stayed (`setMyAccommodation`
+leaves `endDate` null when `parseContractWeeks` returns null, and the page
+shows "Contract length not published for this room type" for it), and it's
+still unit-tested at the parser level (`spec/cost.test.ts` already asserts
+`parseContractWeeks("tbc")` is `null`) — but the planned integration test
+for it was dropped rather than kept against seed data that can't actually
+exercise it.
+
+Cancelling a contract doesn't delete its row — it flips `status` to
+`cancelled` and stamps `cancelledAt`, the same "keep history, don't erase
+it" choice `upsertReview` doesn't need to make (reviews don't have a
+history concept) but `roomInterest`'s toggle-on/off doesn't either (there's
+nothing to look back on). A contract does have something worth keeping: the
+new "Past accommodation" list on `/my-accommodation/` reads directly off
+those cancelled rows.
+
+**Round 11 — a "View contract" document, and turning one-click
+cancellation into a signed Notice of Cancellation.** Prompted with:
+
+> add one more option to view the contract
+
+and, mid-turn, expanded to:
+
+> and create a document (to sign, etc) with a whole process for when the
+> user would like to cancel the contract
+
+Round 10 shipped `cancelMyContract` as a single POST with no confirmation
+step — appropriate for a mock, but not a fair model of what cancelling a
+real housing contract feels like, which is exactly what the second prompt
+called out. Two new pages, both dynamic routes on the same `contracts.id`:
+
+- `/contract/[id]/` — the full contract rendered as a document (resident,
+  property, tariff, term, dates), scoped by `getContractById(userId, id)`
+  so a contract can only be opened by the user who holds it (404
+  otherwise, following `/residences/[slug].astro`'s existing 404
+  convention for an unresolved dynamic route). Deliberately *not* a
+  separate "cancelled" page: the same document doubles as the
+  cancellation receipt once `status` flips, showing `cancelledAt` and the
+  stored signature instead of the "cancel this contract" link. One page
+  that changes state, rather than two pages that could drift apart.
+- `/contract/[id]/cancel/` — a "Notice of Cancellation" the resident has
+  to read and sign: a required acknowledgement checkbox and a required
+  typed-name signature field, both enforced by the same
+  native-`required`-attribute-first, server-side-defense-in-depth
+  convention this app already uses on the maintenance/RA-message forms.
+  `/api/contract/cancel` now refuses to cancel without both fields present
+  — a bare POST silently no-ops instead of erroring, matching
+  `requests/add.ts`'s existing "invalid input redirects without mutating"
+  pattern — which is a genuine, intentional breaking change to the old
+  API contract, not an oversight: the old one-click "Cancel contract"
+  button on `/my-accommodation/` was replaced with a link to the new
+  sign-flow page in the same round, so nothing in the shipped app still
+  posts the old bare request.
+
+The signature itself is persisted (a new `cancellationSignature` column on
+`contracts`, added via a Drizzle migration same as every other schema
+change), not treated as UI-only theatre — the user's ask for "a document
+(to sign, etc)" reads as wanting a real record of who signed and when, and
+the receipt view on `/contract/[id]/` is exactly that record played back.
+
+`formatDate`/`remainingTermLabel` moved out of `my-accommodation.astro` and
+into a new `src/lib/contractFormat.ts` so the contract card and the new
+document view can't drift into disagreeing about what a date or a
+remaining-term string reads as — the same de-duplication `cost.ts`,
+`directDebit.ts` and `geo.ts` already exist to enforce elsewhere in this
+app.
+
 ## Before you ship
 
-`pnpm check` (typecheck + `astro build` + the full `vitest` suite, 132 tests
-across 8 files) is green. `pnpm check:evidence` passes once this round's
+`pnpm check` (typecheck + `astro build` + the full `vitest` suite, 171 tests
+across 10 files) is green. `pnpm check:evidence` passes once this round's
 changes are committed — see the latest commit range in this repo's history
 for the diff described above.

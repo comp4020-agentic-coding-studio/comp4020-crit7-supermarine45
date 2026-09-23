@@ -5,7 +5,12 @@ const links = [
   { href: "/", label: "Residences" },
   { href: "/search/", label: "Search" },
   { href: "/shortlist/", label: "Shortlist" },
-  ...(user ? [{ href: "/hall-match/", label: "Hall match" }] : []),
+  ...(user
+    ? [
+        { href: "/hall-match/", label: "Hall match" },
+        { href: "/my-accommodation/", label: "My accommodation" },
+      ]
+    : []),
   { href: "/readme/", label: "About" },
 ];
 ---

@@ -76,6 +76,31 @@ see "Accounts" under "What good looks like here" below.
   and a room-type tab set (CSS-only, no client JS) showing each room type's
   weekly tariff, contract length, inclusions and other fees side by side,
   mirroring the structure of ANU's own per-residence pages.
+- **My accommodation** (`/my-accommodation/`) — a mock contract for one room,
+  set from a picker over the full room list. Once set, the page shows the
+  hall/room, weekly tariff, remaining contract term, a **"View contract"**
+  link, a **"Cancel contract"** link, a maintenance-request form and list, and
+  an in-app message form to "contact the residence assistant" — both
+  explicitly captioned as prototype-only, since neither reaches a real
+  person. A **next direct debit** widget shows the next date from ANU's real
+  published [2026 direct debit schedule](https://d3gu8jtw4r0om.cloudfront.net/files/2026-07/Direct%20debit%20dates%202026_v5.pdf)
+  (`src/lib/directDebit.ts`), picking the Lodges or the Residences schedule
+  by whether the contract's hall carries "Lodge" in its name, same as ANU's
+  own PDF distinguishes them.
+  - **View contract** (`/contract/[id]/`) — the full mock contract rendered
+    as a document (resident, property, tariff, term, dates), scoped so a
+    user can only open their own contract's id (404 otherwise). The same
+    page doubles as the cancellation receipt: once cancelled, it shows the
+    cancellation date and the typed signature instead of the "cancel this
+    contract" link.
+  - **Cancel contract** (`/contract/[id]/cancel/`) — a "Notice of
+    Cancellation" the resident has to actually read and sign before
+    anything happens: a required acknowledgement checkbox and a required
+    typed-name signature field, posted to the same API route as before.
+    Cancelling a mock contract is a one-click action in most apps this size;
+    making it a reviewed, signed document was a deliberate choice to model
+    what a real cancellation flow should feel like, not just what's fastest
+    to build.
 
 ## What good looks like here
 
@@ -145,6 +170,20 @@ Judgement calls I made, not enforced by any check:
   `seed/residences.json` points straight at each photo's real URL on
   `study.anu.edu.au`, so a visitor's browser fetches it from ANU directly and
   this app never stores or redistributes a copy of it.
+- **"Contact the residence assistant" is an in-app mock message form, not
+  fabricated contact details.** Inventing an RA email or phone number would
+  look like real ANU contact information without being any; instead the
+  message is just stored and listed back, captioned as prototype-only —
+  consistent with how "accounts" here are already explicitly native and not
+  a StarRez integration (see the top of this README).
+- **Only the direct-debit *date* is taken from ANU's published PDF, not the
+  billing-period span next to it.** The PDF's "billing period From/To"
+  columns extract inconsistently under a straight text pull (the first two
+  rows of each table read backwards in time — a table-extraction artefact,
+  not real data), so `src/lib/directDebit.ts` only hardcodes the date column,
+  cross-checked by hand against the PDF's own year-at-a-glance calendar
+  graphic — the same "don't ship data you can't verify" rule as
+  `parseContractWeeks`/`estimateAnnualCost` above.
 
 What's enforced by `spec/`:
 
@@ -197,6 +236,20 @@ What's enforced by `spec/`:
   "Estimated cost for the year" row renders a real value or the tbc fallback
   for every compared room, and the `PolicyNote` component's no-pets fact
   appears on both `/search/` and a residence detail page.
+- `spec/direct-debit.test.ts`: `nextDirectDebitDate` picks the correct next
+  date on or after a given day for both the Lodges and the Residences
+  schedule, proves the two schedules are genuinely different (not the same
+  table under two names) at a point where they diverge, and returns `null`
+  once the published 2026–27 schedule runs out; `isLodge` matches exactly
+  the four seeded residences ANU itself names a "Lodge".
+- `spec/my-accommodation.test.ts`: a logged-out visitor is redirected to
+  `/login/`; setting a room creates an active contract and swaps the picker
+  for a contract card with a real upcoming direct-debit date; setting a
+  second room cancels the first (only one active contract at a time) and
+  the first appears in "Past accommodation"; cancelling brings the picker
+  back; a maintenance request and an RA message each land in their own
+  list and withdrawing one marks it withdrawn instead of deleting it; and
+  one user can't withdraw another user's request.
 
 ## Data & sources
 
@@ -210,6 +263,7 @@ What's enforced by `spec/`:
 | Residence coordinates | [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/) geocoding each residence's published street address | `scripts/fetch-geo.ts`, written to `seed/residences.json` |
 | Nearby bus stops, supermarkets, cafés, bike parking | [OpenStreetMap Overpass API](https://overpass-api.de/) | Same script, written to `seed/nearby-places.json` |
 | ANU Civic Loop shuttle route & stop order | ANU's own announcement, [ANU Civic Loop bus route update, 17 August 2026](https://sustainability.anu.edu.au/news/anu-civic-loop-bus-route-update-17-august-2026) | Stop names and sequence hand-transcribed; coordinates geocoded the same way, written to `seed/shuttle-stops.json` |
+| 2026 direct debit dates (ANU Residences and ANU Lodges schedules) | ANU's own published PDF, [Direct debit dates 2026](https://d3gu8jtw4r0om.cloudfront.net/files/2026-07/Direct%20debit%20dates%202026_v5.pdf) | Date columns hand-transcribed into `src/lib/directDebit.ts`, used by the "next direct debit" widget on `/my-accommodation/` |
 
 None of this is queried live — see "What good looks like here" above for why.
 

@@ -230,3 +230,53 @@ export const roomInterest = sqliteTable(
   },
   (t) => [primaryKey({ columns: [t.userId, t.roomId] })],
 );
+
+// A mock contract for one room, for the prototype's "My accommodation" area
+// — not a real ANU/StarRez booking. At most one "active" contract per user
+// is enforced in src/lib/db.ts (setMyAccommodation), not here; cancelling
+// sets status/cancelledAt rather than deleting the row, so a user's contract
+// history survives.
+export const contracts = sqliteTable("contracts", {
+  id: int().primaryKey({ autoIncrement: true }),
+  userId: int("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  roomId: int("room_id")
+    .notNull()
+    .references(() => residenceRooms.id, { onDelete: "cascade" }),
+  startDate: text("start_date").notNull(),
+  // Null when the room's contractTerm can't be parsed into weeks (a "tbc"
+  // rate rather than an "N weeks" one) — see src/lib/cost.ts's parseContractWeeks.
+  endDate: text("end_date"),
+  status: text({ enum: ["active", "cancelled"] }).notNull().default("active"),
+  cancelledAt: text("cancelled_at"),
+  // The typed name from the cancellation notice's "sign" step — see
+  // src/pages/contract/[id]/cancel.astro. Null until cancelled.
+  cancellationSignature: text("cancellation_signature"),
+  createdAt: text("created_at")
+    .notNull()
+    .default(sql`(datetime('now'))`),
+});
+
+export type Contract = typeof contracts.$inferSelect;
+
+// A maintenance request or a message to the residence assistant — same
+// shape (what it says, submitted/withdrawn), so one table covers both
+// rather than two nearly-identical ones. Explicitly mocked: every list of
+// these on the page is captioned as prototype-only, nothing here reaches
+// real ANU staff.
+export const residentRequests = sqliteTable("resident_requests", {
+  id: int().primaryKey({ autoIncrement: true }),
+  contractId: int("contract_id")
+    .notNull()
+    .references(() => contracts.id, { onDelete: "cascade" }),
+  kind: text({ enum: ["maintenance", "ra_message"] }).notNull(),
+  category: text(),
+  message: text().notNull(),
+  status: text({ enum: ["submitted", "withdrawn"] }).notNull().default("submitted"),
+  createdAt: text("created_at")
+    .notNull()
+    .default(sql`(datetime('now'))`),
+});
+
+export type ResidentRequest = typeof residentRequests.$inferSelect;
