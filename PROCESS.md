@@ -2,17 +2,12 @@
 
 ## What I built
 
-**ANU Residence Explorer** — the full-stack replacement I wish existed for
-ANU's own [residences listing](https://study.anu.edu.au/accommodation/our-residences),
-which splits 19 halls, lodges and colleges across separate static pages with no
-way to compare them, search them, or see where any of them actually sit in
-Canberra. It brings all 19 into one searchable, sortable, filterable, mapped
-view, and adds the relationships a real housing decision actually needs:
-accounts, a hall-matching questionnaire, resident reviews, a non-binding
-room-interest signal, and a shortlist tied to your account instead of shared
-anonymous state. It deliberately does not touch or imitate ANU's real
-`anucomb.starrezhousing.com` StarRez system — that boundary is stated in
-`README.md` and held throughout every round of this build.
+I built a replacement of the ANU Residence Explorer, which allows students to view and arrange their on-campus accomodation. In this prototype, I highlighted several key improvment points: 
+(1) refined search and compare, which enables a direct side-by-side comparison each accomodation type (i.e., room, studio).
+(2) key information, such as proximity to shuttle services and in-room features.
+(3) Ability to manage contract, and maintenance requests.
+I observe this features, though essential, are not available in the original accomodation portal, which currently still requires manually contacting the staff thorugh email.
+
 
 ## How I got here
 
