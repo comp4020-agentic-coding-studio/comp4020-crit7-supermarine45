@@ -6,6 +6,7 @@ export const ROUTES = [
   "/shortlist/",
   "/residences/burton-garran-hall/",
   "/readme/",
+  "/about/",
   "/login/",
   "/signup/",
   "/hall-match/",
