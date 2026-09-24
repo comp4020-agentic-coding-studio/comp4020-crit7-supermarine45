@@ -50,9 +50,9 @@ const { id, center, zoom, residences = [], places = [], shuttle = [], small = fa
 <script>
   import L from "leaflet";
   import "leaflet/dist/leaflet.css";
-  import markerIcon from "leaflet/dist/images/marker-icon.png";
-  import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-  import markerShadow from "leaflet/dist/images/marker-shadow.png";
+  import markerIcon from "leaflet/dist/images/marker-icon.png?url";
+  import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png?url";
+  import markerShadow from "leaflet/dist/images/marker-shadow.png?url";
 
   // Leaflet's default pin icon locates its own image files by reading its
   // CSS file's URL and resolving relative to that — a trick that only works
@@ -60,6 +60,11 @@ const { id, center, zoom, residences = [], places = [], shuttle = [], small = fa
   // itself. Vite bundles the CSS elsewhere, so that lookup 404s and the
   // browser shows a broken-image placeholder instead of the pin. Importing
   // the images directly lets Vite resolve their real, bundled URLs instead.
+  // The `?url` suffix matters: without it, Astro's production build routes
+  // these .png imports through its own image pipeline, which returns an
+  // {src, width, height, format} metadata object instead of a plain URL
+  // string — Leaflet then builds `<img src="[object Object]">` and the icon
+  // 404s again. `?url` forces Vite's plain-string resolution in every mode.
   delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl;
   L.Icon.Default.mergeOptions({
     iconUrl: markerIcon,
