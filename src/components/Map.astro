@@ -50,6 +50,22 @@ const { id, center, zoom, residences = [], places = [], shuttle = [], small = fa
 <script>
   import L from "leaflet";
   import "leaflet/dist/leaflet.css";
+  import markerIcon from "leaflet/dist/images/marker-icon.png";
+  import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+  import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+  // Leaflet's default pin icon locates its own image files by reading its
+  // CSS file's URL and resolving relative to that — a trick that only works
+  // when leaflet.css is served from the same place as the leaflet package
+  // itself. Vite bundles the CSS elsewhere, so that lookup 404s and the
+  // browser shows a broken-image placeholder instead of the pin. Importing
+  // the images directly lets Vite resolve their real, bundled URLs instead.
+  delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl;
+  L.Icon.Default.mergeOptions({
+    iconUrl: markerIcon,
+    iconRetinaUrl: markerIcon2x,
+    shadowUrl: markerShadow,
+  });
 
   const CATEGORY_LABEL: Record<string, string> = {
     bus_stop: "Bus stop",
@@ -88,9 +104,19 @@ const { id, center, zoom, residences = [], places = [], shuttle = [], small = fa
     const center = JSON.parse(el.dataset.center || "[-35.28,149.12]") as [number, number];
     const zoom = Number(el.dataset.zoom || "15");
     const map = L.map(el, { scrollWheelZoom: false }).setView(center, zoom);
-    const tileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 19,
+    // Not tile.openstreetmap.org: OSM's own tile usage policy requires a
+    // custom User-Agent identifying the app, which a browser-issued tile
+    // request can never send (browsers don't let JS override that header) —
+    // so that endpoint silently blocks a chunk of requests from any
+    // browser-based Leaflet map, no matter what this app does. CARTO's free
+    // basemap CDN serves the same OSM data without that restriction, which
+    // is why the map was loading inconsistently before this switch.
+    const tileLayer = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: "abcd",
+      maxZoom: 20,
+      detectRetina: true,
     }).addTo(map);
 
     const residences = JSON.parse(el.dataset.residences || "[]") as ResidenceMarker[];
@@ -140,8 +166,8 @@ const { id, center, zoom, residences = [], places = [], shuttle = [], small = fa
     }
     requestAnimationFrame(() => map.invalidateSize());
 
-    // OpenStreetMap's tile server occasionally drops a request or serves a
-    // transient error, leaving a permanently grey/blank tile that a resize
+    // Any tile CDN occasionally drops a request or serves a transient
+    // error, leaving a permanently grey/blank tile that a resize
     // doesn't fix (invalidateSize() only re-measures the container; it doesn't
     // retry a tile that already failed). redraw() re-requests every tile
     // currently in view, which is the actual fix for that case.
