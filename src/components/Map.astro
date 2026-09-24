@@ -109,19 +109,17 @@ const { id, center, zoom, residences = [], places = [], shuttle = [], small = fa
     const center = JSON.parse(el.dataset.center || "[-35.28,149.12]") as [number, number];
     const zoom = Number(el.dataset.zoom || "15");
     const map = L.map(el, { scrollWheelZoom: false }).setView(center, zoom);
-    // Not tile.openstreetmap.org: OSM's own tile usage policy requires a
-    // custom User-Agent identifying the app, which a browser-issued tile
-    // request can never send (browsers don't let JS override that header) —
-    // so that endpoint silently blocks a chunk of requests from any
-    // browser-based Leaflet map, no matter what this app does. CARTO's free
-    // basemap CDN serves the same OSM data without that restriction, which
-    // is why the map was loading inconsistently before this switch.
-    const tileLayer = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: "abcd",
-      maxZoom: 20,
-      detectRetina: true,
+    // Not tile.openstreetmap.org directly: OSM's own tile usage policy
+    // requires a custom User-Agent identifying the app, which a
+    // browser-issued tile request can never send. Not a third-party CDN
+    // either — CARTO's free anonymous basemap tier (tried first) turned out
+    // to require a registered API key after all, watermarking every tile
+    // "API KEY REQUIRED" instead of serving it. /api/tiles proxies through
+    // this app's own server, which can set that header, so this is this
+    // app's origin the whole way and isn't subject to either restriction.
+    const tileLayer = L.tileLayer("/api/tiles/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
     }).addTo(map);
 
     const residences = JSON.parse(el.dataset.residences || "[]") as ResidenceMarker[];
