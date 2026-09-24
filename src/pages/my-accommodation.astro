@@ -30,8 +30,7 @@ const nextDebit = contract ? nextDirectDebitDate(contract.residenceName) : null;
     <main class="wide">
       <h1>My accommodation</h1>
       <p class="policy-note-gap">
-        This is a mock contract for the prototype — ANU's real accommodation contracts, maintenance system and
-        residence assistants aren't connected here.
+        View your accomodation contract and manage maintenance request here.
       </p>
 
       {
@@ -81,17 +80,16 @@ const nextDebit = contract ? nextDirectDebitDate(contract.residenceName) : null;
               <span class="quick-start-card-title">Next direct debit</span>
               {nextDebit ? <p class="direct-debit-date">{formatDate(nextDebit)}</p> : <p>No upcoming date published.</p>}
               <p class="policy-note-gap">
-                From ANU's real published{" "}
+                View {" "}
                 <a href="https://d3gu8jtw4r0om.cloudfront.net/files/2026-07/Direct%20debit%20dates%202026_v5.pdf">
                   2026 direct debit schedule
-                </a>
-                , applied to this mock contract.
+                </a> here.
               </p>
             </div>
 
             <section>
               <h2>Maintenance requests</h2>
-              <p class="policy-note-gap">Prototype only — nothing submitted here reaches ANU staff.</p>
+              <p class="policy-note-gap"></p>
               <form method="post" action="/api/requests/add" class="filters request-form">
                 <input type="hidden" name="redirect" value="/my-accommodation/" />
                 <input type="hidden" name="kind" value="maintenance" />
@@ -143,7 +141,7 @@ const nextDebit = contract ? nextDirectDebitDate(contract.residenceName) : null;
 
             <section>
               <h2>Contact the residence assistant</h2>
-              <p class="policy-note-gap">Prototype only — nothing submitted here reaches ANU staff.</p>
+              <p class="policy-note-gap"></p>
               <form method="post" action="/api/requests/add" class="filters request-form">
                 <input type="hidden" name="redirect" value="/my-accommodation/" />
                 <input type="hidden" name="kind" value="ra_message" />

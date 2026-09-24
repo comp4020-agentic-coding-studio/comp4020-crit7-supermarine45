@@ -27,9 +27,9 @@ if (!contract) {
   <body>
     <Nav />
     <main class="wide">
-      <h1>Residential contract (mock)</h1>
+      <h1>Residential contract</h1>
       <p class="policy-note-gap">
-        This is a mock contract generated for this prototype — it isn't a real ANU or StarRez accommodation contract.
+        
       </p>
 
       <article class="contract-document">
@@ -40,7 +40,7 @@ if (!contract) {
           <dt>Resident</dt>
           <dd>{user.username}</dd>
           <dt>Provider</dt>
-          <dd>ANU Residences (mock)</dd>
+          <dd>ANU Residences</dd>
           <dt>Property</dt>
           <dd>
             <a href={`/residences/${contract.residenceSlug}/`}>{contract.residenceName}</a> — {contract.roomName}

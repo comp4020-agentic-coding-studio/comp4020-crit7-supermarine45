@@ -37,17 +37,15 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
         <div class="hero-banner-overlay">
           <h1>ANU Residence Explorer</h1>
           <p>
-            All {residences.length} of ANU's undergraduate and postgraduate residences, mapped, searchable and
-            side by side — built on top of ANU's own public residences listing.
+            View {residences.length} of ANU's undergraduate and postgraduate residences.
           </p>
         </div>
       </div>
 
       <section class="quick-start" aria-labelledby="quick-start-heading">
-        <h2 id="quick-start-heading">Quick start — jump to a shortlist</h2>
+        <h2 id="quick-start-heading">Quick start</h2>
         <p>
-          Not sure where to look first? Pick whichever matters most to you, or answer a few questions for a
-          ranking built around your own preferences instead.
+          Not sure where to look first? Pick whichever matters most to you, or answer a few questions for our recommendation.
         </p>
         <ul class="quick-start-grid">
           <li>
@@ -88,18 +86,16 @@ const mapShuttle = shuttleStops.map((s) => ({ lat: s.latitude, lon: s.longitude,
       <div class="cta-bar">
         <div>
           <h2>Compare all {residences.length} residences in one place</h2>
-          <p>Filter by resident type, catering and price, then jump straight to the real ANU application page.</p>
+          <p>Filter by resident type, catering and price.</p>
         </div>
         <a class="btn-primary" href="/search/">Search &amp; filter</a>
       </div>
 
       <p>
-        ANU's own <a href="https://study.anu.edu.au/accommodation/our-residences">residences listing</a> splits
-        {residences.length} halls, lodges and colleges across separate pages with no way to compare them side by side,
-        and no sense of where any of them actually sit in Canberra. This map plots every residence together with the
+        ANU accommodation offerings are served by the 
         <a href="https://sustainability.anu.edu.au/news/anu-civic-loop-bus-route-update-17-august-2026"
-          >ANU Civic Loop shuttle route</a
-        > (dashed red) and nearby bus stops, supermarkets and cafes, pulled from OpenStreetMap.
+          > ANU Civic Loop shuttle</a
+        >
       </p>
       <Map id="overview-map" center={[-35.2778, 149.1185]} zoom={15} residences={mapResidences} shuttle={mapShuttle} />
 

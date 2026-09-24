@@ -23,8 +23,7 @@ const error = Astro.url.searchParams.get("error");
       <h1>Sign up</h1>
       <p>
         Create an account for ANU Residence Explorer to save a shortlist, get hall matches, flag room interest and
-        write reviews. This account is native to this app — it's not connected to ANU's real StarRez housing
-        portal or any ANU login.
+        write reviews. 
       </p>
       {error && <p class="auth-error">{error}</p>}
       <form method="post" action="/api/auth/signup" class="filters auth-form">

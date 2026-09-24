@@ -32,12 +32,10 @@ if (contract.status !== "active") {
     <main class="wide">
       <h1>Notice of Cancellation</h1>
       <p class="policy-note-gap">
-        This is a mock cancellation process for this prototype — it doesn't send anything to ANU or end a real
-        housing contract.
       </p>
 
       <article class="contract-document">
-        <p>You are about to cancel the following mock contract:</p>
+        <p>You are about to cancel the following contract:</p>
         <dl>
           <dt>Property</dt>
           <dd>{contract.residenceName} — {contract.roomName}</dd>
@@ -49,9 +47,7 @@ if (contract.status !== "active") {
           <dd>{remainingTermLabel(contract.endDate)}</dd>
         </dl>
         <p>
-          By signing below, you confirm you wish to end this mock residential contract effective immediately. In this
-          prototype, no notice period, cancellation fee, or refund calculation applies — those are exactly the kind
-          of real contractual terms this app doesn't model or fabricate.
+          By signing below, you confirm you wish to end this residential contract effective immediately. 
         </p>
 
         <form method="post" action="/api/contract/cancel" class="request-form">
